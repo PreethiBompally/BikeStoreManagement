@@ -52,7 +52,7 @@ class Products(models.Model):
         db_table = 'products'
 
 class Stocks(models.Model):
-    STORE_ID = models.IntegerField()
+    STORE_ID = models.IntegerField(primary_key=True)
     PRODUCT_ID = models.IntegerField()
     QUANTITY = models.DecimalField(max_digits=20, decimal_places=5)
     class Meta:
@@ -74,7 +74,7 @@ class Orders(models.Model):
         db_table = 'orders'
 
 class OrderItems(models.Model):
-    ORDER_ID = models.IntegerField()
+    ORDER_ID = models.IntegerField(primary_key=True)
     ITEM_ID = models.IntegerField()
     PRODUCT_ID = models.IntegerField()
     QUANTITY = models.DecimalField(max_digits=20, decimal_places=5)
