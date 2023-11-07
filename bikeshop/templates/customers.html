@@ -1,0 +1,36 @@
+<!-- customers.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customers</title>
+</head>
+<body>
+    <h1>Customers</h1>
+    <table border="1">
+        <tr>
+            <th>Customer ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zipcode</th>
+        </tr>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.CUSTOMER_ID }}</td>
+            <td>{{ customer.FIRST_NAME }}</td>
+            <td>{{ customer.LAST_NAME }}</td>
+            <td>{{ customer.PHONE }}</td>
+            <td>{{ customer.EMAIL }}</td>
+            <td>{{ customer.STREET }}</td>
+            <td>{{ customer.CITY }}</td>
+            <td>{{ customer.STATE }}</td>
+            <td>{{ customer.ZIPCODE }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

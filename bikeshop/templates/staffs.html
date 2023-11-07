@@ -1,0 +1,34 @@
+<!-- staffs.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Staffs</title>
+</head>
+<body>
+    <h1>Staffs</h1>
+    <table border="1">
+        <tr>
+            <th>Staff ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Active</th>
+            <th>Store ID</th>
+            <th>Manager ID</th>
+        </tr>
+        {% for staff in staffs %}
+        <tr>
+            <td>{{ staff.STAFF_ID }}</td>
+            <td>{{ staff.FIRST_NAME }}</td>
+            <td>{{ staff.LAST_NAME }}</td>
+            <td>{{ staff.PHONE }}</td>
+            <td>{{ staff.EMAIL }}</td>
+            <td>{{ staff.ACTIVE }}</td>
+            <td>{{ staff.STORE_ID }}</td>
+            <td>{{ staff.MANAGER_ID }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

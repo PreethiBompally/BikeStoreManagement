@@ -1,0 +1,24 @@
+<!-- stocks.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stocks</title>
+</head>
+<body>
+    <h1>Stocks</h1>
+    <table border="1">
+        <tr>
+            <th>Store ID</th>
+            <th>Product ID</th>
+            <th>Quantity</th>
+        </tr>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock.STORE_ID }}</td>
+            <td>{{ stock.PRODUCT_ID }}</td>
+            <td>{{ stock.QUANTITY }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

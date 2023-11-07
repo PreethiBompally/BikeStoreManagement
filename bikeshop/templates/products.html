@@ -1,0 +1,30 @@
+<!-- products.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+</head>
+<body>
+    <h1>Products</h1>
+    <table border="1">
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Brand ID</th>
+            <th>Category ID</th>
+            <th>Model Year</th>
+            <th>List Price</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.PRODUCT_ID }}</td>
+            <td>{{ product.PRODUCT_NAME }}</td>
+            <td>{{ product.BRAND_ID }}</td>
+            <td>{{ product.CATEGORY_ID }}</td>
+            <td>{{ product.MODEL_YEAR }}</td>
+            <td>{{ product.LIST_PRICE }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

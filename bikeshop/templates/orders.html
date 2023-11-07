@@ -1,0 +1,34 @@
+<!-- orders.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders</title>
+</head>
+<body>
+    <h1>Orders</h1>
+    <table border="1">
+        <tr>
+            <th>Order ID</th>
+            <th>Customer ID</th>
+            <th>Order Status</th>
+            <th>Order Date</th>
+            <th>Required Date</th>
+            <th>Shipped Date</th>
+            <th>Store ID</th>
+            <th>Staff ID</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.ORDER_ID }}</td>
+            <td>{{ order.CUSTOMER_ID }}</td>
+            <td>{{ order.ORDER_STATUS }}</td>
+            <td>{{ order.ORDER_DATE }}</td>
+            <td>{{ order.REQUIRED_DATE }}</td>
+            <td>{{ order.SHIPPED_DATE }}</td>
+            <td>{{ order.STORE_ID }}</td>
+            <td>{{ order.STAFF_ID }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
