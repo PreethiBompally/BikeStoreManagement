@@ -82,12 +82,10 @@ DATABASES = {
         'NAME': 'bike_store',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'HOST': '127.0.0.1',  # or the MySQL server's address
+        'PORT': '3306',       # MySQL default port
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
