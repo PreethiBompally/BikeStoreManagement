@@ -100,3 +100,12 @@ class Customers(models.Model):
     class Meta:
         managed = False
         db_table = 'customers'
+
+class Login(models.Model):
+    USER_NAME = models.CharField(max_length=255,primary_key=True)  # Add the max_length attribute here
+    PASSWORD = models.CharField(max_length=255)
+    class Meta:
+        managed = False
+        db_table = 'users'
+
+        

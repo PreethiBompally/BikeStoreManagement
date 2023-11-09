@@ -3,36 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Bike Store - Welcome</title>
+    <header id="fixed-header">
+        <h1>Athens Bike Store</h1>
+    <nav>
+        <ul>
+            <li><a href="index">Home</a></li>
+            <li><a href="products">Products</a></li>
+            <li><a href="about">About Us</a></li>
+            <li><a href="contact">Contact</a></li>
+        </ul>
+    </nav>
+    <a href="login" class="login-button">Login</a>
+</header>
+<style>
+    #fixed-header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* You can set the background color as desired */
+    color: #fff; /* Text color (adjust as needed) */
+    z-index: 100; /* Set a z-index value to ensure it's above other content */
+}
+</style>
     <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+
+<body>
     <style>
-        /* Add your CSS styles here to enhance the appearance */
-        /* Example: Change font styles, colors, layouts, etc. */
-        /* For demonstration purposes, a basic structure is provided */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url('https://kickstart.bikeexif.com/wp-content/uploads/2014/11/husqvarna-motorcycle-concept.jpg');
-            background-size: cover; 
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100% auto;
-            filter: brightness(110%) contrast(120%) saturate(120%);
-            color: #fff; /* Text color (white in this example) */
-            font-family: Arial, sans-serif; /* Choose an appropriate font-family */
-            font-size: 18px; /* Adjust the font size */
+       .login-button {
+        position: fixed;
+        top: 10px; /* Adjust to your desired distance from the top */
+        right: 10px; /* Adjust to your desired distance from the left */
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        font-weight: bold;
+        }
+
+        .login-button:hover {
+        background-color: #0056b3;
         }
 
         h1, h2, h3, p {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for contrast */
-    margin: 10px; /* Adjust the margins as needed */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for contrast */
+        margin: 10px; /* Adjust the margins as needed */
 }
 
 /* Styles for links */
 a {
-    color: #ffcc00; /* Link color (yellow in this example) */
+    color: #e7ba19; 
     text-decoration: none; /* Remove underline from links */
 }
 
@@ -63,7 +85,7 @@ a:hover {
             margin-bottom: 20px;
         }
         section p {
-            color: #666;
+            color: #b7afaf;
         }
         section .btn {
             padding: 10px 20px;
@@ -78,42 +100,48 @@ a:hover {
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>Athens Bike Store</h1>
-        <nav>
-            <ul>
-                <li><a href="index">Home</a></li>
-                <li><a href="products">Products</a></li>
-                <li><a href="about">About Us</a></li>
-                <li><a href="contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://kickstart.bikeexif.com/wp-content/uploads/2014/11/husqvarna-motorcycle-concept.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% auto;
+    filter: brightness(110%) contrast(120%) saturate(120%);
+    color: #fff; /* Text color (white in this example) */
+    font-family: Arial, sans-serif; /* Choose an appropriate font-family */
+    font-size: 18px; /* Adjust the font size */
+}
+</style>
 
     <section id="hero">
-        <h2>Welcome to Your Bike Store</h2>
+        <h2>Welcome to Athens Store</h2>
         <p>Discover the perfect ride for your adventures.</p>
         <a href="products" class="btn">Explore Bikes</a>
     </section>
 
     <section id="customers">
         <h2>Our Valued Customers</h2>
-        <p>We are proud to serve a diverse community of cyclists. Learn more about our loyal customers and their experiences.</p>
+        <p>We are proud to serve a diverse community of bikers. Learn more about our loyal customers and their experiences.</p>
         <a href="customers" class="btn">Meet out customers</a>
     </section>
     
 
     <section id="brands">
         <h2>Featured Brands</h2>
-        <p>Explore top-quality bike brands that we offer at Your Bike Store. Discover trusted names in the cycling industry.</p>
+        <p>Explore top-quality bike brands that we offer at Athens Bike Store. Discover trusted names in the cycling industry.</p>
         <a href="brands" class="btn">Discover Brands</a>
     </section>
 
     <section id="stock">
         <h2>Stock Availability</h2>
         <p>Check the availability of our bike stock and find the perfect model for your needs. Get the latest updates on our inventory.</p>
-        <a href="stock" class="btn">View Stock</a>
+        <a href="stocks" class="btn">View Stock</a>
     </section>
 
     <section id="orders">
@@ -126,12 +154,6 @@ a:hover {
         <h2>Order Items</h2>
         <p>Explore the items included in each order, from bikes to accessories. Learn more about what our customers love.</p>
         <a href="order-items" class="btn">View Order Items</a>
-    </section>
-
-    <section id="products">
-        <h2>Our Product Catalog</h2>
-        <p>Browse through our extensive product catalog, featuring a wide range of bikes and accessories to suit every rider.</p>
-        <a href="products" class="btn">Browse Products</a>
     </section>
 
     <section id="staff">
@@ -153,7 +175,7 @@ a:hover {
     </section>
 
     <footer>
-        <p>&copy; 2023 Your Bike Store. All rights reserved.</p>
+        <p>&copy; 2023 Athens Bike Store. All rights reserved.</p>
     </footer>
 </body>
 </html>

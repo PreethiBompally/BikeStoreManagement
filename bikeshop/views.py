@@ -1,8 +1,12 @@
 # bikeshopapp/views.py
 
 from django.shortcuts import render, get_object_or_404
-from .models import Customers,Brands, Categories, Staffs, Stores, Products, Stocks, Orders, OrderItems
+from .models import Customers,Brands, Categories, Login, Staffs, Stores, Products, Stocks, Orders, OrderItems
 
+
+def login(request):
+    logins = Login.objects.all()
+    return render(request, 'login.html', {'login': logins})
 
 def dashboard(request):
     return render(request, 'dashboard.html')
