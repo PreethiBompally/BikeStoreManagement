@@ -33,6 +33,7 @@ class Products(models.Model):
     CATEGORY_NAME = models.CharField(max_length=1024, null=True, blank=True)
     MODEL_YEAR = models.IntegerField(null=True, blank=True)
     LIST_PRICE = models.DecimalField(max_digits=20, decimal_places=5)
+    IMAGE_URL = models.CharField(max_length=1024, null=True, blank=True)
     class Meta:
         managed = False
         db_table = 'products'
