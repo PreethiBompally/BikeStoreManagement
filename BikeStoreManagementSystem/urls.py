@@ -21,13 +21,10 @@ from bikeshop import views
 urlpatterns = [
     path('', views.dashboard, name = 'dashboard'),
     path('customers/', views.customers, name='customers'),
-    path('brands/', views.brands, name='brands'),
-    path('categories/', views.categories, name='categories'),
-    path('staffs/', views.staffs, name='staffs'),
+    path('staff/', views.staff, name='staff'),
     path('stores/', views.stores, name='stores'),
     path('products/', views.products, name='products'),
     path('stocks/', views.stocks, name='stocks'),
     path('orders/', views.orders, name='orders'),
-    path('order_items/', views.order_items, name='order_items'),
     path('login/', views.login, name='login'),
 ]

@@ -1,20 +1,6 @@
 from django.db import models
 
-class Brands(models.Model):
-    BRAND_ID = models.IntegerField(primary_key=True)
-    BRAND_NAME = models.CharField(max_length=50)
-    class Meta:
-        managed = False
-        db_table = 'brands'
-
-class Categories(models.Model):
-    CATEGORY_ID = models.IntegerField(primary_key=True)
-    CATEGORY_NAME = models.CharField(max_length=50)
-    class Meta:
-        managed = False
-        db_table = 'categories'
-
-class Staffs(models.Model):
+class Staff(models.Model):
     STAFF_ID = models.IntegerField(primary_key=True)
     FIRST_NAME = models.CharField(max_length=50)
     LAST_NAME = models.CharField(max_length=50)
@@ -25,7 +11,7 @@ class Staffs(models.Model):
     MANAGER_ID = models.IntegerField(null=True, blank=True)
     class Meta:
         managed = False
-        db_table = 'staffs'
+        db_table = 'staff'
 
 class Stores(models.Model):
     STORE_ID = models.IntegerField(primary_key=True)
@@ -43,8 +29,8 @@ class Stores(models.Model):
 class Products(models.Model):
     PRODUCT_ID = models.IntegerField(primary_key=True)
     PRODUCT_NAME = models.CharField(max_length=1024, null=True, blank=True)
-    BRAND_ID = models.IntegerField()
-    CATEGORY_ID = models.IntegerField()
+    BRAND_NAME = models.CharField(max_length=1024, null=True, blank=True)
+    CATEGORY_NAME = models.CharField(max_length=1024, null=True, blank=True)
     MODEL_YEAR = models.IntegerField(null=True, blank=True)
     LIST_PRICE = models.DecimalField(max_digits=20, decimal_places=5)
     class Meta:
@@ -72,20 +58,6 @@ class Orders(models.Model):
     class Meta:
         managed = False
         db_table = 'orders'
-
-class OrderItems(models.Model):
-    ORDER_ID = models.IntegerField(primary_key=True)
-    ITEM_ID = models.IntegerField()
-    PRODUCT_ID = models.IntegerField()
-    QUANTITY = models.DecimalField(max_digits=20, decimal_places=5)
-    LIST_PRICE = models.DecimalField(max_digits=20, decimal_places=5)
-    DISCOUNT = models.DecimalField(max_digits=20, decimal_places=5)
-    class Meta:
-        managed = False
-        db_table = 'order_items'
-        unique_together = (('ORDER_ID', 'ITEM_ID', 'PRODUCT_ID'),)
-
-
 class Customers(models.Model):
     CUSTOMER_ID = models.IntegerField(primary_key=True)
     FIRST_NAME = models.CharField(null = False, max_length=50)

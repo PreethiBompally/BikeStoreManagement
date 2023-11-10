@@ -1,7 +1,7 @@
 # bikeshopapp/views.py
 
 from django.shortcuts import render, get_object_or_404
-from .models import Customers,Brands, Categories, Login, Staffs, Stores, Products, Stocks, Orders, OrderItems
+from .models import Customers, Login, Staff, Stores, Products, Stocks, Orders
 
 
 def login(request):
@@ -15,17 +15,9 @@ def customers(request):
     custs = Customers.objects.all()
     return render(request, 'customers.html', {'customers': custs})
 
-def brands(request):
-    all_brands = Brands.objects.all()
-    return render(request, 'brands.html', {'brands': all_brands})
-
-def categories(request):
-    all_categories = Categories.objects.all()
-    return render(request, 'categories.html', {'categories': all_categories})
-
-def staffs(request):
-    all_staffs = Staffs.objects.all()
-    return render(request, 'staffs.html', {'staffs': all_staffs})
+def staff(request):
+    all_staff = Staff.objects.all()
+    return render(request, 'staff.html', {'staffs': all_staff})
 
 def stores(request):
     all_stores = Stores.objects.all()
@@ -42,10 +34,6 @@ def stocks(request):
 def orders(request):
     all_orders = Orders.objects.all()
     return render(request, 'orders.html', {'orders': all_orders})
-
-def order_items(request):
-    all_order_items = OrderItems.objects.all()
-    return render(request, 'order_items.html', {'order_items': all_order_items})
 
 
 # Add other views for CRUD operations.
