@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `PRODUCTS` (
   `CATEGORY_NAME` VARCHAR(1024) NOT NULL,
   `MODEL_YEAR` INT,
   `LIST_PRICE` DECIMAL(20, 5),
+  `IMAGE_URL` VARCHAR(1024),
   PRIMARY KEY (`PRODUCT_ID`)
 );
 
@@ -91,327 +92,85 @@ INSERT INTO stores VALUES (1,"Santa Cruz Bikes","(831)476-4321","santacruz@bikes
 (3,"Rowlett Bikes","(972) 530-5555","rowlett@bikes.shop","8000 Fairway Avenue","Rowlett","TX",75088);
 
 
-INSERT INTO products VALUES (1, 'Trek 820 - 2016', 'Trek', 'Mountain Bikes', 2016, 379.99000);
-INSERT INTO products VALUES (2, 'Ritchey Timberwolf Frameset - 2016', 'Ritchey', 'Mountain Bikes', 2016, 749.99000);
-INSERT INTO products VALUES (3, 'Surly Wednesday Frameset - 2016', 'Surly', 'Mountain Bikes', 2016, 999.99000);
-INSERT INTO products VALUES (4, 'Trek Fuel EX 8 29 - 2016', 'Trek', 'Mountain Bikes', 2016, 2899.99000);
-INSERT INTO products VALUES (5, 'Heller Shagamaw Frame - 2016', 'Heller', 'Mountain Bikes', 2016, 1320.99000);
-INSERT INTO products VALUES (6, 'Surly Ice Cream Truck Frameset - 2016', 'Surly', 'Mountain Bikes', 2016, 469.99000);
-INSERT INTO products VALUES (7, 'Trek Slash 8 27.5 - 2016', 'Trek', 'Mountain Bikes', 2016, 3999.99000);
-INSERT INTO products VALUES (8, 'Trek Remedy 29 Carbon Frameset - 2016', 'Trek', 'Mountain Bikes', 2016, 1799.99000);
-INSERT INTO products VALUES (9, 'Trek Conduit+ - 2016', 'Trek', 'Electric Bikes', 2016, 2999.99000);
-INSERT INTO products VALUES (10, 'Surly Straggler - 2016', 'Surly', 'Cyclocross Bicycles', 2016, 1549.00000);
-INSERT INTO products VALUES (11, 'Surly Straggler 650b - 2016', 'Surly', 'Cyclocross Bicycles', 2016, 1680.99000);
-INSERT INTO products VALUES (12, 'Electra Townie Original 21D - 2016', 'Electra', 'Cruisers Bicycles', 2016, 549.99000);
-INSERT INTO products VALUES (13, 'Electra Cruiser 1 (24-Inch) - 2016', 'Electra', 'Cruisers Bicycles', 2016, 269.99000);
-INSERT INTO products VALUES (14, 'Electra Girl\'s Hawaii 1 (16-inch) - 2015/2016', 'Electra', 'Cruisers Bicycles', 2016, 269.99000);
-INSERT INTO products VALUES (15, 'Electra Moto 1 - 2016', 'Electra', 'Cruisers Bicycles', 2016, 529.99000);
-INSERT INTO products VALUES (16, 'Electra Townie Original 7D EQ - 2016', 'Electra', 'Cruisers Bicycles', 2016, 599.99000);
-INSERT INTO products VALUES (17, 'Pure Cycles Vine 8-Speed - 2016', 'Pure Cycles', 'Cruisers Bicycles', 2016, 429.00000);
-INSERT INTO products VALUES (18, 'Pure Cycles Western 3-Speed - Women\'s - 2015/2016', 'Pure Cycles', 'Cruisers Bicycles', 2016, 449.00000);
-INSERT INTO products VALUES (19, 'Pure Cycles William 3-Speed - 2016', 'Pure Cycles', 'Cruisers Bicycles', 2016, 449.00000);
-INSERT INTO products VALUES (20, 'Electra Townie Original 7D EQ - Women\'s - 2016', 'Electra', 'Cruisers Bicycles', 2016, 599.99000);
-INSERT INTO products VALUES (21, 'Electra Cruiser 1 (24-Inch) - 2016', 'Electra', 'Children Bicycles', 2016, 269.99000);
-INSERT INTO products VALUES (22, 'Electra Girl\'s Hawaii 1 (16-inch) - 2015/2016', 'Electra', 'Children Bicycles', 2016, 269.99000);
-INSERT INTO products VALUES (23, 'Electra Girl\'s Hawaii 1 (20-inch) - 2015/2016', 'Electra', 'Children Bicycles', 2016, 299.99000);
-INSERT INTO products VALUES (24, 'Electra Townie Original 21D - 2016', 'Electra', 'Comfort Bicycles', 2016, 549.99000);
-INSERT INTO products VALUES (25, 'Electra Townie Original 7D - 2015/2016', 'Electra', 'Comfort Bicycles', 2016, 499.99000);
-INSERT INTO products VALUES (26, 'Electra Townie Original 7D EQ - 2016', 'Electra', 'Comfort Bicycles', 2016, 599.99000);
-INSERT INTO products VALUES (27, 'Surly Big Dummy Frameset - 2017', 'Surly', 'Mountain Bikes', 2017, 999.99000);
-INSERT INTO products VALUES (28, 'Surly Karate Monkey 27.5+ Frameset - 2017', 'Surly', 'Mountain Bikes', 2017, 2499.99000);
-INSERT INTO products VALUES (29, 'Trek X-Caliber 8 - 2017', 'Trek', 'Mountain Bikes', 2017, 999.99000);
-INSERT INTO products VALUES (30, 'Surly Ice Cream Truck Frameset - 2017', 'Surly', 'Mountain Bikes', 2017, 999.99000);
-INSERT INTO products VALUES (31, 'Surly Wednesday - 2017', 'Surly', 'Mountain Bikes', 2017, 1632.99000);
-INSERT INTO products VALUES (32, 'Trek Farley Alloy Frameset - 2017', 'Trek', 'Mountain Bikes', 2017, 469.99000);
-INSERT INTO products VALUES (33, 'Surly Wednesday Frameset - 2017', 'Surly', 'Mountain Bikes', 2017, 469.99000);
-INSERT INTO products VALUES (34, 'Trek Session DH 27.5 Carbon Frameset - 2017', 'Trek', 'Mountain Bikes', 2017, 469.99000);
-INSERT INTO products VALUES (35, 'Sun Bicycles Spider 3i - 2017', 'Sun Bicycles', 'Mountain Bikes', 2017, 832.99000);
-INSERT INTO products VALUES (36, 'Surly Troll Frameset - 2017', 'Surly', 'Mountain Bikes', 2017, 832.99000);
-INSERT INTO products VALUES (37, 'Haro Flightline One ST - 2017', 'Haro', 'Mountain Bikes', 2017, 379.99000);
-INSERT INTO products VALUES (38, 'Haro Flightline Two 26 Plus - 2017', 'Haro', 'Mountain Bikes', 2017, 549.99000);
-INSERT INTO products VALUES (39, 'Trek Stache 5 - 2017', 'Trek', 'Mountain Bikes', 2017, 1499.99000);
-INSERT INTO products VALUES (40, 'Trek Fuel EX 9.8 29 - 2017', 'Trek', 'Mountain Bikes', 2017, 4999.99000);
-INSERT INTO products VALUES (41, 'Haro Shift R3 - 2017', 'Haro', 'Mountain Bikes', 2017, 1469.99000);
-INSERT INTO products VALUES (42, 'Trek Fuel EX 5 27.5 Plus - 2017', 'Trek', 'Mountain Bikes', 2017, 2299.99000);
-INSERT INTO products VALUES (43, 'Trek Fuel EX 9.8 27.5 Plus - 2017', 'Trek', 'Mountain Bikes', 2017, 5299.99000);
-INSERT INTO products VALUES (44, 'Haro SR 1.1 - 2017', 'Haro', 'Mountain Bikes', 2017, 539.99000);
-INSERT INTO products VALUES (45, 'Haro SR 1.2 - 2017', 'Haro', 'Mountain Bikes', 2017, 869.99000);
-INSERT INTO products VALUES (46, 'Haro SR 1.3 - 2017', 'Haro', 'Mountain Bikes', 2017, 1409.99000);
-INSERT INTO products VALUES (47, 'Trek Remedy 9.8 - 2017', 'Trek', 'Mountain Bikes', 2017, 5299.99000);
-INSERT INTO products VALUES (48, 'Trek Emonda S 4 - 2017', 'Trek', 'Road Bikes', 2017, 1499.99000);
-INSERT INTO products VALUES (49, 'Trek Domane SL 6 - 2017', 'Trek', 'Road Bikes', 2017, 3499.99000);
-INSERT INTO products VALUES (50, 'Trek Silque SLR 7 Women\'s - 2017', 'Trek', 'Road Bikes', 2017, 5999.99000);
-INSERT INTO products VALUES (51, 'Trek Silque SLR 8 Women\'s - 2017', 'Trek', 'Road Bikes', 2017, 6499.99000);
-INSERT INTO products VALUES (52, 'Surly Steamroller - 2017', 'Surly', 'Road Bikes', 2017, 875.99000);
-INSERT INTO products VALUES (53, 'Surly Ogre Frameset - 2017', 'Surly', 'Road Bikes', 2017, 749.99000);
-INSERT INTO products VALUES (54, 'Trek Domane SL Disc Frameset - 2017', 'Trek', 'Road Bikes', 2017, 3199.99000);
-INSERT INTO products VALUES (55, 'Trek Domane S 6 - 2017', 'Trek', 'Road Bikes', 2017, 2699.99000);
-INSERT INTO products VALUES (56, 'Trek Domane SLR 6 Disc - 2017', 'Trek', 'Road Bikes', 2017, 5499.99000);
-INSERT INTO products VALUES (57, 'Trek Emonda S 5 - 2017', 'Trek', 'Road Bikes', 2017, 1999.99000);
-INSERT INTO products VALUES (58, 'Trek Madone 9.2 - 2017', 'Trek', 'Road Bikes', 2017, 4999.99000);
-INSERT INTO products VALUES (59, 'Trek Domane S 5 Disc - 2017', 'Trek', 'Road Bikes', 2017, 2599.99000);
-INSERT INTO products VALUES (60, 'Sun Bicycles ElectroLite - 2017', 'Sun Bicycles', 'Electric Bikes', 2017, 1559.99000);
-INSERT INTO products VALUES (61, 'Trek Powerfly 8 FS Plus - 2017', 'Trek', 'Electric Bikes', 2017, 4999.99000);
-INSERT INTO products VALUES (62, 'Trek Boone 7 - 2017', 'Trek', 'Cyclocross Bicycles', 2017, 3499.99000);
-INSERT INTO products VALUES (63, 'Trek Boone Race Shop Limited - 2017', 'Trek', 'Cyclocross Bicycles', 2017, 3499.99000);
-INSERT INTO products VALUES (64, 'Electra Townie Original 7D - 2017', 'Electra', 'Cruisers Bicycles', 2017, 489.99000);
-INSERT INTO products VALUES (65, 'Sun Bicycles Lil Bolt Type-R - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 346.99000);
-INSERT INTO products VALUES (66, 'Sun Bicycles Revolutions 24 - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 250.99000);
-INSERT INTO products VALUES (67, 'Sun Bicycles Revolutions 24 - Girl\'s - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 250.99000);
-INSERT INTO products VALUES (68, 'Sun Bicycles Cruz 3 - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 449.99000);
-INSERT INTO products VALUES (69, 'Sun Bicycles Cruz 7 - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 416.99000);
-INSERT INTO products VALUES (70, 'Electra Amsterdam Original 3i - 2015/2017', 'Electra', 'Cruisers Bicycles', 2017, 659.99000);
-INSERT INTO products VALUES (71, 'Sun Bicycles Atlas X-Type - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 416.99000);
-INSERT INTO products VALUES (72, 'Sun Bicycles Biscayne Tandem 7 - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 619.99000);
-INSERT INTO products VALUES (73, 'Sun Bicycles Brickell Tandem 7 - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 749.99000);
-INSERT INTO products VALUES (74, 'Electra Cruiser Lux 1 - 2017', 'Electra', 'Cruisers Bicycles', 2017, 439.99000);
-INSERT INTO products VALUES (75, 'Electra Cruiser Lux Fat Tire 1 Ladies - 2017', 'Electra', 'Cruisers Bicycles', 2017, 599.99000);
-INSERT INTO products VALUES (76, 'Electra Girl\'s Hawaii 1 16\'\' - 2017', 'Electra', 'Cruisers Bicycles', 2017, 299.99000);
-INSERT INTO products VALUES (77, 'Electra Glam Punk 3i Ladies\' - 2017', 'Electra', 'Cruisers Bicycles', 2017, 799.99000);
-INSERT INTO products VALUES (78, 'Sun Bicycles Biscayne Tandem CB - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 647.99000);
-INSERT INTO products VALUES (79, 'Sun Bicycles Boardwalk (24-inch Wheels) - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 402.99000);
-INSERT INTO products VALUES (80, 'Sun Bicycles Brickell Tandem CB - 2017', 'Sun Bicycles', 'Cruisers Bicycles', 2017, 761.99000);
-INSERT INTO products VALUES (81, 'Electra Amsterdam Fashion 7i Ladies\' - 2017', 'Electra', 'Cruisers Bicycles', 2017, 1099.99000);
-INSERT INTO products VALUES (82, 'Electra Amsterdam Original 3i Ladies\' - 2017', 'Electra', 'Cruisers Bicycles', 2017, 659.99000);
-INSERT INTO products VALUES (83, 'Trek Boy\'s Kickster - 2015/2017', 'Trek', 'Children Bicycles', 2017, 149.99000);
-INSERT INTO products VALUES (84, 'Sun Bicycles Lil Kitt\'n - 2017', 'Sun Bicycles', 'Children Bicycles', 2017, 109.99000);
-INSERT INTO products VALUES (85, 'Haro Downtown 16 - 2017', 'Haro', 'Children Bicycles', 2017, 329.99000);
-INSERT INTO products VALUES (86, 'Trek Girl\'s Kickster - 2017', 'Trek', 'Children Bicycles', 2017, 149.99000);
-INSERT INTO products VALUES (87, 'Trek Precaliber 12 Boys - 2017', 'Trek', 'Children Bicycles', 2017, 189.99000);
-INSERT INTO products VALUES (88, 'Trek Precaliber 12 Girls - 2017', 'Trek', 'Children Bicycles', 2017, 189.99000);
-INSERT INTO products VALUES (89, 'Trek Precaliber 16 Boys - 2017', 'Trek', 'Children Bicycles', 2017, 209.99000);
-INSERT INTO products VALUES (90, 'Trek Precaliber 16 Girls - 2017', 'Trek', 'Children Bicycles', 2017, 209.99000);
-INSERT INTO products VALUES (91, 'Trek Precaliber 24 (21-Speed) - Girls - 2017', 'Trek', 'Children Bicycles', 2017, 349.99000);
-INSERT INTO products VALUES (92, 'Haro Shredder 20 - 2017', 'Haro', 'Children Bicycles', 2017, 209.99000);
-INSERT INTO products VALUES (93, 'Haro Shredder 20 Girls - 2017', 'Haro', 'Children Bicycles', 2017, 209.99000);
-INSERT INTO products VALUES (94, 'Haro Shredder Pro 20 - 2017', 'Haro', 'Children Bicycles', 2017, 249.99000);
-INSERT INTO products VALUES (95, 'Electra Girl\'s Hawaii 1 16\'\' - 2017', 'Electra', 'Children Bicycles', 2017, 299.99000);
-INSERT INTO products VALUES (96, 'Electra Moto 3i (20-inch) - Boy\'s - 2017', 'Electra', 'Children Bicycles', 2017, 349.99000);
-INSERT INTO products VALUES (97, 'Electra Savannah 3i (20-inch) - Girl\'s - 2017', 'Electra', 'Children Bicycles', 2017, 349.99000);
-INSERT INTO products VALUES (98, 'Electra Straight 8 3i (20-inch) - Boy\'s - 2017', 'Electra', 'Children Bicycles', 2017, 489.99000);
-INSERT INTO products VALUES (99, 'Electra Sugar Skulls 1 (20-inch) - Girl\'s - 2017', 'Electra', 'Children Bicycles', 2017, 299.99000);
-INSERT INTO products VALUES (100, 'Electra Townie 3i EQ (20-inch) - Boys\' - 2017', 'Electra', 'Children Bicycles', 2017, 489.99000);
-INSERT INTO products VALUES (101, 'Electra Townie 7D (20-inch) - Boys\' - 2017', 'Electra', 'Children Bicycles', 2017, 339.99000);
-INSERT INTO products VALUES (102, 'Electra Townie Original 7D - 2017', 'Electra', 'Comfort Bicycles', 2017, 489.99000);
-INSERT INTO products VALUES (103, 'Sun Bicycles Streamway 3 - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 551.99000);
-INSERT INTO products VALUES (104, 'Sun Bicycles Streamway - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 481.99000);
-INSERT INTO products VALUES (105, 'Sun Bicycles Streamway 7 - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 533.99000);
-INSERT INTO products VALUES (106, 'Sun Bicycles Cruz 3 - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 449.99000);
-INSERT INTO products VALUES (107, 'Sun Bicycles Cruz 7 - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 416.99000);
-INSERT INTO products VALUES (108, 'Sun Bicycles Cruz 3 - Women\'s - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 449.99000);
-INSERT INTO products VALUES (109, 'Sun Bicycles Cruz 7 - Women\'s - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 416.99000);
-INSERT INTO products VALUES (110, 'Sun Bicycles Drifter 7 - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 470.99000);
-INSERT INTO products VALUES (111, 'Sun Bicycles Drifter 7 - Women\'s - 2017', 'Sun Bicycles', 'Comfort Bicycles', 2017, 470.99000);
-INSERT INTO products VALUES (112, 'Trek 820 - 2018', 'Trek', 'Mountain Bikes', 2018, 379.99000);
-INSERT INTO products VALUES (113, 'Trek Marlin 5 - 2018', 'Trek', 'Mountain Bikes', 2018, 489.99000);
-INSERT INTO products VALUES (114, 'Trek Marlin 6 - 2018', 'Trek', 'Mountain Bikes', 2018, 579.99000);
-INSERT INTO products VALUES (115, 'Trek Fuel EX 8 29 - 2018', 'Trek', 'Mountain Bikes', 2018, 3199.99000);
-INSERT INTO products VALUES (116, 'Trek Marlin 7 - 2017/2018', 'Trek', 'Mountain Bikes', 2018, 749.99000);
-INSERT INTO products VALUES (117, 'Trek Ticket S Frame - 2018', 'Trek', 'Mountain Bikes', 2018, 1469.99000);
-INSERT INTO products VALUES (118, 'Trek X-Caliber 8 - 2018', 'Trek', 'Mountain Bikes', 2018, 999.99000);
-INSERT INTO products VALUES (119, 'Trek Kids\' Neko - 2018', 'Trek', 'Mountain Bikes', 2018, 469.99000);
-INSERT INTO products VALUES (120, 'Trek Fuel EX 7 29 - 2018', 'Trek', 'Mountain Bikes', 2018, 2499.99000);
-INSERT INTO products VALUES (121, 'Surly Krampus Frameset - 2018', 'Surly', 'Mountain Bikes', 2018, 2499.99000);
-INSERT INTO products VALUES (122, 'Surly Troll Frameset - 2018', 'Surly', 'Mountain Bikes', 2018, 2499.99000);
-INSERT INTO products VALUES (123, 'Trek Farley Carbon Frameset - 2018', 'Trek', 'Mountain Bikes', 2018, 999.99000);
-INSERT INTO products VALUES (124, 'Surly Krampus - 2018', 'Surly', 'Mountain Bikes', 2018, 1499.00000);
-INSERT INTO products VALUES (125, 'Trek Kids\' Dual Sport - 2018', 'Trek', 'Mountain Bikes', 2018, 469.99000);
-INSERT INTO products VALUES (126, 'Surly Big Fat Dummy Frameset - 2018', 'Surly', 'Mountain Bikes', 2018, 469.99000);
-INSERT INTO products VALUES (127, 'Surly Pack Rat Frameset - 2018', 'Surly', 'Mountain Bikes', 2018, 469.99000);
-INSERT INTO products VALUES (128, 'Surly ECR 27.5 - 2018', 'Surly', 'Mountain Bikes', 2018, 1899.00000);
-INSERT INTO products VALUES (129, 'Trek X-Caliber 7 - 2018', 'Trek', 'Mountain Bikes', 2018, 919.99000);
-INSERT INTO products VALUES (130, 'Trek Stache Carbon Frameset - 2018', 'Trek', 'Mountain Bikes', 2018, 919.99000);
-INSERT INTO products VALUES (131, 'Heller Bloodhound Trail - 2018', 'Heller', 'Mountain Bikes', 2018, 2599.00000);
-INSERT INTO products VALUES (132, 'Trek Procal AL Frameset - 2018', 'Trek', 'Mountain Bikes', 2018, 1499.99000);
-INSERT INTO products VALUES (133, 'Trek Procaliber Frameset - 2018', 'Trek', 'Mountain Bikes', 2018, 1499.99000);
-INSERT INTO products VALUES (134, 'Trek Remedy 27.5 C Frameset - 2018', 'Trek', 'Mountain Bikes', 2018, 1499.99000);
-INSERT INTO products VALUES (135, 'Trek X-Caliber Frameset - 2018', 'Trek', 'Mountain Bikes', 2018, 1499.99000);
-INSERT INTO products VALUES (136, 'Trek Procaliber 6 - 2018', 'Trek', 'Mountain Bikes', 2018, 1799.99000);
-INSERT INTO products VALUES (137, 'Heller Shagamaw GX1 - 2018', 'Heller', 'Mountain Bikes', 2018, 2599.00000);
-INSERT INTO products VALUES (138, 'Trek Fuel EX 5 Plus - 2018', 'Trek', 'Mountain Bikes', 2018, 2249.99000);
-INSERT INTO products VALUES (139, 'Trek Remedy 7 27.5 - 2018', 'Trek', 'Mountain Bikes', 2018, 2999.99000);
-INSERT INTO products VALUES (140, 'Trek Remedy 9.8 27.5 - 2018', 'Trek', 'Mountain Bikes', 2018, 4999.99000);
-INSERT INTO products VALUES (141, 'Trek Stache 5 - 2018', 'Trek', 'Mountain Bikes', 2018, 1599.99000);
-INSERT INTO products VALUES (142, 'Trek Fuel EX 8 29 XT - 2018', 'Trek', 'Mountain Bikes', 2018, 3199.99000);
-INSERT INTO products VALUES (143, 'Trek Domane ALR 3 - 2018', 'Trek', 'Road Bikes', 2018, 1099.99000);
-INSERT INTO products VALUES (144, 'Trek Domane ALR 4 Disc - 2018', 'Trek', 'Road Bikes', 2018, 1549.99000);
-INSERT INTO products VALUES (145, 'Trek Domane ALR 5 Disc - 2018', 'Trek', 'Road Bikes', 2018, 1799.99000);
-INSERT INTO products VALUES (146, 'Trek Domane SLR 6 - 2018', 'Trek', 'Road Bikes', 2018, 4999.99000);
-INSERT INTO products VALUES (147, 'Trek Domane ALR 5 Gravel - 2018', 'Trek', 'Road Bikes', 2018, 1799.99000);
-INSERT INTO products VALUES (148, 'Trek Domane SL 8 Disc - 2018', 'Trek', 'Road Bikes', 2018, 5499.99000);
-INSERT INTO products VALUES (149, 'Trek Domane SLR 8 Disc - 2018', 'Trek', 'Road Bikes', 2018, 7499.99000);
-INSERT INTO products VALUES (150, 'Trek Emonda SL 7 - 2018', 'Trek', 'Road Bikes', 2018, 4499.99000);
-INSERT INTO products VALUES (151, 'Trek Domane ALR 4 Disc Women\'s - 2018', 'Trek', 'Road Bikes', 2018, 1549.99000);
-INSERT INTO products VALUES (152, 'Trek Domane SL 5 Disc Women\'s - 2018', 'Trek', 'Road Bikes', 2018, 2499.99000);
-INSERT INTO products VALUES (153, 'Trek Domane SL 7 Women\'s - 2018', 'Trek', 'Road Bikes', 2018, 4999.99000);
-INSERT INTO products VALUES (154, 'Trek Domane SLR 6 Disc Women\'s - 2018', 'Trek', 'Road Bikes', 2018, 5499.99000);
-INSERT INTO products VALUES (155, 'Trek Domane SLR 9 Disc - 2018', 'Trek', 'Road Bikes', 2018, 11999.99000);
-INSERT INTO products VALUES (156, 'Trek Domane SL Frameset - 2018', 'Trek', 'Road Bikes', 2018, 6499.99000);
-INSERT INTO products VALUES (157, 'Trek Domane SL Frameset Women\'s - 2018', 'Trek', 'Road Bikes', 2018, 6499.99000);
-INSERT INTO products VALUES (158, 'Trek CrossRip 1 - 2018', 'Trek', 'Road Bikes', 2018, 959.99000);
-INSERT INTO products VALUES (159, 'Trek Emonda ALR 6 - 2018', 'Trek', 'Road Bikes', 2018, 2299.99000);
-INSERT INTO products VALUES (160, 'Trek Emonda SLR 6 - 2018', 'Trek', 'Road Bikes', 2018, 4499.99000);
-INSERT INTO products VALUES (161, 'Surly ECR - 2018', 'Surly', 'Road Bikes', 2018, 1899.00000);
-INSERT INTO products VALUES (162, 'Trek Emonda SL 6 Disc - 2018', 'Trek', 'Road Bikes', 2018, 2999.99000);
-INSERT INTO products VALUES (163, 'Surly Pack Rat - 2018', 'Surly', 'Road Bikes', 2018, 1349.00000);
-INSERT INTO products VALUES (164, 'Surly Straggler 650b - 2018', 'Surly', 'Road Bikes', 2018, 1549.00000);
-INSERT INTO products VALUES (165, 'Trek 1120 - 2018', 'Trek', 'Road Bikes', 2018, 2499.99000);
-INSERT INTO products VALUES (166, 'Trek Domane AL 2 Women\'s - 2018', 'Trek', 'Road Bikes', 2018, 749.99000);
-INSERT INTO products VALUES (167, 'Surly ECR Frameset - 2018', 'Surly', 'Road Bikes', 2018, 749.99000);
-INSERT INTO products VALUES (168, 'Surly Straggler - 2018', 'Surly', 'Road Bikes', 2018, 1549.00000);
-INSERT INTO products VALUES (169, 'Trek Emonda SLR 8 - 2018', 'Trek', 'Road Bikes', 2018, 6499.99000);
-INSERT INTO products VALUES (170, 'Trek CrossRip 2 - 2018', 'Trek', 'Road Bikes', 2018, 1299.99000);
-INSERT INTO products VALUES (171, 'Trek Domane SL 6 - 2018', 'Trek', 'Road Bikes', 2018, 3199.99000);
-INSERT INTO products VALUES (172, 'Trek Domane ALR Disc Frameset - 2018', 'Trek', 'Road Bikes', 2018, 3199.99000);
-INSERT INTO products VALUES (173, 'Trek Domane ALR Frameset - 2018', 'Trek', 'Road Bikes', 2018, 3199.99000);
-INSERT INTO products VALUES (174, 'Trek Domane SLR Disc Frameset - 2018', 'Trek', 'Road Bikes', 2018, 3199.99000);
-INSERT INTO products VALUES (175, 'Trek Domane SLR Frameset - 2018', 'Trek', 'Road Bikes', 2018, 3199.99000);
-INSERT INTO products VALUES (176, 'Trek Madone 9 Frameset - 2018', 'Trek', 'Road Bikes', 2018, 3199.99000);
-INSERT INTO products VALUES (177, 'Trek Domane SLR 6 Disc - 2018', 'Trek', 'Road Bikes', 2018, 5499.99000);
-INSERT INTO products VALUES (178, 'Trek Domane AL 2 - 2018', 'Trek', 'Road Bikes', 2018, 749.99000);
-INSERT INTO products VALUES (179, 'Trek Domane AL 3 - 2018', 'Trek', 'Road Bikes', 2018, 919.99000);
-INSERT INTO products VALUES (180, 'Trek Domane AL 3 Women\'s - 2018', 'Trek', 'Road Bikes', 2018, 919.99000);
-INSERT INTO products VALUES (181, 'Trek Domane SL 5 - 2018', 'Trek', 'Road Bikes', 2018, 2199.99000);
-INSERT INTO products VALUES (182, 'Trek Domane SL 5 Disc - 2018', 'Trek', 'Road Bikes', 2018, 2499.99000);
-INSERT INTO products VALUES (183, 'Trek Domane SL 5 Women\'s - 2018', 'Trek', 'Road Bikes', 2018, 2199.99000);
-INSERT INTO products VALUES (184, 'Trek Domane SL 6 Disc - 2018', 'Trek', 'Road Bikes', 2018, 3499.99000);
-INSERT INTO products VALUES (185, 'Trek Conduit+ - 2018', 'Trek', 'Electric Bikes', 2018, 2799.99000);
-INSERT INTO products VALUES (186, 'Trek CrossRip+ - 2018', 'Trek', 'Electric Bikes', 2018, 4499.99000);
-INSERT INTO products VALUES (187, 'Trek Neko+ - 2018', 'Trek', 'Electric Bikes', 2018, 2799.99000);
-INSERT INTO products VALUES (188, 'Trek XM700+ Lowstep - 2018', 'Trek', 'Electric Bikes', 2018, 3499.99000);
-INSERT INTO products VALUES (189, 'Trek Lift+ Lowstep - 2018', 'Trek', 'Electric Bikes', 2018, 2799.99000);
-INSERT INTO products VALUES (190, 'Trek Dual Sport+ - 2018', 'Trek', 'Electric Bikes', 2018, 2799.99000);
-INSERT INTO products VALUES (191, 'Electra Loft Go! 8i - 2018', 'Electra', 'Electric Bikes', 2018, 2799.99000);
-INSERT INTO products VALUES (192, 'Electra Townie Go! 8i - 2017/2018', 'Electra', 'Electric Bikes', 2018, 2599.99000);
-INSERT INTO products VALUES (193, 'Trek Lift+ - 2018', 'Trek', 'Electric Bikes', 2018, 2799.99000);
-INSERT INTO products VALUES (194, 'Trek XM700+ - 2018', 'Trek', 'Electric Bikes', 2018, 3499.99000);
-INSERT INTO products VALUES (195, 'Electra Townie Go! 8i Ladies\' - 2018', 'Electra', 'Electric Bikes', 2018, 2599.99000);
-INSERT INTO products VALUES (196, 'Trek Verve+ - 2018', 'Trek', 'Electric Bikes', 2018, 2299.99000);
-INSERT INTO products VALUES (197, 'Trek Verve+ Lowstep - 2018', 'Trek', 'Electric Bikes', 2018, 2299.99000);
-INSERT INTO products VALUES (198, 'Electra Townie Commute Go! - 2018', 'Electra', 'Electric Bikes', 2018, 2999.99000);
-INSERT INTO products VALUES (199, 'Electra Townie Commute Go! Ladies\' - 2018', 'Electra', 'Electric Bikes', 2018, 2999.99000);
-INSERT INTO products VALUES (200, 'Trek Powerfly 5 - 2018', 'Trek', 'Electric Bikes', 2018, 3499.99000);
-INSERT INTO products VALUES (201, 'Trek Powerfly 5 FS - 2018', 'Trek', 'Electric Bikes', 2018, 4499.99000);
-INSERT INTO products VALUES (202, 'Trek Powerfly 5 Women\'s - 2018', 'Trek', 'Electric Bikes', 2018, 3499.99000);
-INSERT INTO products VALUES (203, 'Trek Powerfly 7 FS - 2018', 'Trek', 'Electric Bikes', 2018, 4999.99000);
-INSERT INTO products VALUES (204, 'Trek Super Commuter+ 7 - 2018', 'Trek', 'Electric Bikes', 2018, 3599.99000);
-INSERT INTO products VALUES (205, 'Trek Super Commuter+ 8S - 2018', 'Trek', 'Electric Bikes', 2018, 4999.99000);
-INSERT INTO products VALUES (206, 'Trek Boone 5 Disc - 2018', 'Trek', 'Cyclocross Bicycles', 2018, 3299.99000);
-INSERT INTO products VALUES (207, 'Trek Boone 7 Disc - 2018', 'Trek', 'Cyclocross Bicycles', 2018, 3999.99000);
-INSERT INTO products VALUES (208, 'Trek Crockett 5 Disc - 2018', 'Trek', 'Cyclocross Bicycles', 2018, 1799.99000);
-INSERT INTO products VALUES (209, 'Trek Crockett 7 Disc - 2018', 'Trek', 'Cyclocross Bicycles', 2018, 2999.99000);
-INSERT INTO products VALUES (210, 'Surly Straggler - 2018', 'Surly', 'Cyclocross Bicycles', 2018, 1549.00000);
-INSERT INTO products VALUES (211, 'Surly Straggler 650b - 2018', 'Surly', 'Cyclocross Bicycles', 2018, 1549.00000);
-INSERT INTO products VALUES (212, 'Electra Townie Original 21D - 2018', 'Electra', 'Cruisers Bicycles', 2018, 559.99000);
-INSERT INTO products VALUES (213, 'Electra Cruiser 1 - 2016/2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 269.99000);
-INSERT INTO products VALUES (214, 'Electra Tiger Shark 3i - 2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (215, 'Electra Queen of Hearts 3i - 2018', 'Electra', 'Cruisers Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (216, 'Electra Super Moto 8i - 2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (217, 'Electra Straight 8 3i - 2018', 'Electra', 'Cruisers Bicycles', 2018, 909.99000);
-INSERT INTO products VALUES (218, 'Electra Cruiser 7D - 2016/2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (219, 'Electra Moto 3i - 2018', 'Electra', 'Cruisers Bicycles', 2018, 639.99000);
-INSERT INTO products VALUES (220, 'Electra Cruiser 1 Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 269.99000);
-INSERT INTO products VALUES (221, 'Electra Cruiser 7D Ladies\' - 2016/2018', 'Electra', 'Cruisers Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (222, 'Electra Cruiser 1 Tall - 2016/2018', 'Electra', 'Cruisers Bicycles', 2018, 269.99000);
-INSERT INTO products VALUES (223, 'Electra Cruiser Lux 3i - 2018', 'Electra', 'Cruisers Bicycles', 2018, 529.99000);
-INSERT INTO products VALUES (224, 'Electra Cruiser Lux 7D - 2018', 'Electra', 'Cruisers Bicycles', 2018, 479.99000);
-INSERT INTO products VALUES (225, 'Electra Delivery 3i - 2016/2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 959.99000);
-INSERT INTO products VALUES (226, 'Electra Townie Original 21D EQ - 2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 679.99000);
-INSERT INTO products VALUES (227, 'Electra Cruiser 7D (24-Inch) Ladies\' - 2016/2018', 'Electra', 'Cruisers Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (228, 'Electra Cruiser 7D Tall - 2016/2018', 'Electra', 'Cruisers Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (229, 'Electra Cruiser Lux 1 - 2016/2018', 'Electra', 'Cruisers Bicycles', 2018, 429.99000);
-INSERT INTO products VALUES (230, 'Electra Cruiser Lux 1 Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 429.99000);
-INSERT INTO products VALUES (231, 'Electra Cruiser Lux 3i Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 529.99000);
-INSERT INTO products VALUES (232, 'Electra Cruiser Lux 7D Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 479.99000);
-INSERT INTO products VALUES (233, 'Electra Cruiser Lux Fat Tire 7D - 2018', 'Electra', 'Cruisers Bicycles', 2018, 639.99000);
-INSERT INTO products VALUES (234, 'Electra Daydreamer 3i Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (235, 'Electra Koa 3i Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (236, 'Electra Morningstar 3i Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (237, 'Electra Relic 3i - 2018', 'Electra', 'Cruisers Bicycles', 2018, 849.99000);
-INSERT INTO products VALUES (238, 'Electra Townie Balloon 8D EQ - 2016/2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (239, 'Electra Townie Balloon 8D EQ Ladies\' - 2016/2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (240, 'Electra Townie Commute 27D Ladies - 2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (241, 'Electra Townie Commute 8D - 2018', 'Electra', 'Cruisers Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (242, 'Electra Townie Commute 8D Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 699.99000);
-INSERT INTO products VALUES (243, 'Electra Townie Original 21D EQ Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 679.99000);
-INSERT INTO products VALUES (244, 'Electra Townie Original 21D Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 559.99000);
-INSERT INTO products VALUES (245, 'Electra Townie Original 3i EQ - 2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 659.99000);
-INSERT INTO products VALUES (246, 'Electra Townie Original 3i EQ Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 639.99000);
-INSERT INTO products VALUES (247, 'Electra Townie Original 7D EQ - 2018', 'Electra', 'Cruisers Bicycles', 2018, 599.99000);
-INSERT INTO products VALUES (248, 'Electra Townie Original 7D EQ Ladies\' - 2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 599.99000);
-INSERT INTO products VALUES (249, 'Electra White Water 3i - 2018', 'Electra', 'Cruisers Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (250, 'Electra Townie Go! 8i - 2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 2599.99000);
-INSERT INTO products VALUES (251, 'Electra Townie Commute Go! - 2018', 'Electra', 'Cruisers Bicycles', 2018, 2999.99000);
-INSERT INTO products VALUES (252, 'Electra Townie Commute Go! Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 2999.99000);
-INSERT INTO products VALUES (253, 'Electra Townie Go! 8i Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 2599.99000);
-INSERT INTO products VALUES (254, 'Electra Townie Balloon 3i EQ - 2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (255, 'Electra Townie Balloon 7i EQ Ladies\' - 2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (256, 'Electra Townie Commute 27D - 2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (257, 'Electra Amsterdam Fashion 3i Ladies\' - 2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (258, 'Electra Amsterdam Royal 8i - 2017/2018', 'Electra', 'Cruisers Bicycles', 2018, 1259.90000);
-INSERT INTO products VALUES (259, 'Electra Amsterdam Royal 8i Ladies - 2018', 'Electra', 'Cruisers Bicycles', 2018, 1199.99000);
-INSERT INTO products VALUES (260, 'Electra Townie Balloon 3i EQ Ladies\' - 2018', 'Electra', 'Cruisers Bicycles', 2018, 799.99000);
-INSERT INTO products VALUES (261, 'Electra Townie Balloon 7i EQ - 2018', 'Electra', 'Cruisers Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (262, 'Trek MT 201 - 2018', 'Trek', 'Children Bicycles', 2018, 249.99000);
-INSERT INTO products VALUES (263, 'Strider Classic 12 Balance Bike - 2018', 'Strider', 'Children Bicycles', 2018, 89.99000);
-INSERT INTO products VALUES (264, 'Strider Sport 16 - 2018', 'Strider', 'Children Bicycles', 2018, 249.99000);
-INSERT INTO products VALUES (265, 'Strider Strider 20 Sport - 2018', 'Strider', 'Children Bicycles', 2018, 289.99000);
-INSERT INTO products VALUES (266, 'Trek Superfly 20 - 2018', 'Trek', 'Children Bicycles', 2018, 399.99000);
-INSERT INTO products VALUES (267, 'Trek Precaliber 12 Girl\'s - 2018', 'Trek', 'Children Bicycles', 2018, 199.99000);
-INSERT INTO products VALUES (268, 'Trek Kickster - 2018', 'Trek', 'Children Bicycles', 2018, 159.99000);
-INSERT INTO products VALUES (269, 'Trek Precaliber 12 Boy\'s - 2018', 'Trek', 'Children Bicycles', 2018, 199.99000);
-INSERT INTO products VALUES (270, 'Trek Precaliber 16 Boy\'s - 2018', 'Trek', 'Children Bicycles', 2018, 209.99000);
-INSERT INTO products VALUES (271, 'Trek Precaliber 16 Girl\'s - 2018', 'Trek', 'Children Bicycles', 2018, 209.99000);
-INSERT INTO products VALUES (272, 'Trek Precaliber 20 6-speed Boy\'s - 2018', 'Trek', 'Children Bicycles', 2018, 289.99000);
-INSERT INTO products VALUES (273, 'Trek Precaliber 20 6-speed Girl\'s - 2018', 'Trek', 'Children Bicycles', 2018, 289.99000);
-INSERT INTO products VALUES (274, 'Trek Precaliber 20 Boy\'s - 2018', 'Trek', 'Children Bicycles', 2018, 229.99000);
-INSERT INTO products VALUES (275, 'Trek Precaliber 20 Girl\'s - 2018', 'Trek', 'Children Bicycles', 2018, 229.99000);
-INSERT INTO products VALUES (276, 'Trek Precaliber 24 (7-Speed) - Boys - 2018', 'Trek', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (277, 'Trek Precaliber 24 21-speed Boy\'s - 2018', 'Trek', 'Children Bicycles', 2018, 369.99000);
-INSERT INTO products VALUES (278, 'Trek Precaliber 24 21-speed Girl\'s - 2018', 'Trek', 'Children Bicycles', 2018, 369.99000);
-INSERT INTO products VALUES (279, 'Trek Precaliber 24 7-speed Girl\'s - 2018', 'Trek', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (280, 'Trek Superfly 24 - 2017/2018', 'Trek', 'Children Bicycles', 2018, 489.99000);
-INSERT INTO products VALUES (281, 'Electra Cruiser 7D (24-Inch) Ladies\' - 2016/2018', 'Electra', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (282, 'Electra Cyclosaurus 1 (16-inch) - Boy\'s - 2018', 'Electra', 'Children Bicycles', 2018, 279.99000);
-INSERT INTO products VALUES (283, 'Electra Heartchya 1 (20-inch) - Girl\'s - 2018', 'Electra', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (284, 'Electra Savannah 1 (20-inch) - Girl\'s - 2018', 'Electra', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (285, 'Electra Soft Serve 1 (16-inch) - Girl\'s - 2018', 'Electra', 'Children Bicycles', 2018, 279.99000);
-INSERT INTO products VALUES (286, 'Electra Starship 1 16\'\' - 2018', 'Electra', 'Children Bicycles', 2018, 279.99000);
-INSERT INTO products VALUES (287, 'Electra Straight 8 1 (16-inch) - Boy\'s - 2018', 'Electra', 'Children Bicycles', 2018, 279.99000);
-INSERT INTO products VALUES (288, 'Electra Straight 8 1 (20-inch) - Boy\'s - 2018', 'Electra', 'Children Bicycles', 2018, 389.99000);
-INSERT INTO products VALUES (289, 'Electra Superbolt 1 20\'\' - 2018', 'Electra', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (290, 'Electra Superbolt 3i 20\'\' - 2018', 'Electra', 'Children Bicycles', 2018, 369.99000);
-INSERT INTO products VALUES (291, 'Electra Sweet Ride 1 (20-inch) - Girl\'s - 2018', 'Electra', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (292, 'Electra Sweet Ride 3i (20-inch) - Girls\' - 2018', 'Electra', 'Children Bicycles', 2018, 369.99000);
-INSERT INTO products VALUES (293, 'Electra Tiger Shark 1 (20-inch) - Boys\' - 2018', 'Electra', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (294, 'Electra Tiger Shark 3i (20-inch) - Boys\' - 2018', 'Electra', 'Children Bicycles', 2018, 369.99000);
-INSERT INTO products VALUES (295, 'Electra Treasure 1 20\'\' - 2018', 'Electra', 'Children Bicycles', 2018, 319.99000);
-INSERT INTO products VALUES (296, 'Electra Treasure 3i 20\'\' - 2018', 'Electra', 'Children Bicycles', 2018, 369.99000);
-INSERT INTO products VALUES (297, 'Electra Under-The-Sea 1 16\'\' - 2018', 'Electra', 'Children Bicycles', 2018, 279.99000);
-INSERT INTO products VALUES (298, 'Electra Water Lily 1 (16-inch) - Girl\'s - 2018', 'Electra', 'Children Bicycles', 2018, 279.99000);
-INSERT INTO products VALUES (299, 'Electra Townie Original 21D - 2018', 'Electra', 'Comfort Bicycles', 2018, 559.99000);
-INSERT INTO products VALUES (300, 'Electra Townie Balloon 3i EQ Ladies\' - 2018', 'Electra', 'Comfort Bicycles', 2018, 799.99000);
-INSERT INTO products VALUES (301, 'Electra Townie Balloon 7i EQ - 2018', 'Electra', 'Comfort Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (302, 'Electra Townie Original 1 - 2018', 'Electra', 'Comfort Bicycles', 2018, 449.99000);
-INSERT INTO products VALUES (303, 'Electra Townie Go! 8i - 2017/2018', 'Electra', 'Comfort Bicycles', 2018, 2599.99000);
-INSERT INTO products VALUES (304, 'Electra Townie Original 21D EQ - 2017/2018', 'Electra', 'Comfort Bicycles', 2018, 679.99000);
-INSERT INTO products VALUES (305, 'Electra Townie Balloon 3i EQ - 2017/2018', 'Electra', 'Comfort Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (306, 'Electra Townie Balloon 7i EQ Ladies\' - 2017/2018', 'Electra', 'Comfort Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (307, 'Electra Townie Balloon 8D EQ - 2016/2017/2018', 'Electra', 'Comfort Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (308, 'Electra Townie Balloon 8D EQ Ladies\' - 2016/2017/2018', 'Electra', 'Comfort Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (309, 'Electra Townie Commute 27D - 2018', 'Electra', 'Comfort Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (310, 'Electra Townie Commute 27D Ladies - 2018', 'Electra', 'Comfort Bicycles', 2018, 899.99000);
-INSERT INTO products VALUES (311, 'Electra Townie Commute 8D - 2018', 'Electra', 'Comfort Bicycles', 2018, 749.99000);
-INSERT INTO products VALUES (312, 'Electra Townie Commute 8D Ladies\' - 2018', 'Electra', 'Comfort Bicycles', 2018, 699.99000);
-INSERT INTO products VALUES (313, 'Electra Townie Original 1 Ladies\' - 2018', 'Electra', 'Comfort Bicycles', 2018, 449.99000);
-INSERT INTO products VALUES (314, 'Electra Townie Original 21D EQ Ladies\' - 2018', 'Electra', 'Comfort Bicycles', 2018, 679.99000);
-INSERT INTO products VALUES (315, 'Electra Townie Original 21D Ladies\' - 2018', 'Electra', 'Comfort Bicycles', 2018, 559.99000);
-INSERT INTO products VALUES (316, 'Trek Checkpoint ALR 4 Women\'s - 2019', 'Trek', 'Road Bikes', 2019, 1699.99000);
-INSERT INTO products VALUES (317, 'Trek Checkpoint ALR 5 - 2019', 'Trek', 'Road Bikes', 2019, 1999.99000);
-INSERT INTO products VALUES (318, 'Trek Checkpoint ALR 5 Women\'s - 2019', 'Trek', 'Road Bikes', 2019, 1999.99000);
-INSERT INTO products VALUES (319, 'Trek Checkpoint SL 5 Women\'s - 2019', 'Trek', 'Road Bikes', 2019, 2799.99000);
-INSERT INTO products VALUES (320, 'Trek Checkpoint SL 6 - 2019', 'Trek', 'Road Bikes', 2019, 3799.99000);
-INSERT INTO products VALUES (321, 'Trek Checkpoint ALR Frameset - 2019', 'Trek', 'Road Bikes', 2019, 3199.99000);
+INSERT INTO products VALUES 
+(1,"Royal Enfield Classic 350","Royal Enfield","Cruiser",2015,190229,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(2,"Royal Enfield Continental GT 650","Royal Enfield","Touring",2015,304945,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(3,"Royal Enfield Himalayan","Royal Enfield","Cruiser",2015,215869,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(4,"Royal Enfield Interceptor 650","Royal Enfield","Cruiser",2015,288141,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(5,"TVS Raider 125","TVS","Cruiser",2015,90524,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(6,"Apache","TVS","Cafe racer",2016,118381,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(7,"TVS Ronin","TVS","Cruiser",2016,149000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(8,"TVS Ntorq 125","TVS","Scooter",2016,85995,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(9,"TVS Sport","TVS","Cruiser",2016,61577,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(10,"TVS Jupiter 125","TVS","Scooter",2017,84568,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(11,"Splendor","Hero","Cruiser",2017,71571,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(12,"Hero Xtreme 160R","Hero","Cruiser",2017,119570,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(13,"Hero Glamour","Hero","Cruiser",2017,79029,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(14,"Hero Passion Pro","Hero","Cruiser",2017,73432,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(15,"Hero Xtreme 200S","Hero","Cruiser",2017,135257,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(16,"Hero Pleasure + Xtec","Hero","Cruiser",2018,78913,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(17,"Hero Maestro Edge 125","Hero","Scooter",2018,87827,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(18,"Pulsar","Bajaj","Touring",2018,82712,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(19,"Bajaj Dominar 400","Bajaj","Cruiser",2018,222744,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(20,"Bajaj Dominar 250","Bajaj","Cruiser",2018,175054,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(21,"Avenger","Bajaj","Touring",2019,112562,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(22,"Activa","Honda","Scooter",2019,73663,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(23,"Honda Shine","Honda","Cruiser",2019,78000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(24,"Honda Unicorn","Honda","Cruiser",2019,104982,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(25,"Honda Dio","Honda","Scooter",2019,71502,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(26,"Honda Hornet 2.0","Honda","Cruiser",2019,136391,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(27,"Honda Hness CB350","Honda","Cruiser",2020,200349,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(28,"Honda CB300F","Honda","Cafe racer",2020,226217,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(29,"Honda CB350RS","Honda","Cafe racer",2020,205107,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(30,"Honda CB300R","Honda","Cafe racer",2020,277332,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(31,"CBR","Honda","Cafe racer",2020,2372222,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(32,"Honda Goldwing","Honda","Sports tourer",2020,3988635,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(33,"Honda Africa Twin","Honda","Sports tourer",2021,1601500,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(34,"Honda CB650R","Honda","Cafe racer",2021,914337,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(35,"Yamaha MT 15 V2","Yamaha","Sports",2021,165390,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(36,"Yamaha R15 V4","Yamaha","Sports",2021,180687,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(37,"Yamaha FZ S FI","Yamaha","Sports",2021,121979,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(38,"Yamaha R15S","Yamaha","Cruiser",2021,163734,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(39,"Yamaha FZ X","Yamaha","Sports",2021,135240,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(40,"Yamaha FZ25","Yamaha","Sports",2021,150623,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(41,"Yamaha Ray ZR 125","Yamaha","Scooter",2022,83273,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(42,"Yamaha Fascino 125","Yamaha","Scooter",2022,79456,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(43,"Yamaha Aerox 155","Yamaha","Scooter",2022,141554,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(44,"Suzuki Access 125","Suzuki","Scooter",2022,77378,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(45,"Suzuki Gixxer SF","Suzuki","Cafe racer",2022,135702,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(46,"Suzuki Burgman Street 125","Suzuki","Scooter",2022,89436,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(47,"Suzuki Gixxer","Suzuki","Cafe racer",2022,130718,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(48,"Suzuki Katana","Suzuki","Cafe racer",2022,1366892,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(49,"Suzuki V-Strom 650 XT","Suzuki","Touring",2023,892801,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(50,"Duke 310","KTM","Sports",2023,176937,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(51,"KTM 390 Adventure","KTM","Touring",2023,337292,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(52,"KTM 250 Adventure","KTM","Touring",2023,242595,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(53,"Jawa 42","Jawa","Bobber",2023,174573,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(54,"Jawa Standard","Jawa","Bobber",2023,183648,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(55,"Ninja","Kawasaki","Sports",2023,1614985,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(56,"Kawasaki Z900","Kawasaki","Sports",2023,902000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(57,"Kawasaki W800","Kawasaki","Cruiser",2023,732773,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(58,"Kawasaki Versys 1000","Kawasaki","Touring",2023,1219000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(59,"Benelli Imperiale 400","Benelli","Cruiser",2017,234886,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(60,"Benelli TRK 251","Benelli","Sports",2017,298977,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(61,"Benelli 502C","Benelli","Sports",2017,579955,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(62,"Benelli Leoncino 500","Benelli","Sports",2017,554876,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(63,"Ducati Panigale V4","Ducati","Sports",2017,2741000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(64,"Ducati SuperSport","Ducati","Sports",2017,1575000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(65,"Ducati Monster BS6","Ducati","Cafe racer",2017,1249000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(66,"Scrambler","Ducati","Scrambler",2017,939000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(67,"Husqvarna Svartpilen 250","Husqvarna","Scrambler",2017,217632,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(68,"Husqvarna Vitpilen 250","Husqvarna","Cafe racer",2019,217074,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(69,"Triumph Rocket 3","Triumph","Cafe racer",2019,2019312,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(70,"Triumph Trident 660","Triumph","Scrambler",2019,758000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(71,"Triumph Speed Triple 1200 RS","Triumph","Scrambler",2018,1795000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(72,"Triumph Tiger 900","Triumph","Sports tourer",2018,1399865,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(73,"Bonneville","Triumph","Cruiser",2018,1285000,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(74,"Vespa SXL 150","Vespa","Scooter",2018,148261,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(75,"Vespa VXL 125","Vespa","Scooter",2018,130438,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(76,"Vespa VXL 150","Vespa","Scooter",2018,143895,"https://wallpapercave.com/wp/wp6130456.jpg"),
+(77,"Vespa Elegante 150","Vespa","Scooter",2020,155927,"https://wallpapercave.com/wp/wp6130456.jpg");
+
 
 INSERT INTO stocks VALUES (1,1,27),
 (1,2,5),  
@@ -490,242 +249,6 @@ INSERT INTO stocks VALUES (1,1,27),
 (1,75,23),
 (1,76,15),
 (1,77,16),
-(1,78,13),
-(1,79,13),
-(1,80,11),
-(1,81,25),
-(1,82,1), 
-(1,83,13),
-(1,84,11),
-(1,85,23),
-(1,86,19),
-(1,87,27),
-(1,88,7), 
-(1,89,9), 
-(1,90,4), 
-(1,91,8), 
-(1,92,0), 
-(1,93,22),
-(1,94,6), 
-(1,95,25),
-(1,96,20),
-(1,97,20),
-(1,98,28),
-(1,99,28),
-(1,100,15),
-(1,101,17),
-(1,102,9),
-(1,103,13),
-(1,104,25),
-(1,105,7),
-(1,106,30),
-(1,107,20),
-(1,108,15),
-(1,109,30),
-(1,110,1),
-(1,111,11),
-(1,112,17),
-(1,113,24),
-(1,114,3),
-(1,115,10),
-(1,116,24),
-(1,117,15),
-(1,118,12),
-(1,119,17),
-(1,120,23),
-(1,121,19),
-(1,122,22),
-(1,123,8),
-(1,124,23),
-(1,125,22),
-(1,126,28),
-(1,127,12),
-(1,128,11),
-(1,129,21),
-(1,130,22),
-(1,131,20),
-(1,132,1),
-(1,133,9),
-(1,134,26),
-(1,135,15),
-(1,136,12),
-(1,137,12),
-(1,138,6),
-(1,139,17),
-(1,140,3),
-(1,141,21),
-(1,142,22),
-(1,143,19),
-(1,144,7),
-(1,145,5),
-(1,146,6),
-(1,147,8),
-(1,148,6),
-(1,149,1),
-(1,150,22),
-(1,151,24),
-(1,152,12),
-(1,153,25),
-(1,154,13),
-(1,155,8),
-(1,156,13),
-(1,157,25),
-(1,158,11),
-(1,159,18),
-(1,160,0),
-(1,161,17),
-(1,162,14),
-(1,163,0),
-(1,164,15),
-(1,165,16),
-(1,166,23),
-(1,167,28),
-(1,168,0),
-(1,169,25),
-(1,170,14),
-(1,171,3),
-(1,172,3),
-(1,173,2),
-(1,174,26),
-(1,175,2),
-(1,176,11),
-(1,177,19),
-(1,178,23),
-(1,179,16),
-(1,180,5),
-(1,181,19),
-(1,182,28),
-(1,183,11),
-(1,184,4),
-(1,185,3),
-(1,186,1),
-(1,187,16),
-(1,188,30),
-(1,189,6),
-(1,190,21),
-(1,191,21),
-(1,192,20),
-(1,193,30),
-(1,194,24),
-(1,195,1),
-(1,196,26),
-(1,197,22),
-(1,198,1),
-(1,199,2),
-(1,200,27),
-(1,201,16),
-(1,202,5),
-(1,203,4),
-(1,204,23),
-(1,205,9),
-(1,206,10),
-(1,207,27),
-(1,208,13),
-(1,209,22),
-(1,210,25),
-(1,211,13),
-(1,212,17),
-(1,213,14),
-(1,214,4),
-(1,215,1),
-(1,216,11),
-(1,217,11),
-(1,218,27),
-(1,219,30),
-(1,220,4),
-(1,221,7),
-(1,222,12),
-(1,223,3),
-(1,224,16),
-(1,225,24),
-(1,226,18),
-(1,227,19),
-(1,228,22),
-(1,229,27),
-(1,230,7),
-(1,231,25),
-(1,232,5),
-(1,233,5),
-(1,234,13),
-(1,235,7),
-(1,236,18),
-(1,237,26),
-(1,238,20),
-(1,239,28),
-(1,240,17),
-(1,241,17),
-(1,242,10),
-(1,243,11),
-(1,244,10),
-(1,245,3),
-(1,246,0),
-(1,247,15),
-(1,248,14),
-(1,249,27),
-(1,250,3),
-(1,251,2),
-(1,252,28),
-(1,253,16),
-(1,254,24),
-(1,255,13),
-(1,256,20),
-(1,257,17),
-(1,258,25),
-(1,259,10),
-(1,260,20),
-(1,261,3),
-(1,262,6),
-(1,263,21),
-(1,264,16),
-(1,265,28),
-(1,266,1),
-(1,267,27),
-(1,268,23),
-(1,269,22),
-(1,270,16),
-(1,271,6),
-(1,272,14),
-(1,273,20),
-(1,274,19),
-(1,275,28),
-(1,276,7),
-(1,277,13),
-(1,278,17),
-(1,279,17),
-(1,280,23),
-(1,281,11),
-(1,282,6),
-(1,283,10),
-(1,284,27),
-(1,285,20),
-(1,286,28),
-(1,287,2),
-(1,288,9),
-(1,289,2),
-(1,290,8),
-(1,291,9),
-(1,292,30),
-(1,293,18),
-(1,294,3),
-(1,295,24),
-(1,296,9),
-(1,297,22),
-(1,298,26),
-(1,299,18),
-(1,300,7),
-(1,301,10),
-(1,302,0),
-(1,303,12),
-(1,304,15),
-(1,305,23),
-(1,306,21),
-(1,307,17),
-(1,308,23),
-(1,309,7),
-(1,310,18),
-(1,311,20),
-(1,312,23),
-(1,313,14),
 (2,1,14), 
 (2,2,16), 
 (2,3,28), 
@@ -803,242 +326,6 @@ INSERT INTO stocks VALUES (1,1,27),
 (2,75,11),
 (2,76,20),
 (2,77,25),
-(2,78,4), 
-(2,79,29),
-(2,80,27),
-(2,81,19),
-(2,82,4), 
-(2,83,21),
-(2,84,22),
-(2,85,6), 
-(2,86,24),
-(2,87,14),
-(2,88,8), 
-(2,89,8), 
-(2,90,26),
-(2,91,0), 
-(2,92,22),
-(2,93,22),
-(2,94,2), 
-(2,95,10),
-(2,96,22),
-(2,97,15),
-(2,98,14),
-(2,99,24),
-(2,100,12),
-(2,101,4),
-(2,102,12),
-(2,103,1),
-(2,104,26),
-(2,105,3),
-(2,106,7),
-(2,107,29),
-(2,108,29),
-(2,109,25),
-(2,110,7),
-(2,111,6),
-(2,112,1),
-(2,113,7),
-(2,114,12),
-(2,115,19),
-(2,116,17),
-(2,117,18),
-(2,118,25),
-(2,119,23),
-(2,120,16),
-(2,121,3),
-(2,122,11),
-(2,123,18),
-(2,124,4),
-(2,125,10),
-(2,126,13),
-(2,127,12),
-(2,128,28),
-(2,129,21),
-(2,130,17),
-(2,131,9),
-(2,132,6),
-(2,133,28),
-(2,134,13),
-(2,135,30),
-(2,136,8),
-(2,137,1),
-(2,138,16),
-(2,139,24),
-(2,140,13),
-(2,141,28),
-(2,142,24),
-(2,143,12),
-(2,144,4),
-(2,145,23),
-(2,146,3),
-(2,147,13),
-(2,148,27),
-(2,149,22),
-(2,150,7),
-(2,151,2),
-(2,152,21),
-(2,153,21),
-(2,154,9),
-(2,155,21),
-(2,156,8),
-(2,157,28),
-(2,158,0),
-(2,159,30),
-(2,160,4),
-(2,161,9),
-(2,162,18),
-(2,163,30),
-(2,164,9),
-(2,165,6),
-(2,166,27),
-(2,167,1),
-(2,168,29),
-(2,169,1),
-(2,170,2),
-(2,171,28),
-(2,172,16),
-(2,173,17),
-(2,174,8),
-(2,175,0),
-(2,176,26),
-(2,177,9),
-(2,178,1),
-(2,179,16),
-(2,180,3),
-(2,181,29),
-(2,182,21),
-(2,183,26),
-(2,184,0),
-(2,185,4),
-(2,186,16),
-(2,187,10),
-(2,188,27),
-(2,189,13),
-(2,190,18),
-(2,191,15),
-(2,192,0),
-(2,193,21),
-(2,194,15),
-(2,195,19),
-(2,196,28),
-(2,197,10),
-(2,198,0),
-(2,199,13),
-(2,200,11),
-(2,201,24),
-(2,202,1),
-(2,203,7),
-(2,204,25),
-(2,205,13),
-(2,206,9),
-(2,207,8),
-(2,208,12),
-(2,209,11),
-(2,210,10),
-(2,211,4),
-(2,212,22),
-(2,213,10),
-(2,214,7),
-(2,215,11),
-(2,216,19),
-(2,217,22),
-(2,218,26),
-(2,219,16),
-(2,220,6),
-(2,221,12),
-(2,222,30),
-(2,223,7),
-(2,224,4),
-(2,225,11),
-(2,226,5),
-(2,227,12),
-(2,228,7),
-(2,229,29),
-(2,230,25),
-(2,231,8),
-(2,232,11),
-(2,233,25),
-(2,234,12),
-(2,235,4),
-(2,236,7),
-(2,237,30),
-(2,238,6),
-(2,239,17),
-(2,240,19),
-(2,241,24),
-(2,242,2),
-(2,243,18),
-(2,244,1),
-(2,245,18),
-(2,246,10),
-(2,247,16),
-(2,248,26),
-(2,249,10),
-(2,250,23),
-(2,251,0),
-(2,252,20),
-(2,253,29),
-(2,254,7),
-(2,255,12),
-(2,256,8),
-(2,257,5),
-(2,258,10),
-(2,259,16),
-(2,260,20),
-(2,261,4),
-(2,262,8),
-(2,263,4),
-(2,264,13),
-(2,265,4),
-(2,266,18),
-(2,267,21),
-(2,268,3),
-(2,269,4),
-(2,270,15),
-(2,271,26),
-(2,272,1),
-(2,273,28),
-(2,274,15),
-(2,275,3),
-(2,276,9),
-(2,277,4),
-(2,278,8),
-(2,279,18),
-(2,280,11),
-(2,281,3),
-(2,282,8),
-(2,283,28),
-(2,284,6),
-(2,285,22),
-(2,286,3),
-(2,287,15),
-(2,288,13),
-(2,289,5),
-(2,290,29),
-(2,291,22),
-(2,292,22),
-(2,293,12),
-(2,294,7),
-(2,295,15),
-(2,296,8),
-(2,297,7),
-(2,298,27),
-(2,299,0),
-(2,300,13),
-(2,301,26),
-(2,302,6),
-(2,303,23),
-(2,304,6),
-(2,305,21),
-(2,306,17),
-(2,307,18),
-(2,308,15),
-(2,309,9),
-(2,310,5),
-(2,311,27),
-(2,312,2),
-(2,313,24),
 (3,1,14), 
 (3,2,24), 
 (3,3,0),  
@@ -1115,243 +402,7 @@ INSERT INTO stocks VALUES (1,1,27),
 (3,74,17),
 (3,75,29),
 (3,76,23),
-(3,77,23),
-(3,78,19),
-(3,79,29),
-(3,80,22),
-(3,81,18),
-(3,82,7), 
-(3,83,23),
-(3,84,15),
-(3,85,15),
-(3,86,27),
-(3,87,16),
-(3,88,28),
-(3,89,22),
-(3,90,9), 
-(3,91,8), 
-(3,92,28),
-(3,93,18),
-(3,94,15),
-(3,95,14),
-(3,96,1), 
-(3,97,28),
-(3,98,5), 
-(3,99,19),
-(3,100,28),
-(3,101,17),
-(3,102,22),
-(3,103,10),
-(3,104,22),
-(3,105,1),
-(3,106,1),
-(3,107,11),
-(3,108,23),
-(3,109,24),
-(3,110,11),
-(3,111,29),
-(3,112,24),
-(3,113,23),
-(3,114,12),
-(3,115,25),
-(3,116,30),
-(3,117,23),
-(3,118,9),
-(3,119,29),
-(3,120,25),
-(3,121,4),
-(3,122,8),
-(3,123,15),
-(3,124,11),
-(3,125,2),
-(3,126,5),
-(3,127,4),
-(3,128,20),
-(3,129,10),
-(3,130,20),
-(3,131,23),
-(3,132,16),
-(3,133,16),
-(3,134,17),
-(3,135,15),
-(3,136,4),
-(3,137,17),
-(3,138,17),
-(3,139,21),
-(3,140,3),
-(3,141,4),
-(3,142,29),
-(3,143,9),
-(3,144,9),
-(3,145,11),
-(3,146,9),
-(3,147,3),
-(3,148,6),
-(3,149,1),
-(3,150,21),
-(3,151,1),
-(3,152,1),
-(3,153,7),
-(3,154,22),
-(3,155,25),
-(3,156,14),
-(3,157,12),
-(3,158,17),
-(3,159,6),
-(3,160,27),
-(3,161,11),
-(3,162,11),
-(3,163,11),
-(3,164,18),
-(3,165,19),
-(3,166,27),
-(3,167,8),
-(3,168,23),
-(3,169,3),
-(3,170,13),
-(3,171,11),
-(3,172,22),
-(3,173,15),
-(3,174,1),
-(3,175,3),
-(3,176,6),
-(3,177,2),
-(3,178,12),
-(3,179,20),
-(3,180,6),
-(3,181,8),
-(3,182,28),
-(3,183,26),
-(3,184,21),
-(3,185,15),
-(3,186,30),
-(3,187,2),
-(3,188,29),
-(3,189,20),
-(3,190,20),
-(3,191,23),
-(3,192,10),
-(3,193,5),
-(3,194,20),
-(3,195,20),
-(3,196,25),
-(3,197,8),
-(3,198,27),
-(3,199,5),
-(3,200,29),
-(3,201,30),
-(3,202,11),
-(3,203,6),
-(3,204,16),
-(3,205,3),
-(3,206,29),
-(3,207,29),
-(3,208,12),
-(3,209,1),
-(3,210,22),
-(3,211,3),
-(3,212,23),
-(3,213,10),
-(3,214,30),
-(3,215,12),
-(3,216,5),
-(3,217,4),
-(3,218,21),
-(3,219,29),
-(3,220,0),
-(3,221,25),
-(3,222,12),
-(3,223,29),
-(3,224,23),
-(3,225,12),
-(3,226,14),
-(3,227,22),
-(3,228,29),
-(3,229,7),
-(3,230,29),
-(3,231,6),
-(3,232,16),
-(3,233,9),
-(3,234,24),
-(3,235,1),
-(3,236,3),
-(3,237,16),
-(3,238,12),
-(3,239,29),
-(3,240,26),
-(3,241,8),
-(3,242,5),
-(3,243,7),
-(3,244,5),
-(3,245,10),
-(3,246,7),
-(3,247,3),
-(3,248,11),
-(3,249,6),
-(3,250,16),
-(3,251,10),
-(3,252,27),
-(3,253,15),
-(3,254,4),
-(3,255,17),
-(3,256,1),
-(3,257,25),
-(3,258,10),
-(3,259,0),
-(3,260,5),
-(3,261,24),
-(3,262,29),
-(3,263,21),
-(3,264,7),
-(3,265,22),
-(3,266,18),
-(3,267,12),
-(3,268,17),
-(3,269,26),
-(3,270,6),
-(3,271,23),
-(3,272,12),
-(3,273,19),
-(3,274,7),
-(3,275,23),
-(3,276,14),
-(3,277,26),
-(3,278,15),
-(3,279,15),
-(3,280,1),
-(3,281,2),
-(3,282,18),
-(3,283,1),
-(3,284,26),
-(3,285,2),
-(3,286,7),
-(3,287,26),
-(3,288,2),
-(3,289,2),
-(3,290,6),
-(3,291,10),
-(3,292,16),
-(3,293,14),
-(3,294,13),
-(3,295,9),
-(3,296,12),
-(3,297,22),
-(3,298,14),
-(3,299,29),
-(3,300,3),
-(3,301,29),
-(3,302,6),
-(3,303,13),
-(3,304,23),
-(3,305,11),
-(3,306,7),
-(3,307,17),
-(3,308,9),
-(3,309,30),
-(3,310,8),
-(3,311,23),
-(3,312,18),
-(3,313,0);
+(3,77,23);
 
 INSERT INTO staff VALUES (1,"Fabiola","Jackson","fabiola.jackson@bikes.shop","(831) 555-5554",1,1,NULL),
 (2,"Mireya","Copeland","mireya.copeland@bikes.shop","(831) 555-5555",1,1,1),
