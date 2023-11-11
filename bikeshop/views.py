@@ -1,7 +1,7 @@
 # bikeshopapp/views.py
 
 from django.shortcuts import render, get_object_or_404
-from .models import Customers, Login, Staff, Stores, Products, Stocks, Orders
+from .models import Customers, Login, Registration, Staff, Stores, Products, Stocks, Orders
 
 
 def login(request):
@@ -34,6 +34,10 @@ def stocks(request):
 def orders(request):
     all_orders = Orders.objects.all()
     return render(request, 'orders.html', {'orders': all_orders})
+
+def registration(request):
+    all_reg = Registration.objects.all()
+    return render(request, 'registration.html', {'registration': all_reg})
 
 
 # Add other views for CRUD operations.

@@ -81,4 +81,14 @@ class Login(models.Model):
         managed = False
         db_table = 'users'
 
+class Registration(models.Model):
+    USER_NAME = models.CharField(max_length=255,primary_key=True)  # Add the max_length attribute here
+    PASSWORD = models.CharField(max_length=255)
+    CONFIRM_PASSWORD = models.CharField(max_length=255)
+    FIRST_NAME = models.CharField(null = False, max_length=50)
+    LAST_NAME = models.CharField(null = False, max_length=50)    
+    EMAIL = models.CharField(max_length=50, null = True, blank=True)
+    class Meta:
+        managed = False
+
         
