@@ -17,7 +17,7 @@ def customers(request):
 
 def staff(request):
     all_staff = Staff.objects.all()
-    return render(request, 'staff.html', {'staffs': all_staff})
+    return render(request, 'staff.html', {'staff': all_staff})
 
 def stores(request):
     all_stores = Stores.objects.all()
