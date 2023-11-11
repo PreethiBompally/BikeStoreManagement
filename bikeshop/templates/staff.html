@@ -1,34 +1,137 @@
-<!-- staffs.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        #fixed-header {
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333; /* You can set the background color as desired */
+            color: #fff; /* Text color (adjust as needed) */
+            z-index: 100; /* Set a z-index value to ensure it's above other content */
+        }
+
+        #fixed-header h1 {
+            margin: 0;
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline links on hover */
+        }
+
+        header a {
+            background-color: #333;
+            color: #e7ba19; 
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .staff1 {
+            position: relative;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 80px; /* Adjust the padding to make the boxes larger */
+            width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1; 
+            text-align: center; 
+        }
+
+        .pin-icon {
+            width: 50px; 
+            height: auto;
+            position: absolute;
+            top: 20px; /* Adjust the top position as needed */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .staff1 h2 {
+            color: #333;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 26px; /* Increase font size */
+            margin-bottom: 10px; /* Add margin for separation */
+        }
+
+ 
+        h1,a {
+            font-family: Arial, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for contrast */
+            margin: 10px; /* Adjust the margins as needed */
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .staff1 p {
+            font-family: 'Roboto Condensed', sans-serif;
+            margin: 5px 0;
+            font-size: 17px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    <h1>Staff</h1>
-    <table border="1">
-        <tr>
-            <th>Staff ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Active</th>
-            <th>Store ID</th>
-            <th>Manager ID</th>
-        </tr>
-        {% for staff in staffs %}
-        <tr>
-            <td>{{ staff.STAFF_ID }}</td>
-            <td>{{ staff.FIRST_NAME }}</td>
-            <td>{{ staff.LAST_NAME }}</td>
-            <td>{{ staff.PHONE }}</td>
-            <td>{{ staff.EMAIL }}</td>
-            <td>{{ staff.ACTIVE }}</td>
-            <td>{{ staff.STORE_ID }}</td>
-            <td>{{ staff.MANAGER_ID }}</td>
-        </tr>
+    <header id="fixed-header">
+        <h1>Athens Bike Store</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Home</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="about">About Us</a></li>
+                <li><a href="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h1> STAFF </h1>
+    <main>
+        {% for s in staff %}
+        <div class="staff1">
+            <image src = "{{ s.IMAGE_URL}}"></image>
+            <h3>{{ s.FIRST_NAME }} {{ s.LAST_NAME }}</h3>
+            <h4>{{ s.PHONE }}</h4>
+            <h4>{{ s.EMAIL }}</h4>
+        </div>
         {% endfor %}
-    </table>
+    </main>
 </body>
 </html>
