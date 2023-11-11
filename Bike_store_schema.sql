@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `STAFF` (
   `ACTIVE` INT,
   `STORE_ID` INT NOT NULL,
   `MANAGER_ID` INT,
+  `IMAGE_URL` VARCHAR(1024),
   PRIMARY KEY (`STAFF_ID`, `STORE_ID`)
 );
 
@@ -404,16 +405,17 @@ INSERT INTO stocks VALUES (1,1,27),
 (3,76,23),
 (3,77,23);
 
-INSERT INTO staff VALUES (1,"Fabiola","Jackson","fabiola.jackson@bikes.shop","(831) 555-5554",1,1,NULL),
-(2,"Mireya","Copeland","mireya.copeland@bikes.shop","(831) 555-5555",1,1,1),
-(3,"Genna","Serrano","genna.serrano@bikes.shop","(831) 555-5556",1,1,2),
-(4,"Virgie","Wiggins","virgie.wiggins@bikes.shop","(831) 555-5557",1,1,2),
-(5,"Jannette","David","jannette.david@bikes.shop","(516) 379-4444",1,2,1),
-(6,"Marcelene","Boyer","marcelene.boyer@bikes.shop","(516) 379-4445",1,2,5),
-(7,"Venita","Daniel","venita.daniel@bikes.shop","(516) 379-4446",1,2,5),
-(8,"Kali","Vargas","kali.vargas@bikes.shop","(972) 530-5555",1,3,1),
-(9,"Layla","Terrell","layla.terrell@bikes.shop","(972) 530-5556",1,3,7),
-(10,"Bernardine","Houston","bernardine.houston@bikes.shop","(972) 530-5557",1,3,7);
+INSERT INTO staff VALUES 
+(1,"Fabiola","Jackson","fabiola.jackson@bikes.shop","(831) 555-5554",1,1,NULL,"https://igimages.gumlet.io/telugu/home/mahesh-babu-emotional.jpg"),
+(2,"Mireya","Copeland","mireya.copeland@bikes.shop","(831) 555-5555",1,1,1,"https://static.toiimg.com/thumb/63783688.cms?width=400&height=300&resizemode=4"),
+(3,"Genna","Serrano","genna.serrano@bikes.shop","(831) 555-5556",1,1,2,"https://resize.indiatvnews.com/en/resize/newbucket/1080_-/2023/03/ram-charan-9-1679042676.jpg"),
+(4,"Virgie","Wiggins","virgie.wiggins@bikes.shop","(831) 555-5557",1,1,2,"https://www.unwomen.org/sites/default/files/2022-10/UN-Women-Goodwill-Ambassador-Emma-Watson-Credit-Celeste-Sloman-853x1280.jpg"),
+(5,"Jannette","David","jannette.david@bikes.shop","(516) 379-4444",1,2,1,"https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_.jpg"),
+(6,"Marcelene","Boyer","marcelene.boyer@bikes.shop","(516) 379-4445",1,2,5,"https://content.tupaki.com/twdata/2018/1118/photos/actress/Kajal%20Agarwal%20Photos/normal/Kajal%20Agarwal%20Photos_37.jpg"),
+(7,"Venita","Daniel","venita.daniel@bikes.shop","(516) 379-4446",1,2,5,"https://upload.wikimedia.org/wikipedia/commons/9/9a/Nani_at_an_interview_for_film_companion_%28cropped%29.png"),
+(8,"Kali","Vargas","kali.vargas@bikes.shop","(972) 530-5555",1,3,1,"https://i.pinimg.com/originals/ce/9b/68/ce9b681d9e62083d89e10def3ba41ecd.jpg"),
+(9,"Layla","Terrell","layla.terrell@bikes.shop","(972) 530-5556",1,3,7,"https://3.bp.blogspot.com/_WvywD6LMh2c/TTsDuUJbrhI/AAAAAAAAAGQ/4jemPE2_lZk/s1600/tamana-5.jpg"),
+(10,"Bernardine","Houston","bernardine.houston@bikes.shop","(972) 530-5557",1,3,7,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSznMF_sivKcC9bNhosb3uPNefXnWOQOeW0Kw&usqp=CAU");
 
 INSERT INTO customers VALUES 
 (1,"Debra","Burks",NULL,"debra.burks@yahoo.com","9273 Thorne Ave. ","Orchard Park","NY",14127),

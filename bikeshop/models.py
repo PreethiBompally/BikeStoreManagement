@@ -9,6 +9,7 @@ class Staff(models.Model):
     ACTIVE = models.IntegerField()
     STORE_ID = models.IntegerField()
     MANAGER_ID = models.IntegerField(null=True, blank=True)
+    IMAGE_URL = models.CharField(max_length=1024, null=True, blank=True)
     class Meta:
         managed = False
         db_table = 'staff'
