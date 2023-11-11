@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Registration</title>
+</head>
+<style>
+    body {
+font-family: Arial, sans-serif;
+background-color: #f2f2f2;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100vh;
+margin: 0;
+}
+
+.reg-container {
+background-color: #fff;
+border: 1px solid #ddd;
+padding: 200px;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form1 {
+text-align: center;
+}
+
+label, input {
+display: block;
+margin: 10px 0;
+}
+
+input[type="text"], input[type="password"] {
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 3px;
+}
+
+button {
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 3px;
+padding: 10px 20px;
+cursor: pointer;
+}
+
+
+</style>
+<body>
+    <div class="reg-container">
+            <div class="form1">
+                <h1 class="title">Registeration</h1>
+                    <form>
+                        <div class="input-field">
+                            <label for="user_name">User name* </label> 
+                            <input type="text" id="user_name" name="user_name" required style="max-width: 100%;" value="{{ request.POST.user_name }}">
+                        </div>
+                        <div class="input-field">
+                            <label for="first_name">First name* </label> 
+                            <input type="text" id="first_name" name="first_name" required style="max-width: 100%;" value="{{ request.POST.first_name }}">
+                        </div>
+                        <div class="input-field">
+                            <label for="last_name">Last name* </label> 
+                            <input type="text" id="last_name" name="last_name" required style="max-width: 100%;" value="{{ request.POST.last_name }}">
+                        </div>
+                        <div class="input-field">
+                            <label for="email">Email* </label>
+                            <input type="text" id="email" name="email" required style="max-width: 100%;" value="{{ request.POST.email }}">
+                        </div>
+        
+
+                        <div class="input-field">
+                            <label for="password1">Password* </label>
+                            <input type="password" id="password1" name="password1" required style="max-width: 100%;"> 
+                        </div>
+                        <div class="input-field">
+                            <label for="password2">Confirm password* </label>
+                            <input type="password" id="password2" style="max-width: 100%;" name="password2" required>
+                        </div>
+                        <button type="submit">Register</button>
+                    </form>
+                    <br>
+                    <div style="text-align: center;">
+                        <a href="{% url 'dashboard' %}"> Return to Home</a>
+                    </div>
+            </div>
+</body>
+</html>

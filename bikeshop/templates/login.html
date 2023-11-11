@@ -63,7 +63,15 @@ button {
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <button type="submit">Login</button>
-        </form>
+        </form><br>
+        <div class="login-signup">
+            <span class="text">Don't have an account?
+                <a href="{% url 'registration' %}">Create</a>
+            </span>
+        </div><br>
+        <div style="text-align: center;">
+            <a href="{% url 'dashboard' %}"> Return to Home</a>
+        </div>
     </div>
 </body>
 </html>
