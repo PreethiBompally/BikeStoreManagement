@@ -4,43 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-            body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-image: url('https://kickstart.bikeexif.com/wp-content/uploads/2014/11/husqvarna-motorcycle-concept.jpg');
-        background-size: cover; 
-        background-position: center top;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: 100% auto;
-        filter: brightness(110%) contrast(120%) saturate(120%);
-        color: #fff;
-        font-family: Arial, sans-serif;
-        font-size: 18px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://kickstart.bikeexif.com/wp-content/uploads/2014/11/husqvarna-motorcycle-concept.jpg');
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% auto;
+            filter: brightness(110%) contrast(120%) saturate(120%);
+            color: #fff; /* Text color (white in this example) */
+            font-family: Arial, sans-serif; /* Choose an appropriate font-family */
+            font-size: 18px; /* Adjust the font size */
         }
 
         #fixed-header {
             top: 0;
             left: 0;
             width: 100%;
-            text-align: center;
-            padding: 10px 0;
             background-color: #333; /* You can set the background color as desired */
             color: #fff; /* Text color (adjust as needed) */
             z-index: 100; /* Set a z-index value to ensure it's above other content */
         }
 
-        #fixed-header h1 {
-            margin: 0;
-        }
-
-
         .login-button {
             position: fixed;
             top: 10px; /* Adjust to your desired distance from the top */
             right: 10px; /* Adjust to your desired distance from the left */
-            background-color: #333;
+            background-color: #007bff;
             color: #fff;
             text-decoration: none;
             padding: 10px 20px;
@@ -49,7 +42,7 @@
         }
 
         .login-button:hover {
-            background-color: #3e3f3f;
+            background-color: #0056b3;
         }
 
         h1, h2, h3, p {
@@ -86,10 +79,8 @@
         }
 
         section {
-            padding: 20px;
+            padding: 40px;
             text-align: center;
-            background-color: rgba(104, 100, 100, 0.7).7;
-            /* Semi-transparent black background */
         }
 
         section h2 {
@@ -98,7 +89,6 @@
 
         section p {
             color: #b7afaf;
-            margin-bottom: 20px;
         }
 
         section .btn {
@@ -113,21 +103,9 @@
         section .btn:hover {
             background-color: #555;
         }
-
-        .search-box {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 101; /* Ensure it's above other content */
-        }
-
-    /* Add any additional styles for the search box, e.g., width, padding, etc. */
-        .search-box input {
-        width: 200px;
-        padding: 5px;
-        }
-
     </style>
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
@@ -135,7 +113,7 @@
         <h1>Athens Bike Store</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'dashboard' %}">Home</a></li>
+                <li><a href="index">Home</a></li>
                 <li><a href="products">Products</a></li>
                 <li><a href="about">About Us</a></li>
                 <li><a href="contact">Contact</a></li>
@@ -144,7 +122,6 @@
         <a href="login" class="login-button">Login</a>
     </header>
 
-<main>
     <section id="hero">
         <h2>Welcome to Athens Store</h2>
         <p>Discover the perfect ride for your adventures.</p>
@@ -180,7 +157,6 @@
         <p>Discover our store locations and find the one nearest to you. Visit us in person to explore our offerings.</p>
         <a href="stores" class="btn">Find a Store</a>
     </section>
-</main>
 
     <footer>
         <p>&copy; 2023 Athens Bike Store. All rights reserved.</p>

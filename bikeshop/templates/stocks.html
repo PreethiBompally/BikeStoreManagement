@@ -1,17 +1,146 @@
-<!-- stocks.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Stocks</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Availability</title>
+
+    <style>
+
+        #fixed-header {
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333; /* You can set the background color as desired */
+            color: #fff; /* Text color (adjust as needed) */
+            z-index: 100; /* Set a z-index value to ensure it's above other content */
+        }
+
+        #fixed-header h1 {
+            margin: 0;
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline links on hover */
+        }
+
+        header a {
+            background-color: #333;
+            color: #e7ba19; 
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 12px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Grey */
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff; /* White */
+        }
+
+        h2 {
+            font-size: 34px; /* Adjust the font size as needed */
+        }
+
+        h1,a {
+            font-family: Arial, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for contrast */
+            margin: 10px; /* Adjust the margins as needed */
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .search-box {
+        position: absolute;
+        margin-top: 120px;
+        top: 10px;
+        right: 10px;
+        z-index: 101; /* Ensure it's above other content */
+        display: flex;
+        align-items: center;
+    }
+
+    .search-box input {
+        width: 200px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .search-box button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    /* Add hover effect for the button */
+    .search-box button:hover {
+        background-color: #0056b3;
+    }
+
+    </style>
 </head>
 <body>
-    <h1>Stocks</h1>
-    <table border="1">
+    <header id="fixed-header">
+        <h1>Athens Bike Store</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Home</a></li>
+                <li><a href="products">Products</a></li>
+                <li><a href="about">About Us</a></li>
+                <li><a href="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<h1  font-size: 34px;>Orders</h1>
+
+<div class="search-box">
+    <input type="text" placeholder="Search...">
+    <!-- Add any additional elements related to the search box as needed -->
+</div>
+
+<table>
+    <thead>
         <tr>
             <th>Store ID</th>
             <th>Product ID</th>
             <th>Quantity</th>
         </tr>
+    </thead>
+    <tbody>
         {% for stock in stocks %}
         <tr>
             <td>{{ stock.STORE_ID }}</td>
@@ -19,6 +148,8 @@
             <td>{{ stock.QUANTITY }}</td>
         </tr>
         {% endfor %}
-    </table>
+    </tbody>
+</table>
+
 </body>
 </html>
