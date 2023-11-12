@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header a {
+            background-color: #333;
+            color: #e7ba19; 
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        main {
+            padding: 20px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Athens Bike Store</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Home</a></li>
+                <li><a href="products">Products</a></li>
+                <li><a href="about">About Us</a></li>
+                <li><a href="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <p>Welcome to Athens Bike Store! We are your premier destination for high-performance motorcycles that cater to all riders.</p>
+
+        <p>Our commitment is to provide a diverse selection of motorcycles, from sleek sport bikes for adrenaline junkies to rugged cruisers for those who enjoy the open road. We believe in the freedom and thrill of riding, and we are dedicated to offering top-quality motorcycles that deliver an exceptional riding experience.</p>
+
+        <p>At Athens Bike Store, customer satisfaction is our priority. Our team is passionate about motorcycles and is ready to assist you in finding the perfect ride that matches your style and preferences.</p>
+
+        <p>Whether you're a seasoned rider or a beginner, we have a motorcycle for you. Explore our collection and embark on your next two-wheeled adventure with Athens Bike Store!</p>
+    </main>
+
+</body>
+</html>

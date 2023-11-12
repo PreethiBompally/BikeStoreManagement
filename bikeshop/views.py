@@ -39,5 +39,8 @@ def registration(request):
     all_reg = Registration.objects.all()
     return render(request, 'registration.html', {'registration': all_reg})
 
+def aboutus(request):
+    return render(request, 'aboutus.html')
+
 
 # Add other views for CRUD operations.
