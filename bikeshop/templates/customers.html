@@ -62,9 +62,13 @@
         }
 
         h2 {
-            font-size: 34px; /* Adjust the font size as needed */
+            font-size: 34px; 
             text-align: center;
-        }
+            font-family: Arial, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for contrast */
+            margin: 10px; /* Adjust the margins as needed */
+            text-decoration: none;
+        } 
 
         h1,a {
             font-family: Arial, sans-serif;
@@ -73,7 +77,7 @@
             text-decoration: none;
         }
 
-    .search-form {
+        .search-form {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -87,7 +91,7 @@
             align-items: center;
         }
 
-        input {
+    select, input {
             margin-right: 10px;
             padding: 8px;
             font-size: 16px;
@@ -99,6 +103,27 @@
             cursor: pointer;
         }
 
+        .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .add-btn,
+    .delete-btn {
+        background-color: #606060;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .delete-btn {
+        background-color: #606060;
+        display: none;
+    }
 
     </style>
 </head>
@@ -122,9 +147,18 @@
     <button type="button">Search</button>
 </form>
 
+<div class="button-container">
+    <button class="add-btn" type="button">Add a Customer</button>
+    <button class="delete-btn" type="button" id="deleteSelectedBtn">Delete Selected</button>
+</div>
+
 <table>
     <thead>
         <tr>
+            <th>
+                <input type="checkbox" class="select-all-checkbox" id="selectAllCheckbox">
+                <label for="selectAllCheckbox">Select All</label>
+            </th>
             <th>Customer ID</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -139,6 +173,7 @@
     <tbody>
         {% for customer in customers %}
         <tr>
+            <td><input type="checkbox" name="customer_ids[]" value="{{ customer.CUSTOMER_ID }}"></td>
             <td>{{ customer.CUSTOMER_ID }}</td>
             <td>{{ customer.FIRST_NAME }}</td>
             <td>{{ customer.LAST_NAME }}</td>
@@ -152,6 +187,30 @@
         {% endfor %}
     </tbody>
 </table>
+
+<script>
+    document.getElementById('selectAllCheckbox').addEventListener('change', function() {
+        var checkboxes = document.getElementsByName('customer_ids[]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = this.checked;
+        }
+        updateDeleteButtonVisibility();
+    });
+
+    var checkboxes = document.getElementsByName('customer_ids[]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', updateDeleteButtonVisibility);
+    });
+
+    function updateDeleteButtonVisibility() {
+        var checkboxes = document.getElementsByName('customer_ids[]');
+        var deleteButton = document.querySelector('.delete-btn');
+        var atLeastOneChecked = Array.from(checkboxes).some(function(checkbox) {
+            return checkbox.checked;
+        });
+        deleteButton.style.display = atLeastOneChecked ? 'inline-block' : 'none';
+    }
+</script>
 
 </body>
 </html>
