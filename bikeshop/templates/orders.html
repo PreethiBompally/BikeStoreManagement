@@ -73,38 +73,32 @@
             text-align: center;
         }
 
-        .search-box {
-        position: absolute;
-        margin-top: 120px;
-        top: 10px;
-        right: 10px;
-        z-index: 101; /* Ensure it's above other content */
-        display: flex;
-        align-items: center;
-    }
+        .search-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            position: absolute;
+            margin-top: 120px;
+            top: 10px;
+            right: 10px;
+            z-index: 101; /* Ensure it's above other content */
+            display: flex;
+            align-items: center;
+        }
 
-    .search-box input {
-        width: 200px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
-    }
+        select, input {
+            margin-right: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
 
-    .search-box button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 5px;
-    }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-    /* Add hover effect for the button */
-    .search-box button:hover {
-        background-color: #0056b3;
-    }
 
     </style>
 </head>
@@ -123,11 +117,16 @@
 
 <h1  font-size: 34px;>Orders</h1>
 
-<div class="search-box">
-    <input type="text" placeholder="Search...">
-    <!-- Add any additional elements related to the search box as needed -->
-</div>
-
+<form class="search-form">
+    <select>
+        <option value="">Search by</option>
+        <option value="ORDER_ID">Order ID</option>
+        <option value="CUSTOMER_ID">Customer ID</option>
+        <option value="STORE_ID">Store ID</option>
+    </select>
+    <input type="text" placeholder="Enter search term">
+    <button type="button">Search</button>
+</form>
 <table>
     <thead>
         <tr>

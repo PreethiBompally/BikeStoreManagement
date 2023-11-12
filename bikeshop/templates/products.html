@@ -103,42 +103,35 @@
         .bike h3 {
             font-family: 'Roboto Condensed', sans-serif;
             margin: 5px 0;
-            font-size: 14px;
-            color: #867377;
+            font-size: 17px;
+            color: #666;
         }
 
-        .search-box {
-        position: absolute;
-        margin-top: 120px;
-        top: 10px;
-        right: 10px;
-        z-index: 101; /* Ensure it's above other content */
-        display: flex;
-        align-items: center;
-    }
+    .search-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            position: absolute;
+            margin-top: 120px;
+            top: 10px;
+            right: 10px;
+            z-index: 101; /* Ensure it's above other content */
+            display: flex;
+            align-items: center;
+        }
 
-    .search-box input {
-        width: 200px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
-    }
+    select, input {
+            margin-right: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
 
-    .search-box button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 5px;
-    }
-
-    /* Add hover effect for the button */
-    .search-box button:hover {
-        background-color: #0056b3;
-    }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
         
     </style>
@@ -158,14 +151,18 @@
     </header>
 
         <h1> Products</h1>
-    
-        <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <!-- Add any additional elements related to the search box as needed -->
-        </div>
-        
  
     <main>
+         <form class="search-form">
+            <select>
+                <option value="">Search by</option>
+                <option value="brand">Brand</option>
+                <option value="category">Category</option>
+                <option value="year">Year</option>
+            </select>
+            <input type="text" placeholder="Enter search term">
+            <button type="button">Search</button>
+        </form>
         {% for product in products %}
         <div class="bike">
             <image src = "{{ product.IMAGE_URL }}"></image>
@@ -179,3 +176,80 @@
     </main>
 </body>
 </html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        select, input {
+            margin-right: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Product Search</h1>
+    </header>
+
+    <main>
+        <form class="search-form">
+           <label for="filter">Filter by:</label>
+            <select>
+                <option value="">Search by</option>
+                <option value="brand">Brand</option>
+                <option value="category">Category</option>
+                <option value="year">Year</option>
+            </select>
+            <input type="text" placeholder="Enter search term">
+            <button type="button">Search</button>
+        </form>
+        {% for product in products %}
+        <div class="bike">
+            <image src = "{{ product.IMAGE_URL }}"></image>
+            <h2>{{ product.BRAND_NAME }} {{ product.PRODUCT_NAME }}</h2>
+            <h3>Model Year {{product.MODEL_YEAR}}</h3>
+            <h3>Retail Price $ {{product.LIST_PRICE }}</h3>
+        </div>
+        {% endfor %}
+ 
+    </main>
+</body>
+</html> -->
