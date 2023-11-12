@@ -125,7 +125,8 @@
     <div class="reg-container">
             <div class="form1">
                 <h1 class="title">Registration</h1>
-                    <form>
+                    <form method="POST" action="{% url 'registration' %}">
+                        {% csrf_token %}
                         <div class="input-field">
                             <label for="user_name">User name* </label> 
                             <input type="text" id="user_name" name="user_name" required style="max-width: 100%;" value="{{ request.POST.user_name }}">
