@@ -6,11 +6,33 @@
     <title>Contact</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
+            background: url('https://wallpapers.com/images/featured/4k-bike-p5ztqfie3vnj5kkp.jpg') center center fixed;
+            background-size:contain;
+            align-items: center;
+            height: 100vh;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
+
+        #fixed-header {
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333; /* Adjust the background color and transparency as needed */
+            color: #fff;
+            z-index: 100;
+        }
+
 
         header a {
             background-color: #333;
@@ -40,14 +62,38 @@
         }
 
         main {
+            flex-grow: 1;
             padding: 20px;
-            text-align: justify;
+            text-align: center;
         }
+
+        h2 {
+            font-size: 32px; 
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 10px; 
+            text-decoration: none;
+        } 
+
+        address {
+            font-style: normal;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        p {
+
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+
     </style>
 </head>
 <body>
 
-    <header>
+    <header id="fixed-header">
         <h1>Athens Bike Store</h1>
         <nav>
             <ul>
@@ -58,15 +104,26 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <p>Welcome to Athens Bike Store! We are your premier destination for high-performance motorcycles that cater to all riders.</p>
 
-        <p>Our commitment is to provide a diverse selection of motorcycles, from sleek sport bikes for adrenaline junkies to rugged cruisers for those who enjoy the open road. We believe in the freedom and thrill of riding, and we are dedicated to offering top-quality motorcycles that deliver an exceptional riding experience.</p>
+        <h2>CONTACT US</h2>
 
-        <p>At Athens Bike Store, customer satisfaction is our priority. Our team is passionate about motorcycles and is ready to assist you in finding the perfect ride that matches your style and preferences.</p>
+        <address>
+            123 Main Street<br>
+            Athens, GA 30605<br>
+            Country
+        </address>
 
-        <p>Whether you're a seasoned rider or a beginner, we have a motorcycle for you. Explore our collection and embark on your next two-wheeled adventure with Athens Bike Store!</p>
+        <p>Email: athensbikestore@example.com</p>
+        <p>Phone: +1 (123) 456-7890</p>
     </main>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2023 Athens Bike Store. All rights reserved.</p>
+        </footer>
 
 </body>
 </html>

@@ -6,10 +6,34 @@
     <title>About Us</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: url('https://rare-gallery.com/uploads/posts/101904-husqvarna-vitpilen-701-2018-bikes-4k.jpg') center center fixed;
+            background-size:contain;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% auto;
+            text-decoration: none;
+        }
+
+        #fixed-header {
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333; /* Adjust the background color and transparency as needed */
+            color: #fff;
+            z-index: 100;
         }
 
         header a {
@@ -40,14 +64,30 @@
         }
 
         main {
+            flex-grow: 1;
             padding: 20px;
             text-align: justify;
         }
+
+        h2 {
+            font-size: 34px; 
+            text-align: center;
+            font-family: Arial, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for contrast */
+            margin: 10px; /* Adjust the margins as needed */
+            text-decoration: none;
+        } 
+
+        p{
+            font-family: sans-serif;
+            color: #fdfbfb;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
     </style>
 </head>
 <body>
-
-    <header>
+    <header id="fixed-header">
         <h1>Athens Bike Store</h1>
         <nav>
             <ul>
@@ -59,6 +99,7 @@
         </nav>
     </header>
     <main>
+        <h2  font-size: 34px;>ABOUT US</h2>
         <p>Welcome to Athens Bike Store! We are your premier destination for high-performance motorcycles that cater to all riders.</p>
 
         <p>Our commitment is to provide a diverse selection of motorcycles, from sleek sport bikes for adrenaline junkies to rugged cruisers for those who enjoy the open road. We believe in the freedom and thrill of riding, and we are dedicated to offering top-quality motorcycles that deliver an exceptional riding experience.</p>
@@ -67,6 +108,10 @@
 
         <p>Whether you're a seasoned rider or a beginner, we have a motorcycle for you. Explore our collection and embark on your next two-wheeled adventure with Athens Bike Store!</p>
     </main>
+
+    <footer>
+        <p>&copy; 2023 Athens Bike Store. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
