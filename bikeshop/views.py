@@ -1,19 +1,78 @@
 # bikeshopapp/views.py
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from .models import Customers, Products, Stocks, Orders
+from django.urls import reverse
+from staff.models import Staff,Stores
+from django.db.models import Q
 
-from django.shortcuts import render, get_object_or_404
-from .models import Customers, Login, Registration, Staff, Stores, Products, Stocks, Orders
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        staff = authenticate(request, USER_NAME=username, password=password)
+        if staff is not None:
+            login(request,staff)
+            return HttpResponseRedirect('/')
+        else:
+            return render(request, 'login_view.html',{'error': 'Invalid username or password'})
+    else:
+        return render(request, 'login_view.html')
 
-
-def login(request):
-    logins = Login.objects.all()
-    return render(request, 'login.html', {'login': logins})
+def logout_view(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            print("x")
+            logout(request)
+            return HttpResponseRedirect('/')
+        else:
+            return render(request, 'logout.html')
+    else:
+        return render(request, 'dashboard.html')
+    
+def registration(request):
+    if request.method == 'POST':
+        user_name = request.POST['user_name']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        store_id = request.POST['store_id']
+        image_url = request.POST['image_url']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        # Create a new Staff instance and save it to the database
+        staff=Staff.objects.create_user(
+        USER_NAME=user_name,
+        EMAIL=email,
+        password=password1,
+        FIRST_NAME=first_name,
+        LAST_NAME=last_name,
+        PHONE=phone if phone != '' else None,
+        STORE=Stores.objects.get(pk=store_id) if store_id != '' else None,
+        IMAGE_URL=image_url)
+        
+        return HttpResponseRedirect(reverse('login_view'))
+    else:
+        return render(request, 'registration.html')
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    user_info = None
+    if request.user.is_authenticated:
+        user_info = {'user_name': request.user.USER_NAME}
+    return render(request, 'dashboard.html', {'user_info': user_info})
 
 def customers(request):
     custs = Customers.objects.all()
-    return render(request, 'customers.html', {'customers': custs})
+    context = {'customers': custs}
+    if request.method == 'POST':
+        search_str = request.POST.get('search')
+        if(search_str !=''):
+            custs = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
+            context = {'customers': custs}
+        return render(request, 'customers.html', context)
+    return render(request, 'customers.html', context)
 
 def staff(request):
     all_staff = Staff.objects.all()
@@ -25,7 +84,22 @@ def stores(request):
 
 def products(request):
     all_products = Products.objects.all()
-    return render(request, 'products.html', {'products': all_products})
+    context= {'products': all_products}
+    if request.method == 'POST':
+        search_str = request.POST.get('search')
+        filter_value = request.POST.get('filter')
+        bikes = None
+        if(filter_value != '' and search_str != ''):
+            if(filter_value == 'brand'):
+                bikes = Products.objects.filter(BRAND_NAME__icontains=search_str)
+            if(filter_value == 'category'):
+                bikes = Products.objects.filter(CATEGORY_NAME__icontains=search_str)
+            if(filter_value == 'year'):
+                bikes = Products.objects.filter(MODEL_YEAR__icontains=search_str)
+        context= {'products': bikes}
+        return render(request, 'products.html', context)
+    else:
+        return render(request, 'products.html', context)
 
 def stocks(request):
     all_stocks = Stocks.objects.all()
@@ -35,14 +109,8 @@ def orders(request):
     all_orders = Orders.objects.all()
     return render(request, 'orders.html', {'orders': all_orders})
 
-def registration(request):
-    all_reg = Registration.objects.all()
-    return render(request, 'registration.html', {'registration': all_reg})
-
 def aboutus(request):
     return render(request, 'aboutus.html')
+
 def contact(request):
     return render(request, 'contact.html')
-
-
-# Add other views for CRUD operations.

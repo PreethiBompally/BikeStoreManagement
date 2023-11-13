@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from bikeshop import views
-# import views
 
 urlpatterns = [
     path('', views.dashboard, name = 'dashboard'),
@@ -26,7 +25,8 @@ urlpatterns = [
     path('products/', views.products, name='products'),
     path('stocks/', views.stocks, name='stocks'),
     path('orders/', views.orders, name='orders'),
-    path('login/', views.login, name='login'),
+    path('login_view/', views.login_view, name='login_view'),
+    path('logout_view/',views.logout_view,name='logout_view'),
     path('registration/', views.registration, name='registration'),
     path('aboutus/', views.aboutus, name='aboutus'),
     path('contact/', views.contact, name='contact'),

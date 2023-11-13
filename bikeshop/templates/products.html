@@ -171,15 +171,18 @@
     <main>
 
         <div class="search-form">
-            <button class="add-btn" type="button">Add New</button>
-            <select>
-                <option value="">Search by</option>
-                <option value="brand">Brand</option>
-                <option value="category">Category</option>
-                <option value="year">Year</option>
-            </select>
-            <input type="text" placeholder="Enter search term">
-            <button type="button">Search</button>
+            <form method="post" action="{% url 'products' %}">
+                {% csrf_token %}
+                <button class="add-btn" type="button">Add New</button>
+                <select id="filter" name="filter">
+                    <option value="">Search by</option>
+                    <option value="brand">Brand</option>
+                    <option value="category">Category</option>
+                    <option value="year">Year</option>
+                </select>
+                <input type="text" name="search" placeholder="Enter search term">
+                <button type="submit">Search</button>
+            </form>
         </div>
 
         {% for product in products %}
