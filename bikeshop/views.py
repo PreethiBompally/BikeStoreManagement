@@ -41,6 +41,8 @@ def registration(request):
 
 def aboutus(request):
     return render(request, 'aboutus.html')
+def contact(request):
+    return render(request, 'contact.html')
 
 
 # Add other views for CRUD operations.

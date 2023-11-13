@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #0a0a0a;
         }
 
         #fixed-header {
@@ -65,7 +65,8 @@
             border: 1px solid #ddd;
             margin: 10px;
             padding: 80px; /* Adjust the padding to make the boxes larger */
-            width: 300px;
+            width: 200px;
+            height: 200px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             z-index: 1; 
@@ -138,7 +139,7 @@
         }
 
         .add-btn {
-        background-color: #d3d3d3;
+        background-color: #fff;
         color: black;
         border: none;
         padding: 10px 20px;
@@ -155,8 +156,8 @@
             <ul>
                 <li><a href="{% url 'dashboard' %}">Home</a></li>
                 <li><a href="{% url 'products' %}">Products</a></li>
-                <li><a href="about">About Us</a></li>
-                <li><a href="contact">Contact</a></li>
+                <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
         </nav>
     </header>
