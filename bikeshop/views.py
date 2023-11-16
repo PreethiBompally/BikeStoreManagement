@@ -38,7 +38,6 @@ def registration(request):
         last_name = request.POST['last_name']
         email = request.POST['email']
         phone = request.POST['phone']
-        store_id = request.POST['store_id']
         image_url = request.POST['image_url']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
@@ -50,7 +49,6 @@ def registration(request):
         FIRST_NAME=first_name,
         LAST_NAME=last_name,
         PHONE=phone if phone != '' else None,
-        STORE=Stores.objects.get(pk=store_id) if store_id != '' else None,
         IMAGE_URL=image_url)
         
         return HttpResponseRedirect(reverse('login_view'))
@@ -101,12 +99,78 @@ def products(request):
     else:
         return render(request, 'products.html', context)
 
+# def stocks(request):
+#     all_stocks = Stocks.objects.all()
+    
+#     if request.method == 'POST':
+#         search_str = request.POST.get('search')
+#         filter_value = request.POST.get('filter')
+#         if(filter_value != '' and search_str != ''):
+#             if(filter_value == 'STORE_NAME'):
+#                 store = Stores.objects.filter(STORE_NAME__icontains=search_str).values('STORE_ID')
+#                 if(store):
+#                     all_stocks = Stocks.objects.filter(STORE_ID = store[0]['STORE_ID'])
+#             if(filter_value == 'PRODUCT_NAME'):
+#                 product = Products.objects.filter(PRODUCT_NAME__icontains=search_str).values('PRODUCT_ID')
+#                 if(product):
+#                     all_stocks = Stocks.objects.filter(PRODUCT_ID = product[0]['PRODUCT_ID'])    
+    
+#     for stock in all_stocks:
+#         x = Stores.objects.filter(STORE_ID=stock.STORE_ID).values('STORE_NAME')
+#         stock.STORE_ID = x[0]['STORE_NAME']
+#         y = Products.objects.filter(PRODUCT_ID=stock.PRODUCT_ID).values('PRODUCT_NAME')
+#         stock.PRODUCT_ID = y[0]['PRODUCT_NAME']
+        
+#     return render(request, 'stocks.html', {'stocks': all_stocks})
+
 def stocks(request):
     all_stocks = Stocks.objects.all()
+    
+    if request.method == 'POST':
+        search_str = request.POST.get('search')
+        filter_value = request.POST.get('filter')
+        if filter_value != '' and search_str != '':
+            if filter_value == 'STORE_NAME':
+                store = Stores.objects.filter(STORE_NAME__icontains=search_str).values('STORE_ID')
+                if store:
+                    all_stocks = all_stocks.filter(STORE_ID=store[0]['STORE_ID'])
+            elif filter_value == 'PRODUCT_NAME':
+                product = Products.objects.filter(PRODUCT_NAME__icontains=search_str).values('PRODUCT_ID')
+                if product:
+                    all_stocks = all_stocks.filter(PRODUCT_ID=product[0]['PRODUCT_ID'])
+
+    # Fetch all store IDs and product IDs to minimize queries
+    store_ids = set(stock.STORE_ID for stock in all_stocks)
+    product_ids = set(stock.PRODUCT_ID for stock in all_stocks)
+
+    # Fetch store names and product names in bulk
+    store_names = {store.STORE_ID: store.STORE_NAME for store in Stores.objects.filter(STORE_ID__in=store_ids)}
+    product_names = {product.PRODUCT_ID: product.PRODUCT_NAME for product in Products.objects.filter(PRODUCT_ID__in=product_ids)}
+
+    # Update stock objects with corresponding names
+    for stock in all_stocks:
+        stock.STORE_ID = store_names.get(stock.STORE_ID, '')
+        stock.PRODUCT_ID = product_names.get(stock.PRODUCT_ID, '')
+
     return render(request, 'stocks.html', {'stocks': all_stocks})
+
 
 def orders(request):
     all_orders = Orders.objects.all()
+    
+    if request.method == 'POST':
+        search_str = request.POST.get('search')
+        filter_value = request.POST.get('filter')
+        if filter_value != '' and search_str != '':
+            if filter_value == 'STORE_NAME':
+                store = Stores.objects.filter(STORE_NAME__icontains=search_str).values('STORE_ID')
+                if store:
+                    all_orders = all_orders.filter(STORE_ID=store[0]['STORE_ID'])
+            elif filter_value == 'CUSTOMER_NAME':
+                cuustomer = Customers.objects.filter(CUSTOMER_NAME__icontains=search_str).values('CUSTOMER_ID')
+                if cuustomer:
+                    all_orders = all_orders.filter(CUSTOMER_ID=cuustomer[0]['CUSTOMER_ID'])
+
     return render(request, 'orders.html', {'orders': all_orders})
 
 def aboutus(request):

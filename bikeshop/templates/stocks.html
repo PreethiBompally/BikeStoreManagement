@@ -116,13 +116,14 @@
 
 <h1  font-size: 34px;>STOCKS</h1>
 
-<form class="search-form">
-    <select>
+<form class="search-form" method="post" action="{% url 'stocks' %}">
+    {% csrf_token %}
+    <select id="filter" name="filter">
         <option value="">Search by</option>
-        <option value="STORE_ID">Store ID</option>
-        <option value="PRODUCT_ID">Product ID</option>
+        <option value="STORE_NAME">Store</option>
+        <option value="PRODUCT_NAME">Product</option>
     </select>
-    <input type="text" placeholder="Enter search term">
+    <input type="text" name="search" placeholder="Enter search term">
     <button type="button">Search</button>
 </form>
 

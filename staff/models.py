@@ -43,7 +43,6 @@ class Staff(AbstractBaseUser):
     LAST_NAME = models.CharField(max_length=50)
     PHONE = models.CharField(max_length=14, null=True, blank=True)
     EMAIL = models.CharField(max_length=50, null=True, blank=True)
-    STORE = models.ForeignKey('Stores', on_delete=models.CASCADE, default=None, null=True)    
     IMAGE_URL = models.CharField(max_length=1024, null=True, blank=True)
     
     last_login = models.DateTimeField(null=True, blank=True)
