@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS `STAFF` (
   `LAST_NAME` VARCHAR(50) NOT NULL,
   `EMAIL` VARCHAR(320) UNIQUE,
   `PHONE` VARCHAR(14),
-  `STORE_ID` INT ,
   `IMAGE_URL` VARCHAR(1024),
   `USER_NAME` VARCHAR(255) NOT NULL,
   `PASSWORD` VARCHAR(255),
@@ -402,16 +401,16 @@ INSERT INTO stocks VALUES (1,1,27),
 (3,77,23);
 
 INSERT INTO staff VALUES 
-(1,"Fabiola","Jackson","fabiola.jackson@bikes.shop","(831)555-5554",1,"https://images.news18.com/ibnlive/uploads/2022/10/mahesh-babu-2.jpg","Fabiola",NULL,NULL),
-(2,"Mireya","Copeland","mireya.copeland@bikes.shop","(831)555-5555",1,"https://wallpapers.com/images/featured/pushpa-allu-arjun-71flc7rr1jx6wtuj.jpg","Mireya",NULL,NULL),
-(3,"Genna","Serrano","genna.serrano@bikes.shop","(831)555-5556",1,"https://resize.indiatvnews.com/en/resize/newbucket/1080_-/2023/03/ram-charan-9-1679042676.jpg","Genna",NULL,NULL),
-(4,"Virgie","Wiggins","virgie.wiggins@bikes.shop","(831)555-5557",1,"https://www.unwomen.org/sites/default/files/2022-10/UN-Women-Goodwill-Ambassador-Emma-Watson-Credit-Celeste-Sloman-853x1280.jpg","Virgie",NULL,NULL),
-(5,"Jannette","David","jannette.david@bikes.shop","(516)379-4444",2,"https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_.jpg","Jannette",NULL,NULL),
-(6,"Marcelene","Boyer","marcelene.boyer@bikes.shop","(516)379-4445",2,"https://content.tupaki.com/twdata/2018/1118/photos/actress/Kajal%20Agarwal%20Photos/normal/Kajal%20Agarwal%20Photos_37.jpg","Marcelene",NULL,NULL),
-(7,"Venita","Daniel","venita.daniel@bikes.shop","(516)379-4446",2,"https://upload.wikimedia.org/wikipedia/commons/9/9a/Nani_at_an_interview_for_film_companion_%28cropped%29.png","Venita",NULL,NULL),
-(8,"Kali","Vargas","kali.vargas@bikes.shop","(972)530-5555",3,"https://i.pinimg.com/originals/ce/9b/68/ce9b681d9e62083d89e10def3ba41ecd.jpg","Kali",NULL,NULL),
-(9,"Layla","Terrell","layla.terrell@bikes.shop","(972)530-5556",3,"https://3.bp.blogspot.com/_WvywD6LMh2c/TTsDuUJbrhI/AAAAAAAAAGQ/4jemPE2_lZk/s1600/tamana-5.jpg","Layla",NULL,NULL),
-(10,"Bernardine","Houston","bernardine.houston@bikes.shop","(972)530-5557",3,"https://pbs.twimg.com/profile_images/1585684687896608768/S8lYnmDv_400x400.jpg","Bernardine",NULL,NULL);
+(1,"Fabiola","Jackson","fabiola.jackson@bikes.shop","(831)555-5554","https://images.news18.com/ibnlive/uploads/2022/10/mahesh-babu-2.jpg","Fabiola",NULL,NULL),
+(2,"Mireya","Copeland","mireya.copeland@bikes.shop","(831)555-5555","https://wallpapers.com/images/featured/pushpa-allu-arjun-71flc7rr1jx6wtuj.jpg","Mireya",NULL,NULL),
+(3,"Genna","Serrano","genna.serrano@bikes.shop","(831)555-5556","https://resize.indiatvnews.com/en/resize/newbucket/1080_-/2023/03/ram-charan-9-1679042676.jpg","Genna",NULL,NULL),
+(4,"Virgie","Wiggins","virgie.wiggins@bikes.shop","(831)555-5557","https://www.unwomen.org/sites/default/files/2022-10/UN-Women-Goodwill-Ambassador-Emma-Watson-Credit-Celeste-Sloman-853x1280.jpg","Virgie",NULL,NULL),
+(5,"Jannette","David","jannette.david@bikes.shop","(516)379-4444","https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_.jpg","Jannette",NULL,NULL),
+(6,"Marcelene","Boyer","marcelene.boyer@bikes.shop","(516)379-4445","https://content.tupaki.com/twdata/2018/1118/photos/actress/Kajal%20Agarwal%20Photos/normal/Kajal%20Agarwal%20Photos_37.jpg","Marcelene",NULL,NULL),
+(7,"Venita","Daniel","venita.daniel@bikes.shop","(516)379-4446","https://upload.wikimedia.org/wikipedia/commons/9/9a/Nani_at_an_interview_for_film_companion_%28cropped%29.png","Venita",NULL,NULL),
+(8,"Kali","Vargas","kali.vargas@bikes.shop","(972)530-5555","https://i.pinimg.com/originals/ce/9b/68/ce9b681d9e62083d89e10def3ba41ecd.jpg","Kali",NULL,NULL),
+(9,"Layla","Terrell","layla.terrell@bikes.shop","(972)530-5556","https://3.bp.blogspot.com/_WvywD6LMh2c/TTsDuUJbrhI/AAAAAAAAAGQ/4jemPE2_lZk/s1600/tamana-5.jpg","Layla",NULL,NULL),
+(10,"Bernardine","Houston","bernardine.houston@bikes.shop","(972)530-5557","https://pbs.twimg.com/profile_images/1585684687896608768/S8lYnmDv_400x400.jpg","Bernardine",NULL,NULL);
 
 
 INSERT INTO customers VALUES 
