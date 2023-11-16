@@ -116,6 +116,7 @@
 <h1  font-size: 34px;>ORDERS</h1>
 
 <form class="search-form" method="post" action="{% url 'orders' %}">
+    {% csrf_token %}
     <select id="filter" name="filter">
         <option value="">Search by</option>
         <option value="ORDER_ID">Order Num</option>
@@ -123,7 +124,7 @@
         <option value="STORE_NAME">Store Name</option>
     </select>
     <input type="text" name="search" placeholder="Enter search term">
-    <button type="button">Search</button>
+    <button type="submit">Search</button>
 </form>
 <table>
     <thead>
@@ -140,15 +141,31 @@
         {% for order in orders %}
         <tr>
             <td>{{ order.ORDER_ID }}</td>
-            <td>{{ order.CUSTOMER }}</td>
+            <td>{{ order.CUSTOMER.FIRST_NAME}} {{ order.CUSTOMER.LAST_NAME}}</td>
             <td>{{ order.ORDER_DATE }}</td>
             <td>{{ order.DELIVERY_DATE }}</td>
             <td>{{ order.SHIPPED_DATE }}</td>
-            <td>{{ order.STORE }}</td>
+            <td>{{ order.STORE.STORE_NAME }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+<div class="pagination">
+    <span class="step-links">
+        {% if orders.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ orders.previous_page_number }}">Previous</a>
+        {% endif %}
 
+        <span class="current">
+            Page {{ orders.number }} of {{ orders.paginator.num_pages }}.
+        </span>
+
+        {% if orders.has_next %}
+            <a href="?page={{ orders.next_page_number }}">Next</a>
+            <a href="?page={{ orders.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 </body>
 </html>
