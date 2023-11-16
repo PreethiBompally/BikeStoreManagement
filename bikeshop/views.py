@@ -129,9 +129,8 @@ def stocks(request):
     return render(request, 'stocks.html', {'stocks': all_stocks})
 
 def orders(request):
-    all_orders = Orders.objects.all()
+    all_orders = Orders.objects.all().order_by('ORDER_ID')
     
-
     if request.method == 'POST':
         search_str = request.POST.get('search')
         filter_value = request.POST.get('filter')
@@ -141,45 +140,22 @@ def orders(request):
             elif filter_value == 'STORE_NAME':
                 store = Stores.objects.filter(STORE_NAME__icontains=search_str).values('STORE_ID')
                 if store:
-                    all_orders = all_orders.filter(STORE_id=store[0]['STORE_ID'])
+                    all_orders = all_orders.filter(STORE_id__in=store)
             elif filter_value == 'CUSTOMER_NAME':
                 customer = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str)).values('CUSTOMER_ID')
                 if customer:
-                    all_orders = all_orders.filter(CUSTOMER_id=customer[0]['CUSTOMER_ID'])
-    
-    paginator = Paginator(all_orders, 10)  # Show 10 orders per page
-
+                    all_orders = all_orders.filter(CUSTOMER_id__in=customer)
     page = request.GET.get('page')
+    items_per_page = request.GET.get('items_per_page',10) # Default to 10 items per page
+    paginator = Paginator(all_orders, items_per_page)
     try:
         all_orders = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver the first page.
         all_orders = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver the last page of results.
         all_orders = paginator.page(paginator.num_pages)
-    
+        
     return render(request, 'orders.html', {'orders': all_orders})
-
-# def orders(request):
-#     all_orders = Orders.objects.all()
-#     print("here")
-#     if request.method == 'POST':
-#         search_str = request.POST.get('search')
-#         filter_value = request.POST.get('filter')
-#         if filter_value != '' and search_str != '':
-#             if filter_value == 'ORDER_ID':
-#                 all_orders = all_orders.filter(ORDER_ID=search_str)
-#             elif filter_value == 'STORE_NAME':
-#                 store = Stores.objects.filter(STORE_NAME__icontains=search_str).values('STORE_ID')
-#                 if store:
-#                     all_orders = all_orders.filter(STORE_ID=store[0]['STORE_ID'])
-#             elif filter_value == 'CUSTOMER_NAME':
-#                 cuustomer = Customers.objects.filter(CUSTOMER_NAME__icontains=search_str).values('CUSTOMER_ID')
-#                 if cuustomer:
-#                     all_orders = all_orders.filter(CUSTOMER_ID=cuustomer[0]['CUSTOMER_ID'])
-
-#     return render(request, 'orders.html', {'orders': all_orders})
 
 def aboutus(request):
     return render(request, 'aboutus.html')
