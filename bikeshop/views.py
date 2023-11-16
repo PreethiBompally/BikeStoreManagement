@@ -141,7 +141,7 @@ def orders(request):
             elif filter_value == 'STORE_NAME':
                 store = Stores.objects.filter(STORE_NAME__icontains=search_str).values('STORE_ID')
                 if store:
-                    all_orders = all_orders.filter(STORE_ID=store[0]['STORE_ID'])
+                    all_orders = all_orders.filter(STORE_id=store[0]['STORE_ID'])
             elif filter_value == 'CUSTOMER_NAME':
                 customer = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str)).values('CUSTOMER_ID')
                 if customer:
