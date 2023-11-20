@@ -156,6 +156,10 @@
         cursor: pointer;
         }
 
+        .imagecontainer2{
+            background-color: 	#808080;
+        }
+
     </style>
 </head>
 <body>
@@ -185,7 +189,9 @@
     <main>
         {% for store in stores %}
         <div class="location">
-            <img src="https://t4.ftcdn.net/jpg/05/29/74/05/360_F_529740584_1NUibxPP3I6u73H2TZJbpeYLzdSrBZFx.jpg" alt="Red Pin" class="pin-icon">
+            <div class="imagecontainer2">
+                <img src="https://t4.ftcdn.net/jpg/05/29/74/05/360_F_529740584_1NUibxPP3I6u73H2TZJbpeYLzdSrBZFx.jpg" alt="Red Pin" class="pin-icon">
+            </div>
             <h2>{{ store.STORE_NAME }}</h2>
             <p>{{ store.STREET }}</p>
             <p>{{ store.CITY }},{{ store.STATE }}{{ store.ZIPCODE }}</p>

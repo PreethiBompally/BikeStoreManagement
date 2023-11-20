@@ -174,6 +174,10 @@
         border-radius: 5px;
         cursor: pointer;
     }
+    .imagecontainer1{
+            background-color: 	#808080;
+        }
+
 
 
     </style>
@@ -205,7 +209,9 @@
     <main>
         {% for s in staff %}
         <div class="staff1">
-            <image src = "{{ s.IMAGE_URL}}"></image>
+            <div class="imagecontainer1">
+                <image src = "{{ s.IMAGE_URL}}"></image>
+            </div>
             <h3>{{ s.FIRST_NAME }} {{ s.LAST_NAME }}</h3>
             <h4>{{ s.PHONE }}</h4>
             <h4>{{ s.EMAIL }}</h4>
