@@ -185,7 +185,7 @@
                 <td>{{ customer.CUSTOMER_ID }}</td>
                 <td>{{ customer.FIRST_NAME }}</td>
                 <td>{{ customer.LAST_NAME }}</td>
-                <td>{{ customer.PHONE }}</td>
+                <td>{% if customer.PHONE != None %}{{ customer.PHONE }}{% else %}-{% endif %}</td>
                 <td>{{ customer.EMAIL }}</td>
                 <td>{{ customer.STREET }}</td>
                 <td>{{ customer.CITY }}</td>
