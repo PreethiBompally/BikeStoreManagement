@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('https://c0.wallpaperflare.com/preview/312/266/470/blur-chrome-classic-close-up.jpg') center center fixed;
+            background: url('https://www.shutterstock.com/image-photo/motorcycle-ride-pleasant-breaks-exploration-260nw-1231005868.jpg') center center fixed;
             background-size:contain;
             display: flex;
             flex-direction: column;
@@ -94,13 +94,19 @@
         }
 
 
-        input[type="text"], input[type="password"] {
+        input[type="text"] {
         width: 100%;
         border: 1px solid #ddd;
         border-radius: 3px;
         }
 
-        input[type="tel"]{
+        input[type="number"]{
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        }
+
+        input[type="email"]{
         width: 100%;
         border: 1px solid #ddd;
         border-radius: 3px;
@@ -147,16 +153,16 @@
                             <input type="text" id="first_name" name="first_name" required style="max-width: 100%;" value="{% if customer %}{{ customer.FIRST_NAME }}{% endif %}">
                         </div>
                         <div class="input-field">
-                            <label for="last_name">LAST name* </label> 
+                            <label for="last_name">Last name* </label> 
                             <input type="text" id="last_name" name="last_name" required style="max-width: 100%;" value="{% if customer %}{{ customer.LAST_NAME }}{% endif %}">
                         </div>
                         <div class="input-field">
                             <label for="phone">Phone </label> 
-                            <input type="text" id="phone" name="phone" style="max-width: 100%;" value="{% if customer %}{{ customer.PHONE }}{% endif %}">
+                            <input type="phone" id="phone" name="phone" style="max-width: 100%;" value="{% if customer %}{{ customer.PHONE }}{% endif %}">
                         </div>
                         <div class="input-field">
-                            <label for="email">Email </label> 
-                            <input type="text" id="email" name="email" required style="max-width: 100%;" value="{% if customer %}{{ customer.EMAIL }}{% endif %}">
+                            <label for="email">Email* </label> 
+                            <input type="email" id="email" name="email" required style="max-width: 100%;" value="{% if customer %}{{ customer.EMAIL }}{% endif %}">
                         </div>
                         <div class="input-field">
                             <label for="street">Street </label> 
@@ -172,7 +178,7 @@
                         </div>
                         <div class="input-field">
                             <label for="zipcode">Zipcode </label> 
-                            <input type="text" id="zipcode" name="zipcode" style="max-width: 100%;" value="{% if customer %}{{ customer.ZIPCODE }}{% endif %}">
+                            <input type="number" id="zipcode" name="zipcode" style="max-width: 100%;" value="{% if customer %}{{ customer.ZIPCODE }}{% endif %}">
                         </div>
                         <button type="submit">Save</button>
                     </form>
