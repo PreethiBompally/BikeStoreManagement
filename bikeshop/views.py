@@ -63,18 +63,23 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'user_info': user_info})
 
 def customers(request):
-    custs = Customers.objects.all()
-    context = {'customers': custs}
+    custs = Customers.objects.all() 
     
     if request.method == 'POST':
         search_str = request.POST.get('search')
         if(search_str !=''):
             custs = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
-            context = {'customers': custs}
-        else:
-            custs = Customers.objects.all()
-        return render(request, 'customers.html', context)
-    return render(request, 'customers.html', context)
+            
+    page = request.GET.get('page')
+    items_per_page = request.GET.get('items_per_page',10)
+    paginator = Paginator(custs, items_per_page)
+    try:
+        custs = paginator.page(page)
+    except PageNotAnInteger:
+        custs = paginator.page(1)
+    except EmptyPage:
+        custs = paginator.page(paginator.num_pages)
+    return render(request, 'customers.html', {'customers': custs})
 
 def staff(request):
     all_staff = Staff.objects.all()
@@ -129,6 +134,16 @@ def stocks(request):
         stock.STORE_ID = store_names.get(stock.STORE_ID, '')
         stock.PRODUCT_ID = product_names.get(stock.PRODUCT_ID, '')
 
+    page = request.GET.get('page')
+    items_per_page = request.GET.get('items_per_page',10)
+    paginator = Paginator(all_stocks, items_per_page)
+    try:
+        all_stocks = paginator.page(page)
+    except PageNotAnInteger:
+        all_stocks = paginator.page(1)
+    except EmptyPage:
+        all_stocks = paginator.page(paginator.num_pages)
+    
     return render(request, 'stocks.html', {'stocks': all_stocks})
 
 def orders(request):
@@ -153,7 +168,7 @@ def orders(request):
                 if product:
                     all_orders = all_orders.filter(PRODUCT_id__in=product)
     page = request.GET.get('page')
-    items_per_page = request.GET.get('items_per_page',10) # Default to 10 items per page
+    items_per_page = request.GET.get('items_per_page',10)
     paginator = Paginator(all_orders, items_per_page)
     try:
         all_orders = paginator.page(page)
