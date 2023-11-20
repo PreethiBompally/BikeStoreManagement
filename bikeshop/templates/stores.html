@@ -155,12 +155,33 @@
         border-radius: 5px;
         cursor: pointer;
         }
+        .delete-link,
+        .edit-link {
+            position: absolute;
+            top: 10px;
+            color: rgb(122, 5, 5);
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .delete-link {
+            right: 10px;
+        }
+
+        .edit-link {
+            right: 30px;
+        }
 
         .imagecontainer2{
             background-color: 	#808080;
         }
 
     </style>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this product? This action will delete all related orders and stocks.");
+        }
+    </script>
 </head>
 <body>
     <header id="fixed-header">
@@ -189,6 +210,8 @@
     <main>
         {% for store in stores %}
         <div class="location">
+            <a href="{% url 'edit_store' store.STORE_ID %}" class="edit-link">&#9998;</a>
+            <a href="{% url 'delete_store' store.STORE_ID %}" class="delete-link" onclick="return confirmDelete();">&#x1F5D1;</a>
             <div class="imagecontainer2">
                 <img src="https://t4.ftcdn.net/jpg/05/29/74/05/360_F_529740584_1NUibxPP3I6u73H2TZJbpeYLzdSrBZFx.jpg" alt="Red Pin" class="pin-icon">
             </div>
