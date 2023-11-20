@@ -1,7 +1,7 @@
 # bikeshopapp/views.py
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Customers, Products, Stocks, Orders
 from django.urls import reverse
 from staff.models import Staff,Stores
@@ -22,9 +22,8 @@ def login_view(request):
         return render(request, 'login_view.html')
 
 def logout_view(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         if request.user.is_authenticated:
-            print("x")
             logout(request)
             return HttpResponseRedirect('/')
         else:
@@ -60,6 +59,7 @@ def dashboard(request):
     user_info = None
     if request.user.is_authenticated:
         user_info = {'user_name': request.user.USER_NAME}
+        print(request.user.USER_NAME)
     return render(request, 'dashboard.html', {'user_info': user_info})
 
 def customers(request):
@@ -162,3 +162,37 @@ def aboutus(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+def add_product(request):
+    distinct_brands = Products.objects.values_list('BRAND_NAME', flat=True).distinct()
+    distinct_categories = Products.objects.values_list('CATEGORY_NAME', flat=True).distinct()
+
+    if request.method == 'POST':
+        product = Products()
+        product.PRODUCT_NAME = request.POST['product_name']
+        product.BRAND_NAME = request.POST['brand']
+        product.CATEGORY_NAME = request.POST['category']
+        product.MODEL_YEAR = request.POST['model_year']
+        product.LIST_PRICE = request.POST['price']
+        product.IMAGE_URL = request.POST['image_url']
+        
+        product.save()
+        return HttpResponseRedirect(reverse('products'))    
+    return render(request, 'product_details.html', {'distinct_brands': distinct_brands,'distinct_categories': distinct_categories,})
+
+def edit_product(request, product_id):
+    distinct_brands = Products.objects.values_list('BRAND_NAME', flat=True).distinct()
+    distinct_categories = Products.objects.values_list('CATEGORY_NAME', flat=True).distinct()
+    product = get_object_or_404(Products, PRODUCT_ID=product_id)
+    
+    context = {'product':product,'distinct_brands': distinct_brands,'distinct_categories': distinct_categories,}
+    return render(request, 'product_details.html', context)
+
+def delete_product(request, product_id):
+    product = get_object_or_404(Products, PRODUCT_ID=product_id)
+
+    if request.method == 'POST':
+        product.delete()
+        return redirect('products')
+
+    return render(request, 'confirm_delete_product.html', {'product': product})

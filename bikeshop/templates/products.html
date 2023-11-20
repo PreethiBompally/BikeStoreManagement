@@ -82,6 +82,7 @@
         }
 
         .bike {
+            position: relative;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -149,6 +150,22 @@
             cursor: pointer;
             margin-right: 1000px; 
         }
+        .delete-link,
+        .edit-link {
+            position: absolute;
+            top: 10px;
+            color: #808080;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .delete-link {
+            right: 10px;
+        }
+
+        .edit-link {
+            right: 30px;
+        }
 
     </style>
 </head>
@@ -173,7 +190,7 @@
         <div class="search-form">
             <form method="post" action="{% url 'products' %}">
                 {% csrf_token %}
-                <button class="add-btn" type="button">Add New</button>
+                <a href="{% url 'add_product' %}" class="add-btn">Add New</a>
                 <select id="filter" name="filter">
                     <option value="">Search by</option>
                     <option value="brand">Brand</option>
@@ -187,6 +204,8 @@
 
         {% for product in products %}
         <div class="bike">
+            <a href="{% url 'edit_product' product.PRODUCT_ID %}" class="edit-link">&#9998;</a>
+            <a href="{% url 'delete_product' product.PRODUCT_ID %}" class="delete-link">&#x1F5D1;</a>
             <img src="{{ product.IMAGE_URL }}" alt="{{ product.BRAND_NAME }} {{ product.PRODUCT_NAME }}">
             <h2>{{ product.BRAND_NAME }} {{ product.PRODUCT_NAME }}</h2>
             <h3>Model Year {{ product.MODEL_YEAR }}</h3>

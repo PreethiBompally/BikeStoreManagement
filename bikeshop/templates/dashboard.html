@@ -150,7 +150,12 @@
                 <li><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
         </nav>
-        <a href="{% url 'login_view' %}" class="login-button">Login</a>
+        {% if user.is_authenticated %}
+            <p style="margin-right: 20px;">Hi, {{ user.user_name }}</p>
+            <a href="{% url 'logout_view' %}" class="login-button">Logout</a>
+        {% else %}
+            <a href="{% url 'login_view' %}" class="login-button">Login</a>
+        {% endif %}
     </header>
 
 <main>

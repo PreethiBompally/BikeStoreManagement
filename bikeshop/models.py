@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 class Products(models.Model):
-    PRODUCT_ID = models.AutoField(primary_key=True)
+    PRODUCT_ID = models.BigAutoField(primary_key=True)
     PRODUCT_NAME = models.CharField(max_length=1024, null=True, blank=True)
     BRAND_NAME = models.CharField(max_length=1024, null=True, blank=True)
     CATEGORY_NAME = models.CharField(max_length=1024, null=True, blank=True)
