@@ -194,7 +194,7 @@
         <div class="search-form">
             <form method="post" action="{% url 'products' %}">
                 {% csrf_token %}
-                <a href="{% url 'add_product' %}" class="add-btn">Add New</a>
+                <a href="{% url 'add_product' %}" class="add-btn">Add Product</a>
                 <select id="filter" name="filter">
                     <option value="">Search by</option>
                     <option value="brand">Brand</option>

@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product</title>
+    <title>Add Customer</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('https://media.istockphoto.com/id/521890329/photo/bike-rider.jpg?s=612x612&w=0&k=20&c=p56JxxiCX3LyMsufE5umR-kWQkPsbRnO8KI9Jrjh1PY=') center center fixed;
+            background: url('https://c0.wallpaperflare.com/preview/312/266/470/blur-chrome-classic-close-up.jpg') center center fixed;
             background-size:contain;
             display: flex;
             flex-direction: column;
@@ -94,13 +94,13 @@
         }
 
 
-        input[type="text"] {
+        input[type="text"], input[type="password"] {
         width: 100%;
         border: 1px solid #ddd;
         border-radius: 3px;
         }
 
-        input[type="number"]{
+        input[type="tel"]{
         width: 100%;
         border: 1px solid #ddd;
         border-radius: 3px;
@@ -132,55 +132,47 @@
             text-shadow: 2px 2px 4px #0c0c0c;
         }
 
-        .imagecontainer{
-            color: #fff;
-        }
-
 </style>
 </head>
 
 <body>
     <div class="reg-container">
             <div class="form1">
-                <h1 class="title">Add Product</h1>
-                    <form method="POST" action="{% url 'add_product' %}">
+                <h1 class="title">Add Customer</h1>
+                    <form method="POST" action="{% url 'add_customer' %}">
                         {% csrf_token %}
-                        <input type="hidden" id="product_id" name="product_id" value="{% if product %}{{ product.PRODUCT_ID }}{% endif %}">
-
+                        <input type="hidden" id="customer_id" name="customer_id" value="{% if customer %}{{ customer.CUSTOMER_ID }}{% endif %}">
                         <div class="input-field">
-                            <label for="product_name">Product name* </label> 
-                            <input type="text" id="product_name" name="product_name" required style="max-width: 100%;" value="{% if product %}{{ product.PRODUCT_NAME }}{% endif %}">
+                            <label for="first_name">First name* </label> 
+                            <input type="text" id="first_name" name="first_name" required style="max-width: 100%;" value="{% if customer %}{{ customer.FIRST_NAME }}{% endif %}">
                         </div>
                         <div class="input-field">
-                            <label for="brand">Brand* </label>
-                            <select id="brand" name="brand" required style="width: 100%;">
-                                <option value="" >Select</option>
-                                {% for brand in distinct_brands %}
-                                    <option value="{{ brand }}" {% if product and brand == product.BRAND_NAME %}selected{% endif %}>{{ brand }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
-                        <div class="input-field">
-                            <label for="category">Category* </label>
-                            <select id="category" name="category" required style="width: 100%;">
-                                <option value="" >Select</option>
-                                {% for category in distinct_categories %}
-                                    <option value="{{ category }}" {% if product and category == product.CATEGORY_NAME %}selected{% endif %}>{{ category }}</option>
-                                {% endfor %}
-                            </select>
+                            <label for="last_name">LAST name* </label> 
+                            <input type="text" id="last_name" name="last_name" required style="max-width: 100%;" value="{% if customer %}{{ customer.LAST_NAME }}{% endif %}">
                         </div>
                         <div class="input-field">
-                            <label for="model_year">Model year* </label>
-                            <input type="number" id="model_year" name="model_year" required style="max-width: 100%;" value="{% if product %}{{ product.MODEL_YEAR }}{% endif %}">
+                            <label for="phone">Phone </label> 
+                            <input type="text" id="phone" name="phone" style="max-width: 100%;" value="{% if customer %}{{ customer.PHONE }}{% endif %}">
                         </div>
                         <div class="input-field">
-                            <label for="price">Price* </label>
-                            <input type="number" id="price" name="price" required style="max-width: 100%;" value="{% if product %}{{ product.LIST_PRICE }}{% endif %}">
-                        </div>                      
+                            <label for="email">Email </label> 
+                            <input type="text" id="email" name="email" required style="max-width: 100%;" value="{% if customer %}{{ customer.EMAIL }}{% endif %}">
+                        </div>
                         <div class="input-field">
-                            <label for="image_url">Image </label>
-                            <input type="text" id="image_url" required style="max-width: 100%;" name="image_url" value="{% if product %}{{ product.IMAGE_URL }}{% endif %}">
+                            <label for="street">Street </label> 
+                            <input type="text" id="street" name="street" style="max-width: 100%;" value="{% if customer %}{{ customer.STREET }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="city">City </label> 
+                            <input type="text" id="city" name="city" style="max-width: 100%;" value="{% if customer %}{{ customer.CITY }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="state">State </label> 
+                            <input type="text" id="state" name="state" style="max-width: 100%;" value="{% if customer %}{{ customer.STATE }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="zipcode">Zipcode </label> 
+                            <input type="text" id="zipcode" name="zipcode" style="max-width: 100%;" value="{% if customer %}{{ customer.ZIPCODE }}{% endif %}">
                         </div>
                         <button type="submit">Save</button>
                     </form>

@@ -105,22 +105,25 @@
 
         .button-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         margin-bottom: 20px;
+        padding-left: 20px;
     }
 
     .add-btn,
-    .delete-btn {
+    .delete-btn,
+    .edit-btn {
         background-color: #606060;
         color: white;
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
+        margin-right: 10px;
     }
 
-    .delete-btn {
+    .delete-btn,.edit-btn {
         background-color: #606060;
         display: none;
     }
@@ -149,69 +152,103 @@
 </form>
 
 <div class="button-container">
-    <button class="add-btn" type="button">Add a Customer</button>
-    <button class="delete-btn" type="button" id="deleteSelectedBtn">Delete Selected</button>
-</div>
+    <a href="{% url 'add_customer' %}" class="add-btn" type="button" id="addCustomerBtn">Add Customer</a>
+    <a href="#" class="edit-btn" type="button" id="editCustomerLink">Edit Customer</a>
+    <a href="#" class="delete-btn" type="button" id="deleteCustomerLink">Delete Selected</a>
+    </div>
 
-<table>
-    <thead>
-        <tr>
-            <th>
-                <input type="checkbox" class="select-all-checkbox" id="selectAllCheckbox">
-                <label for="selectAllCheckbox">Select All</label>
-            </th>
-            <th>Customer ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zipcode</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for customer in customers %}
-        <tr>
-            <td><input type="checkbox" name="customer_ids[]" value="{{ customer.CUSTOMER_ID }}"></td>
-            <td>{{ customer.CUSTOMER_ID }}</td>
-            <td>{{ customer.FIRST_NAME }}</td>
-            <td>{{ customer.LAST_NAME }}</td>
-            <td>{{ customer.PHONE }}</td>
-            <td>{{ customer.EMAIL }}</td>
-            <td>{{ customer.STREET }}</td>
-            <td>{{ customer.CITY }}</td>
-            <td>{{ customer.STATE }}</td>
-            <td>{{ customer.ZIPCODE }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<form id="customerForm">
+    {% csrf_token %}
+    <input type="hidden" name="selected_customer_ids" id="selectedCustomerIds" value="">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" class="select-all-checkbox" id="selectAllCheckbox">
+                    <label for="selectAllCheckbox">Select All</label>
+                </th>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zipcode</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td><input type="checkbox" name="customer_ids[]" value="{{ customer.CUSTOMER_ID }}"></td>
+                <td>{{ customer.CUSTOMER_ID }}</td>
+                <td>{{ customer.FIRST_NAME }}</td>
+                <td>{{ customer.LAST_NAME }}</td>
+                <td>{{ customer.PHONE }}</td>
+                <td>{{ customer.EMAIL }}</td>
+                <td>{{ customer.STREET }}</td>
+                <td>{{ customer.CITY }}</td>
+                <td>{{ customer.STATE }}</td>
+                <td>{{ customer.ZIPCODE }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+
 
 <script>
-    document.getElementById('selectAllCheckbox').addEventListener('change', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        var addCustomerBtn = document.getElementById('addCustomerBtn');
+        var editCustomerLink = document.getElementById('editCustomerLink');
+        var deleteCustomerLink = document.getElementById('deleteCustomerLink');
         var checkboxes = document.getElementsByName('customer_ids[]');
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = this.checked;
-        }
-        updateDeleteButtonVisibility();
-    });
 
-    var checkboxes = document.getElementsByName('customer_ids[]');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', updateDeleteButtonVisibility);
-    });
-
-    function updateDeleteButtonVisibility() {
-        var checkboxes = document.getElementsByName('customer_ids[]');
-        var deleteButton = document.querySelector('.delete-btn');
-        var atLeastOneChecked = Array.from(checkboxes).some(function(checkbox) {
-            return checkbox.checked;
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', updateButtonVisibility);
         });
-        deleteButton.style.display = atLeastOneChecked ? 'inline-block' : 'none';
-    }
+
+        function updateButtonVisibility() {
+            var selectedCustomerIds = Array.from(checkboxes)
+                .filter(function(checkbox) {
+                    return checkbox.checked;
+                })
+                .map(function(checkbox) {
+                    return checkbox.value;
+                });
+
+            // Update Add Customer button visibility
+            addCustomerBtn.style.display = selectedCustomerIds.length > 0 ? 'none' : 'inline-block';
+
+            // Update Edit Customer button visibility
+            editCustomerLink.style.display = selectedCustomerIds.length === 1 ? 'inline-block' : 'none';
+            
+            // Update Delete Customer button visibility
+            deleteCustomerLink.style.display = selectedCustomerIds.length > 0 ? 'inline-block' : 'none';
+
+            // Update the href attribute for the Edit button
+            if (selectedCustomerIds.length === 1) {
+                var editCustomerUrl = '{% url "edit_customer" 0 %}'.replace('0', selectedCustomerIds[0]);
+                editCustomerLink.setAttribute('href', editCustomerUrl);
+            } else {
+                editCustomerLink.removeAttribute('href');
+            }
+
+            // Update the href attribute for the Delete button
+            if (selectedCustomerIds.length > 0) {
+                var deleteCustomerUrl = '{% url "delete_customer" 0 %}'.replace('0', selectedCustomerIds.join(','));
+                deleteCustomerLink.setAttribute('href', deleteCustomerUrl);
+            } else {
+                deleteCustomerLink.removeAttribute('href');
+            }
+
+            // Update the hidden input with selected customer IDs
+            document.getElementById('selectedCustomerIds').value = selectedCustomerIds.join(',');
+        }
+    });
 </script>
+
 
 </body>
 </html>

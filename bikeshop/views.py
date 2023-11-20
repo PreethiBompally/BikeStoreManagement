@@ -65,11 +65,14 @@ def dashboard(request):
 def customers(request):
     custs = Customers.objects.all()
     context = {'customers': custs}
+    
     if request.method == 'POST':
         search_str = request.POST.get('search')
         if(search_str !=''):
             custs = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
             context = {'customers': custs}
+        else:
+            custs = Customers.objects.all()
         return render(request, 'customers.html', context)
     return render(request, 'customers.html', context)
 
@@ -87,15 +90,15 @@ def products(request):
     if request.method == 'POST':
         search_str = request.POST.get('search')
         filter_value = request.POST.get('filter')
-        bikes = None
+        print("here"+search_str+"here")
         if(filter_value != '' and search_str != ''):
             if(filter_value == 'brand'):
-                bikes = Products.objects.filter(BRAND_NAME__icontains=search_str)
+                all_products = Products.objects.filter(BRAND_NAME__icontains=search_str)
             if(filter_value == 'category'):
-                bikes = Products.objects.filter(CATEGORY_NAME__icontains=search_str)
+                all_products = Products.objects.filter(CATEGORY_NAME__icontains=search_str)
             if(filter_value == 'year'):
-                bikes = Products.objects.filter(MODEL_YEAR__icontains=search_str)
-        context= {'products': bikes}
+                all_products = Products.objects.filter(MODEL_YEAR__icontains=search_str)
+        context= {'products': all_products}
         return render(request, 'products.html', context)
     else:
         return render(request, 'products.html', context)
@@ -145,6 +148,10 @@ def orders(request):
                 customer = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str)).values('CUSTOMER_ID')
                 if customer:
                     all_orders = all_orders.filter(CUSTOMER_id__in=customer)
+            elif filter_value == 'PRODUCT_NAME':
+                product = Products.objects.filter(PRODUCT_NAME__icontains=search_str).values('PRODUCT_ID')
+                if product:
+                    all_orders = all_orders.filter(PRODUCT_id__in=product)
     page = request.GET.get('page')
     items_per_page = request.GET.get('items_per_page',10) # Default to 10 items per page
     paginator = Paginator(all_orders, items_per_page)
@@ -164,17 +171,29 @@ def contact(request):
     return render(request, 'contact.html')
 
 def add_product(request):
+    print(request.POST['product_id'] if 'product_id' in request.POST else "")
+    
     distinct_brands = Products.objects.values_list('BRAND_NAME', flat=True).distinct()
     distinct_categories = Products.objects.values_list('CATEGORY_NAME', flat=True).distinct()
 
     if request.method == 'POST':
-        product = Products()
-        product.PRODUCT_NAME = request.POST['product_name']
-        product.BRAND_NAME = request.POST['brand']
-        product.CATEGORY_NAME = request.POST['category']
-        product.MODEL_YEAR = request.POST['model_year']
-        product.LIST_PRICE = request.POST['price']
-        product.IMAGE_URL = request.POST['image_url']
+        if 'product_id' in request.POST and request.POST['product_id'] != '':
+            product_id = request.POST['product_id']
+            product = get_object_or_404(Products, PRODUCT_ID=product_id)
+            product.PRODUCT_NAME = request.POST['product_name']
+            product.BRAND_NAME = request.POST['brand']
+            product.CATEGORY_NAME = request.POST['category']
+            product.MODEL_YEAR = request.POST['model_year']
+            product.LIST_PRICE = request.POST['price']
+            product.IMAGE_URL = request.POST['image_url']
+        else:
+            product = Products()
+            product.PRODUCT_NAME = request.POST['product_name']
+            product.BRAND_NAME = request.POST['brand']
+            product.CATEGORY_NAME = request.POST['category']
+            product.MODEL_YEAR = request.POST['model_year']
+            product.LIST_PRICE = request.POST['price']
+            product.IMAGE_URL = request.POST['image_url']
         
         product.save()
         return HttpResponseRedirect(reverse('products'))    
@@ -191,8 +210,47 @@ def edit_product(request, product_id):
 def delete_product(request, product_id):
     product = get_object_or_404(Products, PRODUCT_ID=product_id)
 
-    if request.method == 'POST':
+    if request.method == 'GET':
         product.delete()
         return redirect('products')
 
-    return render(request, 'confirm_delete_product.html', {'product': product})
+def add_customer(request):
+    if request.method == 'POST':
+        if 'customer_id' in request.POST and request.POST['customer_id'] != '':
+            customer_id = request.POST['customer_id']
+            customer = get_object_or_404(Customers, CUSTOMER_ID=customer_id)
+            customer.FIRST_NAME = request.POST['first_name']
+            customer.LAST_NAME = request.POST['last_name']
+            customer.PHONE = request.POST['phone']
+            customer.EMAIL = request.POST['email']
+            customer.STREET = request.POST['street'] if request.POST['street'] != '' else None
+            customer.CITY = request.POST['city'] if request.POST['city'] != '' else None
+            customer.STATE = request.POST['state'] if request.POST['state'] != '' else None
+            customer.ZIPCODE = request.POST['zipcode'] if request.POST['zipcode'] != '' else None
+        else:
+            customer = Customers()
+            customer.FIRST_NAME = request.POST['first_name']
+            customer.LAST_NAME = request.POST['last_name']
+            customer.PHONE = request.POST['phone']
+            customer.EMAIL = request.POST['email']
+            customer.STREET = request.POST['street'] if request.POST['street'] != '' else None
+            customer.CITY = request.POST['city'] if request.POST['city'] != '' else None
+            customer.STATE = request.POST['state'] if request.POST['state'] != '' else None
+            customer.ZIPCODE = request.POST['zipcode'] if request.POST['zipcode'] != '' else None
+        customer.save()
+        return HttpResponseRedirect(reverse('customers'))    
+    return render(request, 'customer_details.html')
+
+def edit_customer(request, customer_id):
+    customer = get_object_or_404(Customers, CUSTOMER_ID=customer_id)
+    
+    context = {'customer':customer}
+    return render(request, 'customer_details.html', context)
+
+def delete_customer(request, customer_ids):
+    if request.method == 'GET':
+        customer_ids = customer_ids.split(',')
+        for id in customer_ids:
+            customer = get_object_or_404(Customers, CUSTOMER_ID=id)
+            customer.delete()
+        return redirect('customers')

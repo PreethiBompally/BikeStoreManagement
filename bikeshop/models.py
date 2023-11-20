@@ -23,6 +23,7 @@ class Stocks(models.Model):
 
 class Orders(models.Model):
     ORDER_ID = models.AutoField(primary_key=True)
+    PRODUCT = models.ForeignKey('Products', on_delete=models.CASCADE)
     CUSTOMER = models.ForeignKey('Customers', on_delete=models.CASCADE)
     ORDER_DATE = models.DateTimeField(null=True, blank=True)
     DELIVERY_DATE = models.DateTimeField(null=True, blank=True)
