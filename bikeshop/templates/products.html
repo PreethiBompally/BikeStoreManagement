@@ -167,6 +167,10 @@
             right: 30px;
         }
 
+        .imagecontainer{
+            background-color: 	#808080;
+        }
+
     </style>
 </head>
 <body>
@@ -206,7 +210,9 @@
         <div class="bike">
             <a href="{% url 'edit_product' product.PRODUCT_ID %}" class="edit-link">&#9998;</a>
             <a href="{% url 'delete_product' product.PRODUCT_ID %}" class="delete-link">&#x1F5D1;</a>
-            <img src="{{ product.IMAGE_URL }}" alt="{{ product.BRAND_NAME }} {{ product.PRODUCT_NAME }}">
+            <div class="imagecontainer">
+                <img src="{{ product.IMAGE_URL }}" alt="">
+            </div>
             <h2>{{ product.BRAND_NAME }} {{ product.PRODUCT_NAME }}</h2>
             <h3>Model Year {{ product.MODEL_YEAR }}</h3>
             <h3>Retail Price $ {{ product.LIST_PRICE }}</h3>
