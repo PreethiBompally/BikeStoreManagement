@@ -208,9 +208,10 @@ def edit_product(request, product_id):
     return render(request, 'product_details.html', context)
 
 def delete_product(request, product_id):
-    product = get_object_or_404(Products, PRODUCT_ID=product_id)
-
     if request.method == 'GET':
+        product = get_object_or_404(Products, PRODUCT_ID=product_id)
+        Stocks.objects.filter(PRODUCT_ID=product_id).delete()
+        Orders.objects.filter(PRODUCT_id = product_id).delete()
         product.delete()
         return redirect('products')
 
