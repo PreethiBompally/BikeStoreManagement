@@ -182,15 +182,15 @@
             {% for customer in customers %}
             <tr>
                 <td><input type="checkbox" name="customer_ids[]" value="{{ customer.CUSTOMER_ID }}"></td>
-                <td>{{ customer.CUSTOMER_ID }}</td>
-                <td>{{ customer.FIRST_NAME }}</td>
-                <td>{{ customer.LAST_NAME }}</td>
+                <td>{% if customer.CUSTOMER_ID != None %}{{ customer.CUSTOMER_ID }}{% else %}-{% endif %}</td>
+                <td>{% if customer.FIRST_NAME != None %}{{ customer.FIRST_NAME }}{% else %}-{% endif %}</td>
+                <td>{% if customer.LAST_NAME != None %}{{ customer.LAST_NAME }}{% else %}-{% endif %}</td>
                 <td>{% if customer.PHONE != None %}{{ customer.PHONE }}{% else %}-{% endif %}</td>
-                <td>{{ customer.EMAIL }}</td>
-                <td>{{ customer.STREET }}</td>
-                <td>{{ customer.CITY }}</td>
-                <td>{{ customer.STATE }}</td>
-                <td>{{ customer.ZIPCODE }}</td>
+                <td>{% if customer.EMAIL != None %}{{ customer.EMAIL }}{% else %}-{% endif %}</td>
+                <td>{% if customer.STREET != None %}{{ customer.STREET }}{% else %}-{% endif %}</td>
+                <td>{% if customer.CITY != None %}{{ customer.CITY }}{% else %}-{% endif %}</td>
+                <td>{% if customer.STATE != None %}{{ customer.STATE }}{% else %}-{% endif %}</td>
+                <td>{% if customer.ZIPCODE != None %}{{ customer.ZIPCODE }}{% else %}-{% endif %}</td>
             </tr>
             {% endfor %}
         </tbody>

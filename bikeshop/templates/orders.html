@@ -165,13 +165,13 @@
     <tbody>
         {% for order in orders %}
         <tr>
-            <td>{{ order.ORDER_ID }}</td>
+            <td>{% if order.ORDER_ID != None %}{{ order.ORDER_ID }}{% else %}-{% endif %}</td>
             <td>{{ order.CUSTOMER.FIRST_NAME}} {{ order.CUSTOMER.LAST_NAME}}</td>
-            <td>{{ order.PRODUCT.PRODUCT_NAME}}</td>
-            <td>{{ order.ORDER_DATE }}</td>
-            <td>{{ order.DELIVERY_DATE }}</td>
-            <td>{{ order.SHIPPED_DATE }}</td>
-            <td>{{ order.STORE.STORE_NAME }}</td>
+            <td>{% if order.PRODUCT.PRODUCT_NAME != None %}{{ order.PRODUCT.PRODUCT_NAME }}{% else %}-{% endif %}</td>
+            <td>{% if order.ORDER_DATE != None %}{{ order.ORDER_DATE }}{% else %}-{% endif %}</td>
+            <td>{% if order.DELIVERY_DATE != None %}{{ order.DELIVERY_DATE }}{% else %}-{% endif %}</td>
+            <td>{% if order.SHIPPED_DATE != None %}{{ order.SHIPPED_DATE }}{% else %}-{% endif %}</td>
+            <td>{% if order.STORE.STORE_NAME != None %}{{ order.STORE.STORE_NAME }}{% else %}-{% endif %}</td>
         </tr>
         {% endfor %}
     </tbody>

@@ -161,9 +161,9 @@
     <tbody>
         {% for stock in stocks %}
         <tr>
-            <td>{{ stock.STORE_ID }}</td>
-            <td>{{ stock.PRODUCT_ID }}</td>
-            <td>{{ stock.QUANTITY }}</td>
+            <td>{% if stock.STORE_ID != None %}{{ stock.STORE_ID }}{% else %}-{% endif %}</td>
+            <td>{% if stock.PRODUCT_ID != None %}{{ stock.PRODUCT_ID }}{% else %}-{% endif %}</td>
+            <td>{% if stock.QUANTITY != None %}{{ stock.QUANTITY }}{% else %}-{% endif %}</td>
         </tr>
         {% endfor %}
     </tbody>
