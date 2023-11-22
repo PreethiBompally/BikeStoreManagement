@@ -171,6 +171,23 @@
             background-color: 	#808080;
         }
 
+        .login-button {
+            position: fixed;
+            top: 10px; /* Adjust to your desired distance from the top */
+            right: 10px; /* Adjust to your desired distance from the left */
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .login-button:hover {
+            background-color: #3e3f3f;
+        }
+
+
     </style>
     <script>
         function confirmDelete() {
@@ -190,6 +207,9 @@
                 <li><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
         </nav>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout_view' %}" class="login-button">Logout</a>
+        {% endif %}
     </header>
 
     <h1> PRODUCTS</h1>
