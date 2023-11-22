@@ -29,9 +29,13 @@
             width: 100%;
             text-align: center;
             padding: 10px 0;
-            background-color: #333; /* Adjust the background color and transparency as needed */
-            color: #fff;
-            z-index: 100;
+            background-color: #333; /* You can set the background color as desired */
+            color: #fff; /* Text color (adjust as needed) */
+            z-index: 100; /* Set a z-index value to ensure it's above other content */
+        }
+
+        #fixed-header h1 {
+            margin: 0;
         }
 
         header a {
@@ -140,6 +144,17 @@
 </head>
 
 <body>
+    <header id="fixed-header">
+        <h1>Athens Bike Store</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Home</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="reg-container">
             <div class="form1">
                 <h1 class="title">Add Product</h1>
