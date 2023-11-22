@@ -36,7 +36,7 @@ class Customers(models.Model):
     CUSTOMER_ID = models.AutoField(primary_key=True)
     FIRST_NAME = models.CharField(null = False, max_length=50)
     LAST_NAME = models.CharField(null = False, max_length=50)
-    PHONE = models.TextField(null = True, blank=True)
+    PHONE = models.CharField(max_length=14, null=True, blank=True)
     EMAIL = models.CharField(max_length=50, null = True, blank=True)
     STREET = models.CharField(max_length=50, null = True, blank=True)
     CITY = models.CharField(max_length=50, null = True, blank=True)

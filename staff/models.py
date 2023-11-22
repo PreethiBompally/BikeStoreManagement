@@ -7,7 +7,7 @@ from django.utils.translation import gettext as _
 class Stores(models.Model):
     STORE_ID = models.AutoField(primary_key=True)
     STORE_NAME = models.CharField(max_length=50, null=True, blank=True)
-    PHONE = models.BigIntegerField(null=True, blank=True)
+    PHONE = models.CharField(max_length=14, null=True, blank=True)
     EMAIL = models.CharField(max_length=50, null=True, blank=True)
     STREET = models.CharField(max_length=50, null=True, blank=True)
     CITY = models.CharField(max_length=50, null=True, blank=True)

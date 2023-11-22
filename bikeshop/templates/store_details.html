@@ -150,7 +150,15 @@
                         <input type="hidden" id="store_id" name="store_id" value="{% if store %}{{ store.STORE_ID }}{% endif %}">
                         <div class="input-field">
                             <label for="first_name">Store name* </label> 
-                            <input type="text" id="store_name" name="store_name" required style="max-width: 100%;" value="{% if store %}{{ store.FIRST_NAME }}{% endif %}">
+                            <input type="text" id="store_name" name="store_name" required style="max-width: 100%;" value="{% if store %}{{ store.STORE_NAME }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="phone">Phone </label> 
+                            <input type="phone" id="phone" name="phone" style="max-width: 100%;" value="{% if store %}{{ store.PHONE }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="email">Email* </label> 
+                            <input type="email" id="email" name="email" required style="max-width: 100%;" value="{% if store %}{{ store.EMAIL }}{% endif %}">
                         </div>
                         <div class="input-field">
                             <label for="street">Street </label> 
@@ -167,18 +175,6 @@
                         <div class="input-field">
                             <label for="zipcode">Zipcode </label> 
                             <input type="number" id="zipcode" name="zipcode" style="max-width: 100%;" value="{% if store %}{{ store.ZIPCODE }}{% endif %}">
-                        </div>
-                        <div class="input-field">
-                            <label for="phone">Phone </label> 
-                            <input type="phone" id="phone" name="phone" style="max-width: 100%;" value="{% if store %}{{ store.PHONE }}{% endif %}">
-                        </div>
-                        <div class="input-field">
-                            <label for="email">Email* </label> 
-                            <input type="email" id="email" name="email" required style="max-width: 100%;" value="{% if store %}{{ store.EMAIL }}{% endif %}">
-                        </div>
-                        <div class="input-field">
-                            <label for="image_url">Image </label>
-                            <input type="text" id="image_url" required style="max-width: 100%;" name="image_url" value="{% if store %}{{ store.IMAGE_URL }}{% endif %}">
                         </div>
                         
                         <button type="submit">Save</button>

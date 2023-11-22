@@ -153,6 +153,8 @@
         </nav>
         {% if user.is_authenticated %}
             <a href="{% url 'logout_view' %}" class="login-button">Logout</a>
+        {% else %}
+            <a href="{% url 'login_view' %}" class="login-button">Login</a>
         {% endif %}
     </header>
 
@@ -168,7 +170,7 @@
     <input type="text" name="search" placeholder="Enter search term">
     <button type="submit">Search</button>
 </form>
-
+{% if user.is_authenticated %}
 <table>
     <thead>
         <tr>
@@ -212,5 +214,8 @@
         <label for="items_per_page_bottom">Per page:</label>
     </form>
 </div>
+{% else %}
+    <h1>You need to be logged in to view Stocks</h1>
+{% endif %}
 </body>
 </html>

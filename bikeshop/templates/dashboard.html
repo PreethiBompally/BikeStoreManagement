@@ -151,7 +151,7 @@
             </ul>
         </nav>
         {% if user.is_authenticated %}
-            <p style="margin: 0 20px 0 0;">Hi, {{ user.user_name }}</p>
+            <p style="margin: 0 20px 0 0;">Hi, {{ user }}</p>
             <a href="{% url 'logout_view' %}" class="login-button">Logout</a>
         {% else %}
             <a href="{% url 'login_view' %}" class="login-button">Login</a>

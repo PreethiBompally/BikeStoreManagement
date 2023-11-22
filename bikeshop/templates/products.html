@@ -168,8 +168,8 @@
 
         .login-button {
             position: fixed;
-            top: 10px; /* Adjust to your desired distance from the top */
-            right: 10px; /* Adjust to your desired distance from the left */
+            top: 10px;
+            right: 10px;
             background-color: #333;
             color: #fff;
             text-decoration: none;
@@ -226,7 +226,9 @@
         <div class="search-form">
             <form method="post" action="{% url 'products' %}">
                 {% csrf_token %}
-                <a href="{% url 'add_product' %}" class="add-btn">Add Product</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'add_product' %}" class="add-btn">Add Product</a>
+                {% endif %}
                 <select id="filter" name="filter">
                     <option value="">Search by</option>
                     <option value="brand">Brand</option>
@@ -240,9 +242,11 @@
 
         {% for product in products %}
         <div class="bike">
-            <a href="{% url 'edit_product' product.PRODUCT_ID %}" class="edit-link">&#9998;</a>
-            <a href="{% url 'delete_product' product.PRODUCT_ID %}" class="delete-link" onclick="return confirmDelete();">&#x1F5D1;</a>
-            <div class="imagecontainer">
+            {% if user.is_authenticated %}
+                <a href="{% url 'edit_product' product.PRODUCT_ID %}" class="edit-link">&#9998;</a>
+                <a href="{% url 'delete_product' product.PRODUCT_ID %}" class="delete-link" onclick="return confirmDelete();">&#x1F5D1;</a>
+            {% endif %}
+                <div class="imagecontainer">
                 <img src="{{ product.IMAGE_URL }}" alt="">
             </div>
             <h2>{{ product.BRAND_NAME }} {{ product.PRODUCT_NAME }}</h2>

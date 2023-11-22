@@ -81,10 +81,8 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'user_info': user_info})
 
 def staff(request):
-    # stores = Stores.objects.values_list('STORE_NAME', flat=True).distinct()
     all_staff = Staff.objects.all().order_by('STAFF_ID')
     if request.method == 'POST':
-        print("here")
         search_str = request.POST.get('search')
         all_staff = all_staff.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
     return render(request, 'staff.html', {'staff': all_staff})
@@ -99,12 +97,60 @@ def edit_staff(request,staff_id):
 def delete_staff(request, staff_id):
     if request.method == 'GET':
         staff = get_object_or_404(Staff, STAFF_ID=staff_id)
-        staff.delete()
-        return redirect('staff')
+        if(staff.USER_NAME == request.user):
+            staff.delete()
+            logout(request)
+            return HttpResponseRedirect('/')
+        else:
+            staff.delete()
+            return redirect('staff')
 
 def stores(request):
     all_stores = Stores.objects.all().order_by('STORE_ID')
+    if request.method == 'POST':
+        search_str = request.POST.get('search')
+        all_stores = all_stores.filter(Q(STORE_NAME__icontains=search_str) | Q(CITY__icontains=search_str))
     return render(request, 'stores.html', {'stores': all_stores})
+
+def add_store(request):
+    if request.method == 'POST':
+        if 'store_id' in request.POST and request.POST['store_id'] != '':
+            store_id = request.POST['store_id']
+            store = get_object_or_404(Stores, STORE_ID=store_id)
+            store.STORE_NAME = request.POST['store_name']
+            store.PHONE = request.POST['phone']
+            store.EMAIL = request.POST['email']
+            store.STREET = request.POST['street']
+            store.CITY = request.POST['city']
+            store.STATE = request.POST['state']
+            store.ZIPCODE = request.POST['zipcode']
+        else:
+            store = Stores()
+            store.STORE_NAME = request.POST['store_name']
+            store.PHONE = request.POST['phone']
+            store.EMAIL = request.POST['email']
+            store.STREET = request.POST['street']
+            store.CITY = request.POST['city']
+            store.STATE = request.POST['state']
+            store.ZIPCODE = request.POST['zipcode']
+        
+        store.save()
+        return HttpResponseRedirect(reverse('stores'))    
+    return render(request, 'store_details.html')
+
+def edit_store(request,store_id):
+    store = get_object_or_404(Stores, STORE_ID=store_id)
+    context = {'store':store}
+    return render(request, 'store_details.html', context)
+
+def delete_store(request, store_id):
+    if request.method == 'GET':
+        Staff.objects.filter(STORE_id = store_id).delete()
+        Stocks.objects.filter(STORE_ID = store_id).delete()
+        Orders.objects.filter(STORE_id = store_id).delete()
+        store = get_object_or_404(Stores, STORE_ID=store_id)
+        store.delete()
+        return redirect('stores')
 
 def stocks(request):
     all_stocks = Stocks.objects.all().order_by('STORE_ID')
@@ -247,7 +293,7 @@ def edit_product(request, product_id):
 def delete_product(request, product_id):
     if request.method == 'GET':
         product = get_object_or_404(Products, PRODUCT_ID=product_id)
-        Stocks.objects.filter(PRODUCT_ID=product_id).delete()
+        Stocks.objects.filter(PRODUCT_ID = product_id).delete()
         Orders.objects.filter(PRODUCT_id = product_id).delete()
         product.delete()
         return redirect('products')
