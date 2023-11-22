@@ -62,51 +62,25 @@ def dashboard(request):
         print(request.user.USER_NAME)
     return render(request, 'dashboard.html', {'user_info': user_info})
 
-def customers(request):
-    custs = Customers.objects.all() 
-    
-    if request.method == 'POST':
-        search_str = request.POST.get('search')
-        if(search_str !=''):
-            custs = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
-            
-    page = request.GET.get('page')
-    items_per_page = request.GET.get('items_per_page',10)
-    paginator = Paginator(custs, items_per_page)
-    try:
-        custs = paginator.page(page)
-    except PageNotAnInteger:
-        custs = paginator.page(1)
-    except EmptyPage:
-        custs = paginator.page(paginator.num_pages)
-    return render(request, 'customers.html', {'customers': custs})
-
 def staff(request):
     all_staff = Staff.objects.all()
     return render(request, 'staff.html', {'staff': all_staff})
 
+def edit_staff(request,staff_id):
+    staff = get_object_or_404(Staff, STAFF_ID=staff_id)
+    
+    context = {'staff':staff}
+    return render(request, 'staff_details.html', context)
+
+def delete_staff(request, staff_id):
+    if request.method == 'GET':
+        staff = get_object_or_404(Staff, STAFF_ID=staff_id)
+        staff.delete()
+        return redirect('staff')
+
 def stores(request):
     all_stores = Stores.objects.all()
     return render(request, 'stores.html', {'stores': all_stores})
-
-def products(request):
-    all_products = Products.objects.all()
-    context= {'products': all_products}
-    if request.method == 'POST':
-        search_str = request.POST.get('search')
-        filter_value = request.POST.get('filter')
-        print("here"+search_str+"here")
-        if(filter_value != '' and search_str != ''):
-            if(filter_value == 'brand'):
-                all_products = Products.objects.filter(BRAND_NAME__icontains=search_str)
-            if(filter_value == 'category'):
-                all_products = Products.objects.filter(CATEGORY_NAME__icontains=search_str)
-            if(filter_value == 'year'):
-                all_products = Products.objects.filter(MODEL_YEAR__icontains=search_str)
-        context= {'products': all_products}
-        return render(request, 'products.html', context)
-    else:
-        return render(request, 'products.html', context)
 
 def stocks(request):
     all_stocks = Stocks.objects.all()
@@ -185,6 +159,25 @@ def aboutus(request):
 def contact(request):
     return render(request, 'contact.html')
 
+def products(request):
+    all_products = Products.objects.all()
+    context= {'products': all_products}
+    if request.method == 'POST':
+        search_str = request.POST.get('search')
+        filter_value = request.POST.get('filter')
+        print("here"+search_str+"here")
+        if(filter_value != '' and search_str != ''):
+            if(filter_value == 'brand'):
+                all_products = Products.objects.filter(BRAND_NAME__icontains=search_str)
+            if(filter_value == 'category'):
+                all_products = Products.objects.filter(CATEGORY_NAME__icontains=search_str)
+            if(filter_value == 'year'):
+                all_products = Products.objects.filter(MODEL_YEAR__icontains=search_str)
+        context= {'products': all_products}
+        return render(request, 'products.html', context)
+    else:
+        return render(request, 'products.html', context)
+
 def add_product(request):
     print(request.POST['product_id'] if 'product_id' in request.POST else "")
     
@@ -230,6 +223,25 @@ def delete_product(request, product_id):
         product.delete()
         return redirect('products')
 
+def customers(request):
+    custs = Customers.objects.all() 
+    
+    if request.method == 'POST':
+        search_str = request.POST.get('search')
+        if(search_str !=''):
+            custs = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
+            
+    page = request.GET.get('page')
+    items_per_page = request.GET.get('items_per_page',10)
+    paginator = Paginator(custs, items_per_page)
+    try:
+        custs = paginator.page(page)
+    except PageNotAnInteger:
+        custs = paginator.page(1)
+    except EmptyPage:
+        custs = paginator.page(paginator.num_pages)
+    return render(request, 'customers.html', {'customers': custs})
+
 def add_customer(request):
     if request.method == 'POST':
         if 'customer_id' in request.POST and request.POST['customer_id'] != '':
@@ -237,7 +249,7 @@ def add_customer(request):
             customer = get_object_or_404(Customers, CUSTOMER_ID=customer_id)
             customer.FIRST_NAME = request.POST['first_name']
             customer.LAST_NAME = request.POST['last_name']
-            customer.PHONE = request.POST['phone']
+            customer.PHONE = request.POST['phone'] if request.POST['phone'] != '' else None
             customer.EMAIL = request.POST['email']
             customer.STREET = request.POST['street'] if request.POST['street'] != '' else None
             customer.CITY = request.POST['city'] if request.POST['city'] != '' else None
@@ -247,7 +259,7 @@ def add_customer(request):
             customer = Customers()
             customer.FIRST_NAME = request.POST['first_name']
             customer.LAST_NAME = request.POST['last_name']
-            customer.PHONE = request.POST['phone']
+            customer.PHONE = request.POST['phone'] if request.POST['phone'] != '' else None
             customer.EMAIL = request.POST['email']
             customer.STREET = request.POST['street'] if request.POST['street'] != '' else None
             customer.CITY = request.POST['city'] if request.POST['city'] != '' else None
@@ -270,3 +282,5 @@ def delete_customer(request, customer_ids):
             customer = get_object_or_404(Customers, CUSTOMER_ID=id)
             customer.delete()
         return redirect('customers')
+    
+
