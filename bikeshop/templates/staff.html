@@ -186,7 +186,7 @@
         .editstaff-link {
             position: absolute;
             top: 10px;
-            color: rgb(122, 5, 5);
+            color: rgb(231, 229, 229);
             text-decoration: none;
             font-size: 20px;
         }
@@ -199,9 +199,20 @@
             right: 30px;
         }
 
-        .imagecontainer1 {
-            background-color: #808080;
+        .staff1 .editstaff-link,
+        .staff1 .deletestaff-link {
+            display: none;
         }
+
+        .staff1:hover .editstaff-link,
+        .staff1:hover .deletestaff-link {
+            display: block;
+        }
+
+        /* .imagecontainer1 {
+            background-color: #808080;
+        } */
+        
         .login-button {
             position: fixed;
             top: 10px; /* Adjust to your desired distance from the top */
