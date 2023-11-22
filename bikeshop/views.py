@@ -32,45 +32,69 @@ def logout_view(request):
         return render(request, 'dashboard.html')
     
 def registration(request):
+    stores = Stores.objects.values('STORE_ID', 'STORE_NAME').distinct()
     if request.method == 'POST':
-        user_name = request.POST['user_name']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email = request.POST['email']
-        phone = request.POST['phone']
-        image_url = request.POST['image_url']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-        # Create a new Staff instance and save it to the database
-        staff=Staff.objects.create_user(
-        USER_NAME=user_name,
-        EMAIL=email,
-        password=password1,
-        FIRST_NAME=first_name,
-        LAST_NAME=last_name,
-        PHONE=phone if phone != '' else None,
-        IMAGE_URL=image_url)
+        if 'staff_id' in request.POST and request.POST['staff_id'] != '':
+            staff_id = request.POST['staff_id']
+            
+            staff = get_object_or_404(Staff, STAFF_ID=staff_id)
+            staff.USER_NAME = request.POST['user_name']
+            staff.FIRST_NAME = request.POST['first_name']
+            staff.LAST_NAME = request.POST['last_name']
+            staff.EMAIL = request.POST['email']
+            staff.PHONE = request.POST['phone']
+            staff.STORE = Stores.objects.get(pk=request.POST['store_id'])
+            staff.IMAGE_URL = request.POST['image_url']
+            # staff.PASSWORD = request.POST['password1']
+            staff.set_password(request.POST['password1'])
+            staff.save()
+            return HttpResponseRedirect(reverse('staff'))
+        else:
+            user_name = request.POST['user_name']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            phone = request.POST['phone']
+            image_url = request.POST['image_url']
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
+            store = Stores.objects.get(pk=request.POST['store_id'])
         
-        return HttpResponseRedirect(reverse('login_view'))
+            staff=Staff.objects.create_user(
+            USER_NAME=user_name,
+            EMAIL=email,
+            password=password1,
+            FIRST_NAME=first_name,
+            LAST_NAME=last_name,
+            PHONE=phone if phone != '' else None,
+            STORE = store,
+            IMAGE_URL=image_url)
+        
+            return HttpResponseRedirect(reverse('login_view'))
     else:
-        return render(request, 'registration.html')
+        return render(request, 'registration.html',{'stores':stores})
 
 def dashboard(request):
     user_info = None
     if request.user.is_authenticated:
         user_info = {'user_name': request.user.USER_NAME}
-        print(request.user.USER_NAME)
     return render(request, 'dashboard.html', {'user_info': user_info})
 
 def staff(request):
-    all_staff = Staff.objects.all()
+    # stores = Stores.objects.values_list('STORE_NAME', flat=True).distinct()
+    all_staff = Staff.objects.all().order_by('STAFF_ID')
+    if request.method == 'POST':
+        print("here")
+        search_str = request.POST.get('search')
+        all_staff = all_staff.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
     return render(request, 'staff.html', {'staff': all_staff})
 
 def edit_staff(request,staff_id):
+    stores = Stores.objects.values('STORE_ID', 'STORE_NAME').distinct()
     staff = get_object_or_404(Staff, STAFF_ID=staff_id)
     
-    context = {'staff':staff}
-    return render(request, 'staff_details.html', context)
+    context = {'staff':staff,'stores':stores}
+    return render(request, 'registration.html', context)
 
 def delete_staff(request, staff_id):
     if request.method == 'GET':
@@ -79,11 +103,11 @@ def delete_staff(request, staff_id):
         return redirect('staff')
 
 def stores(request):
-    all_stores = Stores.objects.all()
+    all_stores = Stores.objects.all().order_by('STORE_ID')
     return render(request, 'stores.html', {'stores': all_stores})
 
 def stocks(request):
-    all_stocks = Stocks.objects.all()
+    all_stocks = Stocks.objects.all().order_by('STORE_ID')
     
     if request.method == 'POST':
         search_str = request.POST.get('search')
@@ -97,6 +121,10 @@ def stocks(request):
                 product = Products.objects.filter(PRODUCT_NAME__icontains=search_str).values('PRODUCT_ID')
                 if product:
                     all_stocks = all_stocks.filter(PRODUCT_ID=product[0]['PRODUCT_ID'])
+        elif filter_value == '' and search_str != '':
+            store = Stores.objects.filter(STORE_NAME__icontains=search_str).values('STORE_ID')
+            if store:
+                all_stocks = all_stocks.filter(STORE_ID=store[0]['STORE_ID'])
 
     store_ids = set(stock.STORE_ID for stock in all_stocks)
     product_ids = set(stock.PRODUCT_ID for stock in all_stocks)
@@ -141,6 +169,8 @@ def orders(request):
                 product = Products.objects.filter(PRODUCT_NAME__icontains=search_str).values('PRODUCT_ID')
                 if product:
                     all_orders = all_orders.filter(PRODUCT_id__in=product)
+        elif filter_value == '' and search_str != '':
+            all_orders = all_orders.filter(ORDER_ID=search_str)
     page = request.GET.get('page')
     items_per_page = request.GET.get('items_per_page',10)
     paginator = Paginator(all_orders, items_per_page)
@@ -160,12 +190,11 @@ def contact(request):
     return render(request, 'contact.html')
 
 def products(request):
-    all_products = Products.objects.all()
+    all_products = Products.objects.all().order_by('PRODUCT_ID')
     context= {'products': all_products}
     if request.method == 'POST':
         search_str = request.POST.get('search')
         filter_value = request.POST.get('filter')
-        print("here"+search_str+"here")
         if(filter_value != '' and search_str != ''):
             if(filter_value == 'brand'):
                 all_products = Products.objects.filter(BRAND_NAME__icontains=search_str)
@@ -173,14 +202,14 @@ def products(request):
                 all_products = Products.objects.filter(CATEGORY_NAME__icontains=search_str)
             if(filter_value == 'year'):
                 all_products = Products.objects.filter(MODEL_YEAR__icontains=search_str)
+        elif filter_value == '' and search_str != '':
+                all_products = Products.objects.filter(PRODUCT_NAME__icontains=search_str)
         context= {'products': all_products}
         return render(request, 'products.html', context)
     else:
         return render(request, 'products.html', context)
 
 def add_product(request):
-    print(request.POST['product_id'] if 'product_id' in request.POST else "")
-    
     distinct_brands = Products.objects.values_list('BRAND_NAME', flat=True).distinct()
     distinct_categories = Products.objects.values_list('CATEGORY_NAME', flat=True).distinct()
 
@@ -224,7 +253,7 @@ def delete_product(request, product_id):
         return redirect('products')
 
 def customers(request):
-    custs = Customers.objects.all() 
+    custs = Customers.objects.all().order_by('CUSTOMER_ID')
     
     if request.method == 'POST':
         search_str = request.POST.get('search')

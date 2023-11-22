@@ -145,7 +145,7 @@
     <div class="reg-container">
             <div class="form1">
                 <h1 class="title">Add Staff</h1>
-                    <form method="POST" action="{% url 'add_staff' %}">
+                    <form method="POST" action="{% url 'registration' %}">
                         {% csrf_token %}
                         <input type="hidden" id="staff_id" name="staff_id" value="{% if staff %}{{ staff.STAFF_ID }}{% endif %}">
                         <div class="input-field">
@@ -165,17 +165,17 @@
                             <input type="email" id="email" name="email" required style="max-width: 100%;" value="{% if staff %}{{ staff.EMAIL }}{% endif %}">
                         </div>
                         <div class="input-field">
-                            <label for="store_ID">Store_ID* </label>
+                            <label for="store_ID">Store* </label>
                             <select id="store_ID" name="store_ID" required style="width: 100%;">
                                 <option value="" >Select</option>
-                                {% for brand in distinct_brands %}
-                                    <option value="{{ store_ID }}" {% if staff and store_ID == staff.STORE_ID %}selected{% endif %}>{{ store_ID }}</option>
+                                {% for s in stores %}
+                                    <option value="{{ s }}" {% if staff and s == staff.STORE.STORE_NAME %}selected{% endif %}>{{ s }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="input-field">
                             <label for="image_url">Image </label>
-                            <input type="text" id="image_url" required style="max-width: 100%;" name="image_url" value="{% if store %}{{ store.IMAGE_URL }}{% endif %}">
+                            <input type="text" id="image_url" required style="max-width: 100%;" name="image_url" value="{{ staff.IMAGE_URL }}">
                         </div>
                         <button type="submit">Save</button>
                     </form>

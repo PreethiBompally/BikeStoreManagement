@@ -170,45 +170,49 @@
                 <h1 class="title">REGISTRATION</h1>
                     <form method="POST" action="{% url 'registration' %}">
                         {% csrf_token %}
-                        <div class="input-columns">
-                            <div class="column">
-                                <div class="input-field">
-                                    <label for="user_name">User name* </label> 
-                                    <input type="text" id="user_name" name="user_name" required style="max-width: 100%;" value="{{ request.POST.user_name }}">
-                                </div>
-                                <div class="input-field">
-                                    <label for="first_name">First name* </label> 
-                                    <input type="text" id="first_name" name="first_name" required style="max-width: 100%;" value="{{ request.POST.first_name }}">
-                                </div>
-                                <div class="input-field">
-                                    <label for="email">Email* </label>
-                                    <input type="text" id="email" name="email" required style="max-width: 100%;" value="{{ request.POST.email }}">
-                                </div>
-                                <div class="input-field">
-                                    <label for="password1">Password* </label>
-                                    <input type="password" id="password1" name="password1" style="max-width: 100%;" required> 
-                                </div>
-                            </div>
-                            <div class="column">
-                                <div class="input-field">
-                                    <label for="image_url">Image </label>
-                                    <input type="text" id="image_url" style="max-width: 100%;" name="image_url">
-                                </div>
-                                <div class="input-field">
-                                    <label for="last_name">Last name* </label> 
-                                    <input type="text" id="last_name" name="last_name" required style="max-width: 100%;" value="{{ request.POST.last_name }}">
-                                </div>
-                                <div class="input-field">
-                                    <label for="phone">Phone </label>
-                                    <input type="number" id="phone" name="phone" style="max-width: 100%;" pattern="^\(\d{3}\) \d{3}-\d{4}$" value="{{ request.POST.phone }}">
-                                </div> 
-                                <div class="input-field">
-                                    <label for="password2">Confirm password* </label>
-                                    <input type="password" id="password2" name="password2" style="max-width: 100%;"  required>
-                                </div>
-                            </div>
+                        <input type="hidden" id="staff_id" name="staff_id" value="{% if staff %}{{ staff.STAFF_ID }}{% endif %}">
+                        <div class="input-field">
+                            <label for="user_name">Last name* </label> 
+                            <input type="text" id="user_name" name="user_name" required style="max-width: 100%;" value="{% if staff %}{{ staff.USER_NAME }}{% endif %}">
                         </div>
-                        <button type="submit">Register</button>
+                        <div class="input-field">
+                            <label for="first_name">First name* </label> 
+                            <input type="text" id="first_name" name="first_name" required style="max-width: 100%;" value="{% if staff %}{{ staff.FIRST_NAME }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="last_name">Last name* </label> 
+                            <input type="text" id="last_name" name="last_name" required style="max-width: 100%;" value="{% if staff %}{{ staff.LAST_NAME }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="phone">Phone </label> 
+                            <input type="phone" id="phone" name="phone" style="max-width: 100%;" value="{% if staff %}{{ staff.PHONE }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="email">Email* </label> 
+                            <input type="email" id="email" name="email" required style="max-width: 100%;" value="{% if staff %}{{ staff.EMAIL }}{% endif %}">
+                        </div>                      
+                        <div class="input-field">
+                            <label for="password1">Password* </label>
+                            <input type="password" id="password1" name="password1" style="max-width: 100%;" required value="{% if staff %}{{ staff.PASSWORD }}{% endif %}"> 
+                        </div>
+                        <div class="input-field">
+                            <label for="password2">Confirm password* </label>
+                            <input type="password" id="password2" name="password2" style="max-width: 100%;"  required value="{% if staff %}{{ staff.PASSWORD }}{% endif %}">
+                        </div>
+                        <div class="input-field">
+                            <label for="store_id">Store* </label>
+                            <select id="store_id" name="store_id" required style="width: 100%;">
+                                <option value="" >Select</option>
+                                {% for s in stores %}
+                                    <option value="{{ s.STORE_ID }}" {% if staff and s.STORE_NAME == staff.STORE.STORE_NAME %}selected{% endif %}>{{ s.STORE_NAME }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="image_url">Image </label>
+                            <input type="text" id="image_url" required style="max-width: 100%;" name="image_url" value="{{ staff.IMAGE_URL }}">
+                        </div>
+                        <button type="submit">Submit</button>
                     </form>
                     <br>
                     <div class= "rtn-home">
