@@ -11,26 +11,32 @@
     
     <form method="post" action="{% url 'add_stock' %}">
         {% csrf_token %}
-    
-        <label for="store">Store:</label>
-        <select name="store" id="store">
-            <option value="">Select</option>
-            {% for store in stores %}
-                <option value="{{ store.STORE_ID }}">{{ store.STORE_NAME }}</option>
-            {% endfor %}
-        </select>
-    
-        <label for="product">Product:</label>
-        <select name="product" id="product">
-            <option value="">Select</option>
-            {% for product in products %}
-                <option value="{{ product.PRODUCT_ID }}">{{ product.PRODUCT_NAME }}</option>
-            {% endfor %}
-        </select>
-    
-        <label for="quantity">Quantity:</label>
-        <input type="text" name="quantity" id="quantity" required>
-    
+        <input type="hidden" id="store_id" name="store_id" value="{% if stock %}{{ stock.STORE_ID }}{% endif %}">
+        <input type="hidden" id="product_id" name="product_id" value="{% if stock %}{{ stock.PRODUCT_ID }}{% endif %}">
+        <div class="input-field">
+            <label for="store">Store:</label>
+            <select id="store" name="store" required style="width: 100%;">
+                <option value="" >Select</option>
+                {% for store in stores %}
+                    <option value="{{ store.STORE_ID }}"  {% if stock and store.STORE_ID == stock.STORE_ID %}selected{% endif %}>{{ store.STORE_NAME }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <div class="input-field">
+            <label for="product">Product:</label>
+            <select id="product" name="product" required style="width: 100%;">
+                <option value="" >Select</option>
+                {% for product in products %}
+                    <option value="{{ product.PRODUCT_ID }}"  {% if product and product.PRODUCT_ID == stock.PRODUCT_ID %}selected{% endif %}>{{ product.PRODUCT_NAME }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="quantity">Quantity:</label>
+            <input type="text" name="quantity" id="quantity" required>
+        </div>
         <button type="submit">Submit</button>
     </form>
 </body>
