@@ -115,28 +115,72 @@
             background-color: #3e3f3f;
         }
 
+        .add-btn,
+        .delete-btn,
+        .edit-btn {
+            background-color: #606060;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .delete-btn,.edit-btn {
+            background-color: #606060;
+            display: none;
+        }
+
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var pageInput = document.getElementById('page-input');
-            pageInput.addEventListener('keydown', handleEnter);
-        });
-        function handleEnter(event) {
-            if (event.key === 'Enter') {
-                var pageInput = document.getElementById('page-input');
-                var selectedPage = pageInput.value;
-        
-                var itemsPerPageSelect = document.getElementById('items_per_page');
-                var selectedItemsPerPage = itemsPerPageSelect ? itemsPerPageSelect : 10;
-        
-                console.log('selectedPage:', selectedPage);
-                console.log('selectedItemsPerPage:', selectedItemsPerPage);
-        
-                window.location.href = "?page=" + selectedPage + "&items_per_page=" + selectedItemsPerPage;
-                event.preventDefault();
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            var checkboxes = document.getElementsByName('selectedStoreId'); // Updated to match the checkbox name
+            var addStockBtn = document.getElementById('addStockBtn');
+            var editStockLink = document.getElementById('editStockLink');
+
+            var editStockBaseUrl = '{% url "edit_stock" 0 0 %}';
+
+            selectAllCheckbox.addEventListener('change', function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+                updateButtonVisibility();
+            });
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', updateButtonVisibility);
+            });
+
+            function updateButtonVisibility() {
+                var selectedStockIds = Array.from(checkboxes)
+                    .filter(function (checkbox) {
+                        return checkbox.checked;
+                    })
+                    .map(function (checkbox) {
+                        return checkbox.value;
+                    });
+
+                document.getElementById('selectedStockIds').value = selectedStockIds.join(',');
+
+                selectAllCheckbox.checked = checkboxes.length > 0 && checkboxes.length === selectedStockIds.length;
+
+                addStockBtn.style.display = selectedStockIds.length > 0 ? 'none' : 'inline-block';
+
+                editStockLink.style.display = selectedStockIds.length === 1 ? 'inline-block' : 'none';
+
+                if (selectedStockIds.length === 1) {
+                    // Extract Store ID and Product ID from the selectedStoreId value
+                    var ids = selectedStockIds[0].split(' ');
+                    var editStockUrl = editStockBaseUrl.replace('0', ids[0]).replace('0', ids[1]);
+                    editStockLink.setAttribute('href', editStockUrl);
+                } else {
+                    editStockLink.removeAttribute('href');
+                }
             }
-        }
+        });
     </script>
 
 </head>
@@ -170,25 +214,39 @@
     <input type="text" name="search" placeholder="Enter search term">
     <button type="submit">Search</button>
 </form>
-{% if user.is_authenticated %}
-<table>
-    <thead>
-        <tr>
-            <th>Store ID</th>
-            <th>Product ID</th>
-            <th>Quantity</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for stock in stocks %}
-        <tr>
-            <td>{% if stock.STORE_ID != None %}{{ stock.STORE_ID }}{% else %}-{% endif %}</td>
-            <td>{% if stock.PRODUCT_ID != None %}{{ stock.PRODUCT_ID }}{% else %}-{% endif %}</td>
-            <td>{% if stock.QUANTITY != None %}{{ stock.QUANTITY }}{% else %}-{% endif %}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+
+<div class="button-container">
+    <a href="{% url 'add_stock' %}" class="add-btn" type="button" id="addStockBtn">Add Stock</a>
+    <a href="#" class="edit-btn" type="button" id="editStockLink">Edit Stock</a>
+</div>
+
+<form id="stockForm">
+    {% csrf_token %}
+    <input type="hidden" name="stock_ids[]" value="">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" class="select-all-checkbox" id="selectAllCheckbox">
+                    <label for="selectAllCheckbox">Select All</label>
+                </th>
+                <th>Store ID</th>
+                <th>Product ID</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td><input type="checkbox" name="selectedStoreId" value="{{ stock.STORE_ID }} {{ stock.PRODUCT_ID }}"></td>
+                    <td>{% if stock.STORE_ID != None %}{{ stock.STORE_ID }}{% else %}-{% endif %}</td>
+                    <td>{% if stock.PRODUCT_ID != None %}{{ stock.PRODUCT_ID }}{% else %}-{% endif %}</td>
+                    <td>{% if stock.QUANTITY != None %}{{ stock.QUANTITY }}{% else %}-{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
 <div class="pagination">
     <span class="step-links">
         {% if stocks.has_previous %}
@@ -214,8 +272,5 @@
         <label for="items_per_page_bottom">Per page:</label>
     </form>
 </div>
-{% else %}
-    <h1>You need to be logged in to view Stocks</h1>
-{% endif %}
 </body>
 </html>

@@ -1,6 +1,6 @@
 # bikeshopapp/views.py
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Customers, Products, Stocks, Orders
 from django.urls import reverse
@@ -194,6 +194,32 @@ def stocks(request):
     
     return render(request, 'stocks.html', {'stocks': all_stocks})
 
+def add_stock(request):
+    stores = Stores.objects.all()
+    products = Products.objects.all()
+    context = {'stores': stores, 'products': products}
+    if request.method == 'POST':
+        store_id = request.POST.get('store')
+        product_id = request.POST.get('product')
+        print(product_id)
+        quantity = request.POST.get('quantity')
+
+        Stocks.objects.create(STORE_ID=store_id, PRODUCT_ID=product_id, QUANTITY=quantity)
+        return HttpResponseRedirect(reverse('stocks'))
+    
+    return render(request, 'stock_details.html',context)
+
+def edit_stock(request, store_id, product_id):
+    stock = get_object_or_404(Stocks, STORE_ID=store_id, PRODUCT_ID=product_id)
+
+    if request.method == 'POST':
+        stock.QUANTITY = request.POST.get('quantity')
+        stock.save()
+        return HttpResponseRedirect(reverse('stocks'))
+
+    context = {'store_id': store_id, 'product_id': product_id, 'quantity': stock.QUANTITY}
+    return render(request, 'stock_details.html', context)
+    
 def orders(request):
     all_orders = Orders.objects.all().order_by('ORDER_ID')
     
@@ -243,13 +269,13 @@ def products(request):
         filter_value = request.POST.get('filter')
         if(filter_value != '' and search_str != ''):
             if(filter_value == 'brand'):
-                all_products = Products.objects.filter(BRAND_NAME__icontains=search_str)
+                all_products = all_products.filter(BRAND_NAME__icontains=search_str)
             if(filter_value == 'category'):
-                all_products = Products.objects.filter(CATEGORY_NAME__icontains=search_str)
+                all_products = all_products.filter(CATEGORY_NAME__icontains=search_str)
             if(filter_value == 'year'):
-                all_products = Products.objects.filter(MODEL_YEAR__icontains=search_str)
+                all_products = all_products.filter(MODEL_YEAR__icontains=search_str)
         elif filter_value == '' and search_str != '':
-                all_products = Products.objects.filter(PRODUCT_NAME__icontains=search_str)
+                all_products = all_products.filter(PRODUCT_NAME__icontains=search_str)
         context= {'products': all_products}
         return render(request, 'products.html', context)
     else:
@@ -304,7 +330,7 @@ def customers(request):
     if request.method == 'POST':
         search_str = request.POST.get('search')
         if(search_str !=''):
-            custs = Customers.objects.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
+            custs = custs.filter(Q(FIRST_NAME__icontains=search_str) | Q(LAST_NAME__icontains=search_str))
             
     page = request.GET.get('page')
     items_per_page = request.GET.get('items_per_page',10)

@@ -35,10 +35,12 @@ urlpatterns = [
     path('delete_product/<int:product_id>/', views.delete_product, name='delete_product'),
     path('add_customer/', views.add_customer, name='add_customer'),
     path('edit_customer/<int:customer_id>/', views.edit_customer, name='edit_customer'),
-    path('delete_customer/<int:customer_ids>/', views.delete_customer, name='delete_customer'),
+    path('delete_customer/<str:customer_ids>/', views.delete_customer, name='delete_customer'),
     path('edit_staff/<int:staff_id>/', views.edit_staff, name='edit_staff'),
     path('delete_staff/<int:staff_id>/', views.delete_staff, name='delete_staff'),
     path('add_store/', views.add_store, name='add_store'),
     path('edit_store/<int:store_id>/', views.edit_store, name='edit_store'),
     path('delete_store/<int:store_id>/', views.delete_store, name='delete_store'),
+    path('add_stock/', views.add_stock, name='add_stock'),
+    path('edit_stock/<int:store_id>/<int:product_id>/', views.edit_stock, name='edit_stock'),
 ]

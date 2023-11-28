@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Details</title>
+</head>
+<body>
+    <h2>{% if store_id and product_id %}Edit{% else %}Add{% endif %} Stock</h2>
+    
+    <form method="post" action="{% url 'add_stock' %}">
+        {% csrf_token %}
+    
+        <label for="store">Store:</label>
+        <select name="store" id="store">
+            <option value="">Select</option>
+            {% for store in stores %}
+                <option value="{{ store.STORE_ID }}">{{ store.STORE_NAME }}</option>
+            {% endfor %}
+        </select>
+    
+        <label for="product">Product:</label>
+        <select name="product" id="product">
+            <option value="">Select</option>
+            {% for product in products %}
+                <option value="{{ product.PRODUCT_ID }}">{{ product.PRODUCT_NAME }}</option>
+            {% endfor %}
+        </select>
+    
+        <label for="quantity">Quantity:</label>
+        <input type="text" name="quantity" id="quantity" required>
+    
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

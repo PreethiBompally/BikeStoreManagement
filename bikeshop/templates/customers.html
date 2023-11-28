@@ -159,6 +159,8 @@
         </nav>
         {% if user.is_authenticated %}
             <a href="{% url 'logout_view' %}" class="login-button">Logout</a>
+        {% else %}
+            <a href="{% url 'login_view' %}" class="login-button">Login</a>
         {% endif %}
     </header>
 
@@ -171,10 +173,12 @@
 </form>
 
 <div class="button-container">
-    <a href="{% url 'add_customer' %}" class="add-btn" type="button" id="addCustomerBtn">Add Customer</a>
-    <a href="#" class="edit-btn" type="button" id="editCustomerLink">Edit Customer</a>
-    <a href="#" class="delete-btn" type="button" id="deleteCustomerLink">Delete Selected</a>
-    </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_customer' %}" class="add-btn" type="button" id="addCustomerBtn">Add Customer</a>
+        <a href="#" class="edit-btn" type="button" id="editCustomerLink">Edit Customer</a>
+        <a href="#" class="delete-btn" type="button" id="deleteCustomerLink">Delete Selected</a>
+    {% endif %}
+</div>
 
 <form id="customerForm">
     {% csrf_token %}
@@ -244,33 +248,22 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+        var checkboxes = document.getElementsByName('customer_ids[]');
         var addCustomerBtn = document.getElementById('addCustomerBtn');
         var editCustomerLink = document.getElementById('editCustomerLink');
         var deleteCustomerLink = document.getElementById('deleteCustomerLink');
-        var checkboxes = document.getElementsByName('customer_ids[]');
 
-        var pageInput = document.getElementById('page-input');
-        pageInput.addEventListener('keydown', handleEnter);
+        selectAllCheckbox.addEventListener('change', function() {
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateButtonVisibility();
+        });
 
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', updateButtonVisibility);
         });
-
-        function handleEnter(event) {
-            if (event.key === 'Enter') {
-                var pageInput = document.getElementById('page-input');
-                var selectedPage = pageInput.value;
-        
-                var itemsPerPageSelect = document.getElementById('items_per_page');
-                var selectedItemsPerPage = itemsPerPageSelect ? itemsPerPageSelect : 10;
-        
-                console.log('selectedPage:', selectedPage);
-                console.log('selectedItemsPerPage:', selectedItemsPerPage);
-        
-                window.location.href = "?page=" + selectedPage + "&items_per_page=" + selectedItemsPerPage;
-                event.preventDefault();
-            }
-        }
 
         function updateButtonVisibility() {
             var selectedCustomerIds = Array.from(checkboxes)
@@ -281,16 +274,16 @@
                     return checkbox.value;
                 });
 
-            // Update Add Customer button visibility
+            document.getElementById('selectedCustomerIds').value = selectedCustomerIds.join(',');
+
+            selectAllCheckbox.checked = checkboxes.length > 0 && checkboxes.length === selectedCustomerIds.length;
+
             addCustomerBtn.style.display = selectedCustomerIds.length > 0 ? 'none' : 'inline-block';
 
-            // Update Edit Customer button visibility
             editCustomerLink.style.display = selectedCustomerIds.length === 1 ? 'inline-block' : 'none';
             
-            // Update Delete Customer button visibility
             deleteCustomerLink.style.display = selectedCustomerIds.length > 0 ? 'inline-block' : 'none';
 
-            // Update the href attribute for the Edit button
             if (selectedCustomerIds.length === 1) {
                 var editCustomerUrl = '{% url "edit_customer" 0 %}'.replace('0', selectedCustomerIds[0]);
                 editCustomerLink.setAttribute('href', editCustomerUrl);
@@ -298,19 +291,16 @@
                 editCustomerLink.removeAttribute('href');
             }
 
-            // Update the href attribute for the Delete button
             if (selectedCustomerIds.length > 0) {
                 var deleteCustomerUrl = '{% url "delete_customer" 0 %}'.replace('0', selectedCustomerIds.join(','));
                 deleteCustomerLink.setAttribute('href', deleteCustomerUrl);
             } else {
                 deleteCustomerLink.removeAttribute('href');
             }
-
-            // Update the hidden input with selected customer IDs
-            document.getElementById('selectedCustomerIds').value = selectedCustomerIds.join(',');
         }
     });
 </script>
+
 
 
 

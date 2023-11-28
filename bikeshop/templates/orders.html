@@ -152,6 +152,8 @@
         </nav>
         {% if user.is_authenticated %}
             <a href="{% url 'logout_view' %}" class="login-button">Logout</a>
+        {% else %}
+            <a href="{% url 'login_view' %}" class="login-button">Login</a>
         {% endif %}
     </header>
 
