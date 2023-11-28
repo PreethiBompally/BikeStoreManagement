@@ -144,7 +144,7 @@
 <body>
     <div class="reg-container">
             <div class="form1">
-                <h1 class="title">Add Store</h1>
+                <h1 class="title">Store Details</h1>
                     <form method="POST" action="{% url 'add_store' %}">
                         {% csrf_token %}
                         <input type="hidden" id="store_id" name="store_id" value="{% if store %}{{ store.STORE_ID }}{% endif %}">

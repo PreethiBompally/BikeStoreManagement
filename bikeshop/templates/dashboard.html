@@ -41,7 +41,7 @@
 
         .login-button {
             position: fixed;
-            top: 10px; /* Adjust to your desired distance from the top */
+            top: 50px; /* Adjust to your desired distance from the top */
             right: 10px; /* Adjust to your desired distance from the left */
             background-color: #333;
             color: #fff;
@@ -151,8 +151,9 @@
             </ul>
         </nav>
         {% if user.is_authenticated %}
-            <p style="margin: 0 20px 0 0;">Hi, {{ user }}</p>
+
             <a href="{% url 'logout_view' %}" class="login-button">Logout</a>
+            <p style="position: absolute;top: 20px;right: 20px;">Hi, {{ user }}</p>
         {% else %}
             <a href="{% url 'login_view' %}" class="login-button">Login</a>
         {% endif %}
