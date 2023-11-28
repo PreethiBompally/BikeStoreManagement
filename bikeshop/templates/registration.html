@@ -172,7 +172,7 @@
                         {% csrf_token %}
                         <input type="hidden" id="staff_id" name="staff_id" value="{% if staff %}{{ staff.STAFF_ID }}{% endif %}">
                         <div class="input-field">
-                            <label for="user_name">Last name* </label> 
+                            <label for="user_name">User name* </label> 
                             <input type="text" id="user_name" name="user_name" required style="max-width: 100%;" value="{% if staff %}{{ staff.USER_NAME }}{% endif %}">
                         </div>
                         <div class="input-field">
