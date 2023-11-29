@@ -258,8 +258,50 @@ def orders(request):
     return render(request, 'orders.html', {'orders': all_orders})
 
 def add_order(request):
-    x = 0
+    products = Products.objects.all()
+    customers = Customers.objects.all()
+    staff = get_object_or_404(Staff, USER_NAME=request.user)
+    if request.method == 'POST':
+        if 'order_id' in request.POST and request.POST['order_id'] != '':
+            order_id = request.POST['order_id']
+            order = get_object_or_404(Orders, ORDER_ID=order_id)
+            order.CUSTOMER = Customers.objects.get(pk = request.POST['customer'])
+            order.PRODUCT = Products.objects.get(pk = request.POST['product'])
+            order.ORDER_DATE = request.POST['order_date']
+            order.DELIVERY_DATE = request.POST['delivery_date']
+            order.SHIPPED_DATE = request.POST['shipped_date']
+        else:
+            order = Orders()
+            print(request.POST['customer'])
+            order.CUSTOMER = Customers.objects.get(pk = request.POST['customer'])
+            order.PRODUCT = Products.objects.get(pk = request.POST['product'])
+            order.ORDER_DATE = request.POST['order_date']
+            order.DELIVERY_DATE = None if request.POST['delivery_date'] == "" else request.POST['delivery_date']
+            order.SHIPPED_DATE = None if request.POST['shipped_date'] == "" else request.POST['shipped_date']
+            order.STAFF = staff
+            order.STORE = staff.STORE
+        print(order.ORDER_DATE, request.POST['order_date'])
+        order.save()
+        return HttpResponseRedirect(reverse('orders'))    
+
+    context = {'products':products,'customers':customers,'stores':stores}
+    return render(request, 'order_details.html',context)
     
+def edit_order(request,order_id):
+    products = Products.objects.all()
+    customers = Customers.objects.all()
+    order = get_object_or_404(Orders, ORDER_ID=order_id)
+    
+    context = {'order':order,'products':products,'customers':customers}
+    return render(request, 'order_details.html',context)
+
+def delete_order(request, order_ids):
+    if request.method == 'GET':
+        order_ids = order_ids.split(',')
+        for order_id in order_ids:
+            order = Orders.objects.filter(ORDER_ID = order_id)
+            order.delete()
+        return redirect('orders')
 
 def aboutus(request):
     return render(request, 'aboutus.html')

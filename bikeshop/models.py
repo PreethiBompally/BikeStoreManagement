@@ -34,6 +34,7 @@ class Orders(models.Model):
     class Meta:
         managed = False
         db_table = 'orders'
+        
 class Customers(models.Model):
     CUSTOMER_ID = models.AutoField(primary_key=True)
     FIRST_NAME = models.CharField(null = False, max_length=50)
