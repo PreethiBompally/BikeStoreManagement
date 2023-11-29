@@ -167,7 +167,11 @@
 
     <div class="reg-container">
             <div class="form1">
+                {% if staff %}
+                <h1 class="title">Staff details</h1>
+                {% else %}
                 <h1 class="title">REGISTRATION</h1>
+                {% endif %}
                     <form method="POST" action="{% url 'registration' %}">
                         {% csrf_token %}
                         <input type="hidden" id="staff_id" name="staff_id" value="{% if staff %}{{ staff.STAFF_ID }}{% endif %}">

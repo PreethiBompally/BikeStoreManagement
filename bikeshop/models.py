@@ -14,12 +14,13 @@ class Products(models.Model):
         db_table = 'products'
 
 class Stocks(models.Model):
-    STORE_ID = models.IntegerField(primary_key=True)
+    STOCK_ID = models.IntegerField(primary_key=True)
+    STORE_ID = models.IntegerField()
     PRODUCT_ID = models.IntegerField()
     QUANTITY = models.DecimalField(max_digits=20, decimal_places=5)
     class Meta:
         db_table = 'stocks'
-        unique_together = (('STORE_ID', 'PRODUCT_ID'),)
+        # unique_together = (('STORE_ID', 'PRODUCT_ID'),)
 
 class Orders(models.Model):
     ORDER_ID = models.AutoField(primary_key=True)
@@ -29,6 +30,7 @@ class Orders(models.Model):
     DELIVERY_DATE = models.DateTimeField(null=True, blank=True)
     SHIPPED_DATE = models.DateTimeField(null=True, blank=True)
     STORE = models.ForeignKey('staff.Stores', on_delete=models.CASCADE)
+    STAFF = models.ForeignKey('staff.Staff', on_delete=models.CASCADE)
     class Meta:
         managed = False
         db_table = 'orders'

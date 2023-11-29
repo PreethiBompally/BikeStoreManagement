@@ -92,7 +92,7 @@ def edit_staff(request,staff_id):
     staff = get_object_or_404(Staff, STAFF_ID=staff_id)
     
     context = {'staff':staff,'stores':stores}
-    return render(request, 'registration.html', context)
+    return render(request, 'Registration.html', context)
 
 def delete_staff(request, staff_id):
     if request.method == 'GET':
@@ -154,7 +154,6 @@ def delete_store(request, store_id):
 
 def stocks(request):
     all_stocks = Stocks.objects.all().order_by('STORE_ID')
-    
     if request.method == 'POST':
         search_str = request.POST.get('search')
         filter_value = request.POST.get('filter')
@@ -179,8 +178,8 @@ def stocks(request):
     product_names = {product.PRODUCT_ID: product.PRODUCT_NAME for product in Products.objects.filter(PRODUCT_ID__in=product_ids)}
 
     for stock in all_stocks:
-        stock.STORE_ID = store_names.get(stock.STORE_ID, '')
-        stock.PRODUCT_ID = product_names.get(stock.PRODUCT_ID, '')
+        stock.STORE_NAME = store_names.get(stock.STORE_ID, '')
+        stock.PRODUCT_NAME = product_names.get(stock.PRODUCT_ID, '')
 
     page = request.GET.get('page')
     items_per_page = request.GET.get('items_per_page',10)
@@ -198,28 +197,31 @@ def add_stock(request):
     stores = Stores.objects.all()
     products = Products.objects.all()
     context = {'stores': stores, 'products': products}
+    stock = None
     if request.method == 'POST':
-        store_id = request.POST.get('store')
-        product_id = request.POST.get('product')
-        print(product_id)
-        quantity = request.POST.get('quantity')
-
-        Stocks.objects.create(STORE_ID=store_id, PRODUCT_ID=product_id, QUANTITY=quantity)
-        return HttpResponseRedirect(reverse('stocks'))
-    
-    return render(request, 'stock_details.html',context)
-
-def edit_stock(request, store_id, product_id):
-    stock = get_object_or_404(Stocks, STORE_ID=store_id, PRODUCT_ID=product_id)
-
-    if request.method == 'POST':
-        stock.QUANTITY = request.POST.get('quantity')
+        if 'stock' in request.POST and request.POST['stock'] != '':
+            stock = get_object_or_404(Stocks, STOCK_ID=request.POST['stock'])
+            stock.STORE_ID = request.POST['store']
+            stock.PRODUCT_ID = request.POST['product']
+            stock.QUANTITY = request.POST['quantity']
+        else:
+            stock = Stocks()
+            stock.STORE_ID = request.POST['store']
+            stock.PRODUCT_ID = request.POST['product']
+            stock.QUANTITY = request.POST['quantity']
         stock.save()
         return HttpResponseRedirect(reverse('stocks'))
+    return render(request, 'stock_details.html',context)
 
-    context = {'store_id': store_id, 'product_id': product_id, 'quantity': stock.QUANTITY}
-    return render(request, 'stock_details.html', context)
+def edit_stock(request, stock_id):
+    stock = get_object_or_404(Stocks, STOCK_ID=stock_id)
     
+    stores = Stores.objects.all()
+    products = Products.objects.all()
+
+    context = {'stock':stock,'stores':stores,'products':products}
+    return render(request, 'stock_details.html', context)
+
 def orders(request):
     all_orders = Orders.objects.all().order_by('ORDER_ID')
     
@@ -254,6 +256,10 @@ def orders(request):
         all_orders = paginator.page(paginator.num_pages)
         
     return render(request, 'orders.html', {'orders': all_orders})
+
+def add_order(request):
+    x = 0
+    
 
 def aboutus(request):
     return render(request, 'aboutus.html')

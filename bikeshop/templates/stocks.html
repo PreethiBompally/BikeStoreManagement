@@ -61,11 +61,7 @@
             background-color: #ffffff; /* White */
         }
 
-        h2 {
-            font-size: 34px; /* Adjust the font size as needed */
-        }
-
-        h1,a {
+        h1, h2, a {
             font-family: Arial, sans-serif;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for contrast */
             margin: 10px; /* Adjust the margins as needed */
@@ -83,8 +79,6 @@
             top: 10px;
             right: 10px;
             z-index: 101; /* Ensure it's above other content */
-            display: flex;
-            align-items: center;
         }
 
         select, input {
@@ -127,61 +121,12 @@
             margin-right: 10px;
         }
 
-        .delete-btn,.edit-btn {
+        .delete-btn, .edit-btn {
             background-color: #606060;
             display: none;
         }
 
     </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var selectAllCheckbox = document.getElementById('selectAllCheckbox');
-            var checkboxes = document.getElementsByName('selectedStoreId'); // Updated to match the checkbox name
-            var addStockBtn = document.getElementById('addStockBtn');
-            var editStockLink = document.getElementById('editStockLink');
-
-            var editStockBaseUrl = '{% url "edit_stock" 0 0 %}';
-
-            selectAllCheckbox.addEventListener('change', function () {
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.checked = selectAllCheckbox.checked;
-                });
-                updateButtonVisibility();
-            });
-
-            checkboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', updateButtonVisibility);
-            });
-
-            function updateButtonVisibility() {
-                var selectedStockIds = Array.from(checkboxes)
-                    .filter(function (checkbox) {
-                        return checkbox.checked;
-                    })
-                    .map(function (checkbox) {
-                        return checkbox.value;
-                    });
-
-                document.getElementById('selectedStockIds').value = selectedStockIds.join(',');
-
-                selectAllCheckbox.checked = checkboxes.length > 0 && checkboxes.length === selectedStockIds.length;
-
-                addStockBtn.style.display = selectedStockIds.length > 0 ? 'none' : 'inline-block';
-
-                editStockLink.style.display = selectedStockIds.length === 1 ? 'inline-block' : 'none';
-
-                if (selectedStockIds.length === 1) {
-                    // Extract Store ID and Product ID from the selectedStoreId value
-                    var ids = selectedStockIds[0].split(' ');
-                    var editStockUrl = editStockBaseUrl.replace('0', ids[0]).replace('0', ids[1]);
-                    editStockLink.setAttribute('href', editStockUrl);
-                } else {
-                    editStockLink.removeAttribute('href');
-                }
-            }
-        });
-    </script>
 
 </head>
 <body>
@@ -202,7 +147,7 @@
         {% endif %}
     </header>
 
-<h1  font-size: 34px;>STOCKS</h1>
+<h1 font-size: 34px;>STOCKS</h1>
 
 <form class="search-form" method="post" action="{% url 'stocks' %}">
     {% csrf_token %}
@@ -216,13 +161,15 @@
 </form>
 
 <div class="button-container">
-    <a href="{% url 'add_stock' %}" class="add-btn" type="button" id="addStockBtn">Add Stock</a>
-    <a href="#" class="edit-btn" type="button" id="editStockLink">Edit Stock</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_stock' %}" class="add-btn" type="button" id="addStockBtn">Add Stock</a>
+        <a href="#" class="edit-btn" type="button" id="editStockLink">Edit Stock</a>
+    {% endif %}
 </div>
 
 <form id="stockForm">
     {% csrf_token %}
-    <input type="hidden" name="stock_ids[]" value="">
+    <input type="hidden" name="selected_stock_ids" id="selectedStockIds" value="">
     <table>
         <thead>
             <tr>
@@ -238,15 +185,17 @@
         <tbody>
             {% for stock in stocks %}
                 <tr>
-                    <td><input type="checkbox" name="selectedStoreId" value="{{ stock.STORE_ID }} {{ stock.PRODUCT_ID }}"></td>
-                    <td>{% if stock.STORE_ID != None %}{{ stock.STORE_ID }}{% else %}-{% endif %}</td>
-                    <td>{% if stock.PRODUCT_ID != None %}{{ stock.PRODUCT_ID }}{% else %}-{% endif %}</td>
+                    <td><input type="checkbox" name="stock_ids[]" value="{{ stock.STOCK_ID }}"></td>
+
+                    <td>{% if stock.STORE_ID != None %}{{ stock.STORE_NAME }}{% else %}-{% endif %}</td>
+                    <td>{% if stock.PRODUCT_ID != None %}{{ stock.PRODUCT_NAME }}{% else %}-{% endif %}</td>
                     <td>{% if stock.QUANTITY != None %}{{ stock.QUANTITY }}{% else %}-{% endif %}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </form>
+
 <div class="pagination">
     <span class="step-links">
         {% if stocks.has_previous %}
@@ -272,5 +221,51 @@
         <label for="items_per_page_bottom">Per page:</label>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+        var checkboxes = document.getElementsByName('stock_ids[]');
+        var addStockBtn = document.getElementById('addStockBtn');
+        var editStockLink = document.getElementById('editStockLink');
+    
+        selectAllCheckbox.addEventListener('change', function() {
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateButtonVisibility();
+        });
+    
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', updateButtonVisibility);
+        });
+    
+        function updateButtonVisibility() {
+            var selectedStockIds = Array.from(checkboxes)
+                .filter(function(checkbox) {
+                    return checkbox.checked;
+                })
+                .map(function(checkbox) {
+                    return checkbox.value;
+                });
+    
+                
+            document.getElementById('selectedStockIds').value = selectedStockIds.join(',');
+    
+            selectAllCheckbox.checked = checkboxes.length > 0 && checkboxes.length === selectedStockIds.length;
+    
+            addStockBtn.style.display = selectedStockIds.length > 0 ? 'none' : 'inline-block';
+    
+            editStockLink.style.display = selectedStockIds.length === 1 ? 'inline-block' : 'none';
+    
+            if (selectedStockIds.length === 1) {
+                var editStockUrl = '{% url "edit_stock" 0 %}'.replace('0', selectedStockIds);
+                editStockLink.setAttribute('href', editStockUrl);
+            } else {
+                editStockLink.removeAttribute('href');
+            }
+        }
+    });    
+</script>
 </body>
 </html>
