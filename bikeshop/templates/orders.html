@@ -227,9 +227,9 @@
                     <td>{% if order.ORDER_ID != None %}{{ order.ORDER_ID }}{% else %}-{% endif %}</td>
                     <td>{{ order.CUSTOMER.FIRST_NAME}} {{ order.CUSTOMER.LAST_NAME}}</td>
                     <td>{% if order.PRODUCT.PRODUCT_NAME != None %}{{ order.PRODUCT.PRODUCT_NAME }}{% else %}-{% endif %}</td>
-                    <td>{% if order.ORDER_DATE != None %}{{ order.ORDER_DATE }}{% else %}-{% endif %}</td>
-                    <td>{% if order.DELIVERY_DATE != None %}{{ order.DELIVERY_DATE }}{% else %}-{% endif %}</td>
-                    <td>{% if order.SHIPPED_DATE != None %}{{ order.SHIPPED_DATE }}{% else %}-{% endif %}</td>
+                    <td>{% if order.ORDER_DATE != None %}{{ order.ORDER_DATE|date:'Y-m-d' }}{% else %}-{% endif %}</td>
+                    <td>{% if order.DELIVERY_DATE != None %}{{ order.DELIVERY_DATE|date:'Y-m-d' }}{% else %}-{% endif %}</td>
+                    <td>{% if order.SHIPPED_DATE != None %}{{ order.SHIPPED_DATE|date:'Y-m-d' }}{% else %}-{% endif %}</td>
                     <td>{% if order.STORE.STORE_NAME != None %}{{ order.STORE.STORE_NAME }}{% else %}-{% endif %}</td>
                     <td>{% if order.STAFF.FIRST_NAME != None %}{{ order.STAFF.FIRST_NAME }}{% else %}-{% endif %}</td>
                     
