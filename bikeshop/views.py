@@ -45,9 +45,8 @@ def registration(request):
             staff.PHONE = request.POST['phone']
             staff.STORE = Stores.objects.get(pk=request.POST['store_id'])
             staff.IMAGE_URL = request.POST['image_url']
-            # staff.PASSWORD = request.POST['password1']
-            staff.set_password(request.POST['password1'])
-            staff.save()
+            if 'password1' in request.POST and request.POST['password1']:
+                staff.set_password(request.POST['password1'])
             return HttpResponseRedirect(reverse('staff'))
         else:
             user_name = request.POST['user_name']
