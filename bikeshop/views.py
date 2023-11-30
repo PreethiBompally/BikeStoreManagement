@@ -47,6 +47,7 @@ def registration(request):
             staff.IMAGE_URL = request.POST['image_url']
             if 'password1' in request.POST and request.POST['password1']:
                 staff.set_password(request.POST['password1'])
+            staff.save()
             return HttpResponseRedirect(reverse('staff'))
         else:
             user_name = request.POST['user_name']
