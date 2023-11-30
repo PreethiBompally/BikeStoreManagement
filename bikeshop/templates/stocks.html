@@ -231,6 +231,8 @@
         var checkboxes = document.getElementsByName('stock_ids[]');
         var addStockBtn = document.getElementById('addStockBtn');
         var editStockLink = document.getElementById('editStockLink');
+        var pageInput = document.getElementById('page-input');
+        pageInput.addEventListener('keydown', handleEnter);
     
         selectAllCheckbox.addEventListener('change', function() {
             checkboxes.forEach(function(checkbox) {
@@ -238,7 +240,21 @@
             });
             updateButtonVisibility();
         });
-    
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                var pageInput = document.getElementById('page-input');
+                var selectedPage = pageInput.value;
+        
+                var itemsPerPageSelect = document.getElementById('items_per_page');
+                var selectedItemsPerPage = itemsPerPageSelect ? itemsPerPageSelect : 10;
+        
+                console.log('selectedPage:', selectedPage);
+                console.log('selectedItemsPerPage:', selectedItemsPerPage);
+        
+                window.location.href = "?page=" + selectedPage + "&items_per_page=" + selectedItemsPerPage;
+                event.preventDefault();
+            }
+        }
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', updateButtonVisibility);
         });
