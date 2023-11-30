@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('https://retaildesignblog.net/wp-content/uploads/2018/02/Triumph-motorcycle-store-by-Alex-Feskov-Moscow-Russia02.jpg') center center fixed;
+            background: url('https://images5.1000ps.net/c-cms_W12453_18-nueva-imagen-triumph-637593815426266676.jpg') center center fixed;
             background-size:contain;
             display: flex;
             flex-direction: column;
@@ -83,14 +83,13 @@
         label {
             display: block;
             margin: 10px 0;
-            color: #0d0d0d;
+            color: #f1eeee;
             font-family: Arial, sans-serif;
             text-align: center;
             font-size: 20px;
             text-decoration: none;
             border: #0d0d0c;
             border-radius: 50px;
-            text-shadow: 1px 1px 2px #fff;
         }
 
 
@@ -142,6 +141,20 @@
 </head>
 
 <body>
+
+    <header id="fixed-header">
+        <h1>Athens Bike Store</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Home</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'aboutus' %}">About Us</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+
     <div class="reg-container">
             <div class="form1">
                 <h1 class="title">Store Details</h1>

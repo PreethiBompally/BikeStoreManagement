@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('https://www.shutterstock.com/image-photo/motorcycle-ride-pleasant-breaks-exploration-260nw-1231005868.jpg') center center fixed;
+            background: url('https://motospotblog.files.wordpress.com/2016/10/motospot-mt10sp_03.jpg') center center fixed;
             background-size: contain;
             display: flex;
             flex-direction: column;
@@ -97,14 +97,13 @@
         label {
             display: block;
             margin: 10px 0;
-            color: #0d0d0d;
+            color: #f5f0f0;
             font-family: Arial, sans-serif;
             text-align: center;
             font-size: 20px;
             text-decoration: none;
             border: #0d0d0c;
             border-radius: 50px;
-            text-shadow: 1px 1px 2px #fff;
         }
 
 
@@ -184,7 +183,7 @@
     </header>
     <div class="reg-container">
         <div class="form1">
-            <h1 class="title">Add Customer</h1>
+            <h1 class="title">Customer Details</Details></h1>
             <form method="POST" action="{% url 'add_customer' %}">
                 {% csrf_token %}
                 <input type="hidden" id="customer_id" name="customer_id"
