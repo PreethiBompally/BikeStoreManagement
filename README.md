@@ -1,6 +1,6 @@
 # BikeStoreManagement
 Steps to run the project:
-1. Run the sql file in the system.
+1. Run the Bike_store_schema.sql file in the system.
 2. Open BIKESTOREMANAGEMENT folder in Visual studio code
 3. In BikeStoreManagementSystem/setting.py file change the given database credentials to your database credentials.
 4. Open terminal and do migrations using below commands:
