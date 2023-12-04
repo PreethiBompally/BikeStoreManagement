@@ -154,7 +154,7 @@
 <body>
 
     <header id="fixed-header">
-        <h1>Athens Bike Store</h1>
+        <h1>UGA Motorbikes</h1>
         <nav>
             <ul>
                 <li><a href="{% url 'dashboard' %}">Home</a></li>
@@ -197,11 +197,11 @@
                         </div>                      
                         <div class="input-field">
                             <label for="password1">Password* </label>
-                            <input type="password" id="password1" name="password1" style="max-width: 100%;" required value="{% if staff %}{{ staff.PASSWORD }}{% endif %}"> 
+                            <input type="password" id="password1" name="password1" style="max-width: 100%;" value="{% if staff %}{{ staff.PASSWORD }}{% endif %}"> 
                         </div>
                         <div class="input-field">
                             <label for="password2">Confirm password* </label>
-                            <input type="password" id="password2" name="password2" style="max-width: 100%;"  required value="{% if staff %}{{ staff.PASSWORD }}{% endif %}">
+                            <input type="password" id="password2" name="password2" style="max-width: 100%;" value="{% if staff %}{{ staff.PASSWORD }}{% endif %}">
                         </div>
                         <div class="input-field">
                             <label for="store_id">Store* </label>

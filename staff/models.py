@@ -21,8 +21,6 @@ class StaffManager(BaseUserManager):
     def create_user(self, USER_NAME,password, **extra_fields):
         if not USER_NAME:
             raise ValueError('The username field must be set')
-        # user_name = self.normalize_email(USER_NAME)
-        # extra_fields.pop('last_login', None)
         staff = self.model(USER_NAME=USER_NAME,**extra_fields)
         staff.set_password(password)
         staff.save(using=self._db)
@@ -35,7 +33,6 @@ class StaffManager(BaseUserManager):
         return self.create_user(user_name = user_name, email = email,**extra_fields)
 
 class Staff(AbstractBaseUser):
-    # username_validator = UnicodeUsernameValidator() if hasattr(validators, 'UnicodeUsernameValidator') else ASCIIUsernameValidator()
     USER_NAME = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     STAFF_ID = models.AutoField(primary_key=True)
